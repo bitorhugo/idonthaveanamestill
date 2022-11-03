@@ -20,8 +20,8 @@ Auth::routes();
 
 /* group routes that share the same controller*/
 Route::controller(HomeController::class)->group(function () {
-    Route::get('/', 'index');
-    Route::get('/home', 'index');
+    Route::get('/', 'index')->name('home');
+    Route::get('/home', 'index')->name('home');
 });
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
