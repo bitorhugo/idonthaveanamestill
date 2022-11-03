@@ -29,7 +29,7 @@
                         <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                     </li>
                 @endif
-                        @else
+                @else
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }}
@@ -41,8 +41,15 @@
                                                      document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
-
+                        <a class="dropdown-item" href="{{ route('admin') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('admin-form').submit();">
+                            Admin Page
+                        </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                        <form id="admin-form" action="{{ route('admin') }}" method="POST" class="d-none">
                             @csrf
                         </form>
                     </div>

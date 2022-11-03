@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="copyright">
-                    <p>Project done by <a href="https://github.com/bitorhugo">BitorHugo</a>.</p>
+                    <p>Project done by <a href="https://github.com/bitorhugo" target="_blank" rel="noopener noreferrer">BitorHugo</a>.</p>
                 </div>
             </div>
         </div>
