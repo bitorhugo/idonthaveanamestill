@@ -30,7 +30,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{route('cards.index')}}">
                             <i class="fas fa-shopping-basket"></i>
                             <span class="bot-line"></span>Cards</a>
                     </li>
