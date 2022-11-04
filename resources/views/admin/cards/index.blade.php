@@ -1,4 +1,4 @@
-@extends('layouts.masterAdmin')
+ @extends('layouts.masterAdmin')
 @section('content')
     @include('partials.datatable')
     <table class="table table-data2">

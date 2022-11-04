@@ -16,5 +16,5 @@ class Card extends Model
      *
      * @var array
      */
-    protected $hidden = ['password'];
+    protected $hidden = [''];
 }

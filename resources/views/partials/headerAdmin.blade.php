@@ -4,7 +4,7 @@
         <div class="header3-wrap">
             <div class="header__logo">
                 <a href="{{ route('home') }}">
-                    <img src="images/icon/logo-white.png" alt="CoolAdmin"/>
+                    <img src="{{asset('images/icon/logo-white.png')}}" alt="CoolAdmin"/>
                 </a>
             </div>
             <div class="header__navbar">
@@ -176,7 +176,7 @@
                 <div class="account-wrap">
                     <div class="account-item account-item--style2 clearfix js-item-menu">
                         <div class="image">
-                            <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                            <img src="{{asset('images/icon/avatar-01.jpg')}}" alt="John Doe" />
                         </div>
                         <div class="content">
                             <a class="js-acc-btn" href="#">john doe</a>
