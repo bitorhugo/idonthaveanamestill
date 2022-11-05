@@ -20,8 +20,8 @@ class AdminCardController extends Controller
      */
     public function index()
     {
-        $cards['cards'] = Card::all()->toArray();
-        return view('admin.cards.index')->with($cards);
+        $allCards['cards'] = Card::all()->toArray();
+        return view('admin.cards.index')->with($allCards);
     }
 
     /**
@@ -31,7 +31,8 @@ class AdminCardController extends Controller
      */
     public function create()
     {
-        //
+        $arr['card'] = Card::factory()->create();
+        return view('admin.cards.create')->with($arr);
     }
 
     /**

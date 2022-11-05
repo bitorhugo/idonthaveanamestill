@@ -1,4 +1,11 @@
 @extends('layouts.masterAdmin')
+
+@section('desired_create_route')
+    <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+        <a class="zmdi zmdi-plus" href="{{route('cards.create')}}">Add item </a>
+@endsection
+
+
 @section('content')
     @include('partials.datatable')
     <table class="table table-data2">
@@ -39,7 +46,7 @@
                             </button>
                             <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                 <i class="zmdi zmdi-delete"></i>
-                            </button>
+p                            </button>
                             <button class="item" data-toggle="tooltip" data-placement="top" title="More">
                                 <i class="zmdi zmdi-more"></i>
                             </button>

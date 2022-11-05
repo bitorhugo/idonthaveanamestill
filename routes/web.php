@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminCardController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\AdminCardController;
 
 /*
 |--------------------------------------------------------------------------
