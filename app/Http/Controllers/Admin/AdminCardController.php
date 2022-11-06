@@ -71,9 +71,9 @@ class AdminCardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Card $card)
     {
-        echo $id;
+        return view ('admin.cards.edit')->with(['card' => $card]);
     }
 
     /**
