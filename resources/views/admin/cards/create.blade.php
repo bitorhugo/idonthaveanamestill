@@ -6,7 +6,7 @@
         <div class="card-header">Add Card</div>
         <div class="card-body card-block">
             <form action="{{route('cards.store')}}" method="post" class="">
-                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                @csrf
 
                 @foreach(json_decode($card) as $key => $value)
                     <div class="form-group">

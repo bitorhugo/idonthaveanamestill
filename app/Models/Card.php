@@ -18,5 +18,5 @@ class Card extends Model
      *
      * @var array
      */
-    protected $hidden = ['id', 'updated_at', 'created_at'];
+    protected $hidden = [];
 }

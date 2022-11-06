@@ -29,8 +29,7 @@ class AdminCardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create()    {
         // use make() in order to not persist model in database
         $arr['card'] = Card::factory()->make();
         return view('admin.cards.create')->with($arr);
@@ -74,7 +73,7 @@ class AdminCardController extends Controller
      */
     public function edit($id)
     {
-        //
+        echo $id;
     }
 
     /**
