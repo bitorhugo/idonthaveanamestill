@@ -27,6 +27,6 @@ Route::controller(HomeController::class)->group(function () {
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
-//Route::post('/admin', [AdminController::class, 'index'])->name('admin');
+Route::post('/admin', [AdminController::class, 'index'])->name('admin');
 
 Route::resource('/admin/cards', AdminCardController::class);
