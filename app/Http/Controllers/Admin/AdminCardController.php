@@ -41,9 +41,17 @@ class AdminCardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Card $card)
     {
-        //
+        $filtered = $request->collect()
+                            ->except(['_token']);
+
+        $filtered->collect()
+                 ->each(         // on ->each, the order of $key $value gets flipped
+                fn ($value, $key) => $card->$key = $value
+            );
+        $card->save();
+        return redirect()->route('cards.index');
     }
 
     /**
