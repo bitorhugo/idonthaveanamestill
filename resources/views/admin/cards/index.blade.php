@@ -40,7 +40,10 @@
 
                     <td>
                         <div class="table-data-feature">
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
+                            <button class="item" data-toggle="tooltip" data-placement="top" title="Show"
+                                    onclick="event.preventDefault();
+                                document.getElementById('show-form{{$card['id']}}').submit();">
+
                                 <i class="zmdi zmdi-mail-send"></i>
                             </button>
                             <button class="item" data-toggle="tooltip" data-placement="top" title="Edit"
@@ -48,12 +51,14 @@
                                                      document.getElementById('edit-form{{$card['id']}}').submit();">
                                 <i class="zmdi zmdi-edit"></i>
                             </button>
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete"
+                                    onclick="event.preventDefault();
+                                document.getElementById('delete-form{{$card['id']}}').submit();">
                                 <i class="zmdi zmdi-delete"></i>
                             </button>
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                <i class="zmdi zmdi-more"></i>
-                            </button>
+                            <!-- <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+                                 <i class="zmdi zmdi-more"></i>
+                                 </button> -->
                         </div>
                     </td>
                 </tr>
@@ -61,6 +66,14 @@
                 <form id="edit-form{{$card['id']}}" action="{{ route('cards.edit', ['card' => $card['id']]) }}" method="GET" class="d-none">
                     @csrf
                 </form>
+                <form id="delete-form{{$card['id']}}" action="{{ route('cards.destroy', ['card' => $card['id']]) }}" method="POST" class="d-none">
+                    @csrf
+                    @method('delete')
+                </form>
+                <form id="show-form{{$card['id']}}" action="{{ route('cards.show', ['card' => $card['id']]) }}" method="GET" class="d-none">
+                    @csrf
+                </form>
+
             @endforeach
         </tbody>
     </table>
