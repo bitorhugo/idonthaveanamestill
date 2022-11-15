@@ -1,8 +1,10 @@
 @extends('layouts.masterAdmin')
 
 @section('desired_create_route')
-    <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-        <a class="zmdi zmdi-plus" href="{{route('cards.create')}}">Add item </a>
+    <button class="au-btn au-btn-icon au-btn--green au-btn--small"
+            onclick="event.preventDefault();
+        document.getElementById('additem-button').submit();">
+        <i class="zmdi zmdi" href="{{route('cards.create')}}">Add item</i>
     </button>
 @endsection
 
@@ -71,6 +73,9 @@
                     @method('delete')
                 </form>
                 <form id="show-form{{$card['id']}}" action="{{ route('cards.show', ['card' => $card['id']]) }}" method="GET" class="d-none">
+                    @csrf
+                </form>
+                <form id="additem-button" action="{{ route('cards.create') }}" method="GET" class="d-none">
                     @csrf
                 </form>
 
