@@ -45,10 +45,10 @@ class AdminCardController extends Controller
     public function store(Request $request, Card $card)
     {
         $filtered = $request->collect()
-                            ->except(['_token']);
+            ->except(['_token']);
 
         $filtered->collect()
-                 ->each(         // on ->each, the order of $key $value gets flipped
+            ->each(         // on ->each, the order of $key $value gets flipped
                 fn ($value, $key) => $card->$key = $value
             );
         $card->save();
@@ -61,7 +61,7 @@ class AdminCardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Card $card)
     {
         //
     }
@@ -74,6 +74,7 @@ class AdminCardController extends Controller
      */
     public function edit(Card $card)
     {
+        $card->makehidden('id');
         return view ('admin.cards.edit')->with(['card' => $card]);
     }
 
@@ -84,9 +85,18 @@ class AdminCardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Card $card)
     {
-        //
+        $filtered = $request->collect()
+                            ->except(['_token', '_method']);
+
+        $filtered->collect()
+            ->each(         // on ->each, the order of $key $value gets flipped
+                fn ($value, $key) => $card->$key = $value
+            );
+
+        $card->save();
+        return redirect()->route('cards.index');
     }
 
     /**
@@ -97,6 +107,7 @@ class AdminCardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Card::destroy($id);
+        return redirect()->route('cards.index');
     }
 }

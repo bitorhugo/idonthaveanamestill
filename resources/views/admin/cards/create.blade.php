@@ -1,7 +1,4 @@
 @extends('layouts.masterAdmin')
-
-
-
 @section('content')
     <div class="card">
         <div class="card-header">Add Card</div>
