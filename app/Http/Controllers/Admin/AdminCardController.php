@@ -63,7 +63,7 @@ class AdminCardController extends Controller
      */
     public function show(Card $card)
     {
-        //
+        return view ('admin.cards.show')->with(['card' => $card]);
     }
 
     /**
