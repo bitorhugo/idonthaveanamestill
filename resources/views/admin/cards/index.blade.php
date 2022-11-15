@@ -19,8 +19,8 @@
                     </label>
                 </th>
                 <!-- get the first element and iter all cols -->
-                @foreach(array_keys(current($cards)) as $col)
-                    <th>{{$col}}</th>
+                @foreach($keys as $key)
+                    <th>{{$key}}</th>
                 @endforeach
             </tr>
         </thead>
