@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class AdminCardController extends Controller
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
     
@@ -30,7 +31,8 @@ class AdminCardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()    {
+    public function create()
+    {
         // use make() in order to not persist model in database
         $arr['card'] = Card::factory()->make();
         return view('admin.cards.create')->with($arr);
@@ -63,7 +65,7 @@ class AdminCardController extends Controller
      */
     public function show(Card $card)
     {
-        return view ('admin.cards.show')->with(['card' => $card]);
+        return view('admin.cards.show')->with(['card' => $card]);
     }
 
     /**
@@ -75,7 +77,7 @@ class AdminCardController extends Controller
     public function edit(Card $card)
     {
         $card->makehidden('id');
-        return view ('admin.cards.edit')->with(['card' => $card]);
+        return view('admin.cards.edit')->with(['card' => $card]);
     }
 
     /**
