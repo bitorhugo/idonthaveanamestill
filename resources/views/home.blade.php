@@ -2,6 +2,7 @@
 
 @section('content')
 
-    <h1> HOME PAGE</h1>
-
+    @include('partials.searchbar')
+    @include('partials.showcase')
+    
 @endsection

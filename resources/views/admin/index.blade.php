@@ -14,4 +14,4 @@
         </div>
     </section>
     <!-- END WELCOME-->
-@endsection 
+@endsection

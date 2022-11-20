@@ -8,6 +8,12 @@
 <!-- Bootstrap CSS-->
 <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
+<!-- Libraries Stylesheet -->
+<link href="{{URL::asset("lib/owlcarousel/assets/owl.carousel.min.css")}}" rel="stylesheet">
+
+<!-- Customized Bootstrap Stylesheet -->
+<link href="{{URL::asset("css/style.css")}}" rel="stylesheet">
+
 <!-- Vendor CSS-->
 <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
 <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">

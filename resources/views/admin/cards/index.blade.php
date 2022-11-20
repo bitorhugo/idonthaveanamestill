@@ -65,7 +65,9 @@
                     </td>
                 </tr>
                 <!-- add a slug to route to identify which card we want to alter -->
-                <form id="edit-form{{$card['id']}}" action="{{ route('cards.edit', ['card' => $card['id']]) }}" method="GET" class="d-none">
+                <form id="edit-form{{$card['id']}}"
+                    action="{{ route('cards.edit', ['card' => $card['id']]) }}"
+                    method="GET" class="d-none">
                     @csrf
                 </form>
                 <form id="delete-form{{$card['id']}}" action="{{ route('cards.destroy', ['card' => $card['id']]) }}" method="POST" class="d-none">
