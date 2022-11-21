@@ -35,6 +35,7 @@ class AdminUserController extends Controller
     {
         // use make() in order to not persist model in database
         $arr['user'] = User::factory()->make();
+        $arr['user']->makeVisible('password');
         return view('admin.users.create')->with($arr);
     }
 
