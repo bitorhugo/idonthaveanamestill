@@ -66,7 +66,7 @@
                 </tr>
                 <!-- add a slug to route to identify which user we want to alter -->
                 <form id="edit-form{{$user['id']}}"
-                      action="{{ route('user.edit', ['user' => $user['id']]) }}"
+                      action="{{ route('users.edit', ['user' => $user['id']]) }}"
                       method="GET" class="d-none">
                     @csrf
                 </form>
