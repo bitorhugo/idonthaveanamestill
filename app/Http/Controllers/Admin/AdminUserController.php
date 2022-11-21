@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminUserController extends Controller
 {
@@ -45,9 +46,23 @@ class AdminUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store( Request $request, User $user)
     {
-        //
+        $hashed = $request->collect()
+            ->replace(
+                ['password' => Hash::make($request['password'])]
+            );
+
+        $filtered = $hashed->collect()
+            ->except(['_token']);
+
+        $filtered->collect()
+            ->each(         // on ->each, the order of $key $value gets flipped
+                fn ($value, $key) => $user->$key = $value
+            );
+
+        $user->save();
+        return redirect()->route('users.index');
     }
 
     /**
