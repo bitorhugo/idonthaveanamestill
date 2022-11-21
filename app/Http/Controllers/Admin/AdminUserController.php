@@ -82,9 +82,11 @@ class AdminUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $user->makehidden('id');
+        $user->makeVisible('password');
+        return view('admin.users.edit')->with(['user' => $user]);
     }
 
     /**
@@ -94,9 +96,19 @@ class AdminUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        var_dump($request);
+        // $filtered = $request->collect()
+        //     ->except(['_token', '_method']);
+
+        // $filtered->collect()
+        //     ->each(         // on ->each, the order of $key $value gets flipped
+        //         fn ($value, $key) => $user->$key = $value
+        //     );
+
+        // $user->save();
+        // return redirect()->route('users.index');
     }
 
     /**
