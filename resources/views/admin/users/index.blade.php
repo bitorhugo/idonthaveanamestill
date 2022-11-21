@@ -4,7 +4,7 @@
     <button class="au-btn au-btn-icon au-btn--green au-btn--small"
             onclick="event.preventDefault();
         document.getElementById('additem-button').submit();">
-        <i class="zmdi zmdi" href="{{route('cards.create')}}">Add User</i>
+        <i class="zmdi zmdi" href="{{route('users.create')}}">Add User</i>
     </button>
 @endsection
 
@@ -66,8 +66,8 @@
                 </tr>
                 <!-- add a slug to route to identify which user we want to alter -->
                 <form id="edit-form{{$user['id']}}"
-                    action="{{ route('user.edit', ['user' => $user['id']]) }}"
-                    method="GET" class="d-none">
+                      action="{{ route('user.edit', ['user' => $user['id']]) }}"
+                      method="GET" class="d-none">
                     @csrf
                 </form>
                 <form id="delete-form{{$user['id']}}" action="{{ route('users.destroy', ['user' => $user['id']]) }}" method="POST" class="d-none">
@@ -80,7 +80,7 @@
                 <form id="additem-button" action="{{ route('users.create') }}" method="GET" class="d-none">
                     @csrf
                 </form>
-
+                
             @endforeach
         </tbody>
     </table>

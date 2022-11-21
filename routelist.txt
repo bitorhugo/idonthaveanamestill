@@ -20,6 +20,20 @@
 |        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
 |        | GET|HEAD  | admin/cards/{card}/edit | cards.edit       | App\Http\Controllers\Admin\AdminCardController@edit                    | web                                         |
 |        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        | GET|HEAD  | admin/users             | users.index      | App\Http\Controllers\Admin\AdminUserController@index                   | web                                         |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        | POST      | admin/users             | users.store      | App\Http\Controllers\Admin\AdminUserController@store                   | web                                         |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        | GET|HEAD  | admin/users/create      | users.create     | App\Http\Controllers\Admin\AdminUserController@create                  | web                                         |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        | GET|HEAD  | admin/users/{user}      | users.show       | App\Http\Controllers\Admin\AdminUserController@show                    | web                                         |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        | PUT|PATCH | admin/users/{user}      | users.update     | App\Http\Controllers\Admin\AdminUserController@update                  | web                                         |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        | DELETE    | admin/users/{user}      | users.destroy    | App\Http\Controllers\Admin\AdminUserController@destroy                 | web                                         |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        | GET|HEAD  | admin/users/{user}/edit | users.edit       | App\Http\Controllers\Admin\AdminUserController@edit                    | web                                         |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
 |        | GET|HEAD  | api/user                |                  | Closure                                                                | api                                         |
 |        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate:sanctum    |
 |        | GET|HEAD  | home                    | home             | App\Http\Controllers\HomeController@index                              | web                                         |
