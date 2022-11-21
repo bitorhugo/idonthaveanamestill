@@ -10,27 +10,13 @@
             <div class="header__navbar">
                 <ul class="list-unstyled">
                     <li class="has-sub">
-                        <a href="#">
-                            <i class="fas fa-tachometer-alt"></i>Dashboard
+                        <a href=" {{ route('users.index') }} ">
+                            <i class="fas fa-tachometer-alt"></i>Users
                             <span class="bot-line"></span>
                         </a>
-                        <ul class="header3-sub-list list-unstyled">
-                            <li>
-                                <a href="index.html">Dashboard 1</a>
-                            </li>
-                            <li>
-                                <a href="index2.html">Dashboard 2</a>
-                            </li>
-                            <li>
-                                <a href="index3.html">Dashboard 3</a>
-                            </li>
-                            <li>
-                                <a href="index4.html">Dashboard 4</a>
-                            </li>
-                        </ul>
                     </li>
                     <li>
-                        <a href="{{route('cards.index')}}">
+                        <a href=" {{ route('cards.index') }} ">
                             <i class="fas fa-shopping-basket"></i>
                             <span class="bot-line"></span>Cards</a>
                     </li>
