@@ -98,17 +98,16 @@ class AdminUserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        var_dump($request);
-        // $filtered = $request->collect()
-        //     ->except(['_token', '_method']);
+        $filtered = $request->collect()
+            ->except(['_token', '_method']);
 
-        // $filtered->collect()
-        //     ->each(         // on ->each, the order of $key $value gets flipped
-        //         fn ($value, $key) => $user->$key = $value
-        //     );
+        $filtered->collect()
+            ->each(         // on ->each, the order of $key $value gets flipped
+                fn ($value, $key) => $user->$key = $value
+            );
 
-        // $user->save();
-        // return redirect()->route('users.index');
+        $user->save();
+        return redirect()->route('users.index');
     }
 
     /**
@@ -119,6 +118,7 @@ class AdminUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return redirect()->route('users.index');
     }
 }
