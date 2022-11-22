@@ -11,6 +11,7 @@
 
 @section('content')
     @include('partials.datatable')
+
     <table class="table table-data2">
         <thead>
             <tr>
