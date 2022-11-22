@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminUserController extends Controller
@@ -73,7 +74,8 @@ class AdminUserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.users.show')->with(['user' => $user]);
+
+        //        return view('admin.users.show')->with(['user' => $user]);
     }
 
     /**
