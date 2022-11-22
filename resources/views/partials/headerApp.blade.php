@@ -6,6 +6,14 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <a href="{{ route('home') }}" class="text-decoration-none">
+            <h1 class="m-0 display-5 font-weight-semi-bold">
+                seek
+                <span class="text-primary font-weight-bold border px-3 mr-1">N</span>
+                find
+            </h1>
+        </a>
+        
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
