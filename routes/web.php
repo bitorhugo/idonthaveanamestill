@@ -26,7 +26,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/home', 'index')->name('home');
 });
 
-Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+Route::get('/admin', [AdminController::class, 'index'])->middleware('isAdmin')->name('admin');
 
 Route::post('/admin', [AdminController::class, 'index'])->name('admin');
 

@@ -14,7 +14,7 @@ class AdminController extends Controller
     public function __construct()
     {
         /* Checks if user is authenticated */
-        $this->middleware('auth');
+        $this->middleware('isAdmin');
     }
 
     

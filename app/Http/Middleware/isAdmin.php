@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class isAdmin
 {
@@ -16,10 +17,11 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->isAdmin){
+        echo 'inside middleware';
+        if (Auth::user()->isAdmin){
             return $next($request);
         }
 
-        return redirect();
+        return redirect()->route('home');
     }
 }
