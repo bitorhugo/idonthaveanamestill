@@ -21,8 +21,9 @@ class AdminCardController extends Controller
      */
     public function index()
     {
-        $allCards['cards'] = Card::all()->toArray();
-        $allCards['keys'] = array_keys(current($allCards['cards']));
+        $allCards['cardsjson'] = Card::simplePaginate(10);
+        $allCards['cards'] = $allCards['cardsjson']->toArray();
+        $allCards['keys'] = array_keys(current($allCards['cards']['data']));
         return view('admin.cards.index')->with($allCards);
     }
 

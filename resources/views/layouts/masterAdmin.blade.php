@@ -22,7 +22,8 @@
               media="all">
 
         
-        <link href="{{URL::asset('vendor_/bootstrap-4.1/bootstrap.min.css')}}" rel="stylesheet" media="all">
+        <link href="{{URL::asset('bootstrap4.1/bootstrap.min.css')}}" rel="stylesheet" media="all">
+
         <link href="{{URL::asset('vendor_/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css')}}"
               rel="stylesheet"
               media="all">
@@ -45,11 +46,9 @@
         <script src="{{URL::asset('vendor_/slick/slick.min.js')}}"></script>
         <script src="{{URL::asset('vendor_/wow/wow.min.js')}}"></script>
         <script src="{{URL::asset('vendor_/animsition/animsition.min.js')}}"></script>
-        <script src="{{URL::asset('vendor_/bootstrap-progressbar/bootstrap-progressbar.min.js')}}">
-        </script>
+        <script src="{{URL::asset('vendor_/bootstrap-progressbar/bootstrap-progressbar.min.js')}}"></script>
         <script src="{{URL::asset('vendor_/counter-up/jquery.waypoints.min.js')}}"></script>
-        <script src="{{URL::asset('vendor_/counter-up/jquery.counterup.min.js')}}">
-        </script>
+        <script src="{{URL::asset('vendor_/counter-up/jquery.counterup.min.js')}}"></script>
         <script src="{{URL::asset('vendor_/circle-progress/circle-progress.min.js')}}"></script>
         <script src="{{URL::asset('vendor_/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
         <script src="{{URL::asset('vendor_/chartjs/Chart.bundle.min.js')}}"></script>
