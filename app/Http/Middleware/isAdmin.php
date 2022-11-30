@@ -17,7 +17,6 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        echo 'inside middleware';
         if (Auth::user()->isAdmin){
             return $next($request);
         }

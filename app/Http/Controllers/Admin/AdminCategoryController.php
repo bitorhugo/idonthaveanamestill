@@ -14,7 +14,7 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $this->middleware('isAdmin');
     }
 
     /**
