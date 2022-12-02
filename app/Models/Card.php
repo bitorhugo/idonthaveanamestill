@@ -38,6 +38,7 @@ class Card extends Model
     public function toSearchableArray()
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
             // 'price' => $this->price,

@@ -10,10 +10,9 @@
                     <table class="table table-data2">
                         <tbody>
                             @foreach($cards as $card)
-
-                                @foreach($card->getAttributes() as $key)
-                                    <td> {{$key}}</td>
-                                @endforeach
+                                <td> {{$card->name}}</td>
+                                <td> {{$card->description}}</td>
+                                <td> {{$card->price}}</td>
                                 <td>
                                     <div class="table-data-feature">
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Show"
@@ -25,13 +24,13 @@
                                     </div>
                                 </tr>
                                 <!-- add a slug to route to identify which card we want to alter -->
-                                <form id="show-form{{$card->id}}" action="{{ route('cards.show', ['card' => $card['id']]) }}" method="GET" class="d-none">
+                                <form id="show-form{{$card->id}}" action="{{ route('search.show', ['search' => $card->id]) }}" method="GET" class="d-none">
                                     
                                 </form>
                             @endforeach
                         </tbody>
                     </table>
-                    {{$cards->links()}}
+                    {{$cards->links('pagination::bootstrap-4')}}
                 </div>
             </div>
         </div>

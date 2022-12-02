@@ -15,9 +15,9 @@ class HomeCardController extends Controller
      */
     public function index(Request $request)
     {
-        $arr['cards'] = Card::search($request->input('q'))
-                      ->paginate(10);
-        return view('home.cards.index')->with($arr);
+        $cards = Card::search($request->input('q'))
+                      ->paginate(5);
+        return view('home.cards.index')->with(['cards' => $cards]);
     }
 
     /**
@@ -47,9 +47,11 @@ class HomeCardController extends Controller
      * @param  Card $card
      * @return \Illuminate\Http\Response
      */
-    public function show(Card $card)
+    public function show(int $id)
     {
-        ddd ($card);
+        // since id is unique we can safely search using scout
+        $card = Card::search($id)->get();
+        return view ('home.cards.show')->with(['card' => $card]);
     }
 
     /**
