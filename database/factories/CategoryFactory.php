@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CardFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,9 +14,8 @@ class CardFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->numerify('card-###'),
+            'name' => $this->faker->numerify('category-##'),
             'description' => $this->faker->text(),
-            'price' => $this->faker->numberBetween(10, 100),
         ];
     }
 }

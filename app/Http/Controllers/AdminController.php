@@ -13,7 +13,8 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-        /* Checks if user is authenticated */
+        /* Checks if user is admin
+         being admin means being authenticated */
         $this->middleware('isAdmin');
     }
 

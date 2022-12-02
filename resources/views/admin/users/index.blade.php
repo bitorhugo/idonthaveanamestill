@@ -91,7 +91,7 @@
                         </tbody>
                     </table>
 
-                    {{$usersjson->links()}}
+                    {{$usersjson->links('pagination::bootstrap-4')}}
 
                 </div>
             </div>

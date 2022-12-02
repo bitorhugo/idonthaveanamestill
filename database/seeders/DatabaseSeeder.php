@@ -14,8 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // seed database with one admin user
         \App\Models\User::factory()->state(['name' => 'admin', 'password' => Hash::make('adminadmin'), 'email' => 'admin@email.com', 'isAdmin' => true])->create();
         \App\Models\User::factory(10)->create();
+        \App\Models\Category::factory(10)->create();
         \App\Models\Card::factory(10)->create();
     }
 }
