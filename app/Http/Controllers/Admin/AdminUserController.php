@@ -88,7 +88,7 @@ class AdminUserController extends Controller
     public function edit(User $user)
     {
         $user->makehidden('id');
-        $user->makeVisible('password');
+
         return view('admin.users.edit')->with(['user' => $user]);
     }
 

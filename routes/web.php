@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\AdminCardController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Home\HomeCardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,5 @@ Route::post('/admin', [AdminController::class, 'index'])->name('admin');
 Route::resource('/admin/cards', AdminCardController::class);
 
 Route::resource('/admin/users', AdminUserController::class);
+
+Route::resource('/search', HomeCardController::class)->only(['index', 'show']);

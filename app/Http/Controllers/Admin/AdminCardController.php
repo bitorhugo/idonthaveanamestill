@@ -21,11 +21,10 @@ class AdminCardController extends Controller
      */
     public function index()
     {
-        ddd (Card::search('card-8')->get());
-        // $allCards['cardsjson'] = Card::simplePaginate(10);
-        // $allCards['cards'] = $allCards['cardsjson']->toArray();
-        // $allCards['keys'] = array_keys(current($allCards['cards']['data']));
-        // return view('admin.cards.index')->with($allCards);
+        $allCards['cardsjson'] = Card::simplePaginate(10);
+        $allCards['cards'] = $allCards['cardsjson']->toArray();
+        $allCards['keys'] = array_keys(current($allCards['cards']['data']));
+        return view('admin.cards.index')->with($allCards);
     }
 
     /**

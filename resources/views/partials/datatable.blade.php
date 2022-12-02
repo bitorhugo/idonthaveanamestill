@@ -4,8 +4,11 @@
             <div class="col-md-12">
 
                 <!-- Add route name prefix to identify data table -->
-                <h3 class="title-5 m-b-35"> {{  current(explode('.', Route::currentRouteName())) }} data table</h3>
 
+                
+                <!-- <h3 class="title-5 m-b-35"> {{  current(explode('.', Route::currentRouteName())) }} data table</h3> -->
+                
+                
                 <div class="table-data__tool">
                     <div class="table-data__tool-left">
                         <div class="rs-select2--light rs-select2--md">
@@ -30,6 +33,7 @@
                     <div class="table-data__tool-right">
                         @yield('desired_create_route')
                     </div>
+
                 </div>                
             </div>
         </div>

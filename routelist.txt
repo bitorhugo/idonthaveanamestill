@@ -3,37 +3,37 @@
 +--------+-----------+-------------------------+------------------+------------------------------------------------------------------------+---------------------------------------------+
 |        | GET|HEAD  | /                       | home             | App\Http\Controllers\HomeController@index                              | web                                         |
 |        | GET|HEAD  | admin                   | admin            | App\Http\Controllers\AdminController@index                             | web                                         |
-|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\isAdmin                 |
 |        | POST      | admin                   | admin            | App\Http\Controllers\AdminController@index                             | web                                         |
-|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\isAdmin                 |
 |        | GET|HEAD  | admin/cards             | cards.index      | App\Http\Controllers\Admin\AdminCardController@index                   | web                                         |
-|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\isAdmin                 |
 |        | POST      | admin/cards             | cards.store      | App\Http\Controllers\Admin\AdminCardController@store                   | web                                         |
-|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\isAdmin                 |
 |        | GET|HEAD  | admin/cards/create      | cards.create     | App\Http\Controllers\Admin\AdminCardController@create                  | web                                         |
-|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\isAdmin                 |
 |        | GET|HEAD  | admin/cards/{card}      | cards.show       | App\Http\Controllers\Admin\AdminCardController@show                    | web                                         |
-|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\isAdmin                 |
 |        | PUT|PATCH | admin/cards/{card}      | cards.update     | App\Http\Controllers\Admin\AdminCardController@update                  | web                                         |
-|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\isAdmin                 |
 |        | DELETE    | admin/cards/{card}      | cards.destroy    | App\Http\Controllers\Admin\AdminCardController@destroy                 | web                                         |
-|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\isAdmin                 |
 |        | GET|HEAD  | admin/cards/{card}/edit | cards.edit       | App\Http\Controllers\Admin\AdminCardController@edit                    | web                                         |
-|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\isAdmin                 |
 |        | GET|HEAD  | admin/users             | users.index      | App\Http\Controllers\Admin\AdminUserController@index                   | web                                         |
-|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\isAdmin                 |
 |        | POST      | admin/users             | users.store      | App\Http\Controllers\Admin\AdminUserController@store                   | web                                         |
-|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\isAdmin                 |
 |        | GET|HEAD  | admin/users/create      | users.create     | App\Http\Controllers\Admin\AdminUserController@create                  | web                                         |
-|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\isAdmin                 |
 |        | GET|HEAD  | admin/users/{user}      | users.show       | App\Http\Controllers\Admin\AdminUserController@show                    | web                                         |
-|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\isAdmin                 |
 |        | PUT|PATCH | admin/users/{user}      | users.update     | App\Http\Controllers\Admin\AdminUserController@update                  | web                                         |
-|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\isAdmin                 |
 |        | DELETE    | admin/users/{user}      | users.destroy    | App\Http\Controllers\Admin\AdminUserController@destroy                 | web                                         |
-|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\isAdmin                 |
 |        | GET|HEAD  | admin/users/{user}/edit | users.edit       | App\Http\Controllers\Admin\AdminUserController@edit                    | web                                         |
-|        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate            |
+|        |           |                         |                  |                                                                        | App\Http\Middleware\isAdmin                 |
 |        | GET|HEAD  | api/user                |                  | Closure                                                                | api                                         |
 |        |           |                         |                  |                                                                        | App\Http\Middleware\Authenticate:sanctum    |
 |        | GET|HEAD  | home                    | home             | App\Http\Controllers\HomeController@index                              | web                                         |
@@ -55,4 +55,6 @@
 |        | POST      | register                |                  | App\Http\Controllers\Auth\RegisterController@register                  | web                                         |
 |        |           |                         |                  |                                                                        | App\Http\Middleware\RedirectIfAuthenticated |
 |        | GET|HEAD  | sanctum/csrf-cookie     |                  | Laravel\Sanctum\Http\Controllers\CsrfCookieController@show             | web                                         |
+|        | GET|HEAD  | search                  | search.index     | App\Http\Controllers\Home\HomeCardController@index                     | web                                         |
+|        | GET|HEAD  | search/{search}         | search.show      | App\Http\Controllers\Home\HomeCardController@show                      | web                                         |
 +--------+-----------+-------------------------+------------------+------------------------------------------------------------------------+---------------------------------------------+

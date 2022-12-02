@@ -40,7 +40,7 @@ class Card extends Model
         return [
             'name' => $this->name,
             'description' => $this->description,
-            'price' => $this->price,
+            // 'price' => $this->price,
         ];
     }
 
