@@ -21,7 +21,7 @@
                             <span class="bot-line"></span>Cards</a>
                     </li>
                     <li>
-                        <a href="table.html">
+                        <a href="{{route('categories.index')}}">
                             <i class="fas fa-trophy"></i>
                             <span class="bot-line"></span>Category</a>
                     </li>

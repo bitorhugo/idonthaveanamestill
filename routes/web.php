@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\AdminCardController;
+use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Home\HomeCardController;
 
@@ -32,6 +33,8 @@ Route::get('/admin', [AdminController::class, 'index'])->middleware('isAdmin')->
 Route::post('/admin', [AdminController::class, 'index'])->name('admin');
 
 Route::resource('/admin/cards', AdminCardController::class);
+
+Route::resource('/admin/categories', AdminCategoryController::class);
 
 Route::resource('/admin/users', AdminUserController::class);
 
