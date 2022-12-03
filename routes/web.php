@@ -28,9 +28,11 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/home', 'index')->name('home');
 });
 
-Route::get('/admin', [AdminController::class, 'index'])->middleware('isAdmin')->name('admin');
+Route::controller(AdminController::class)->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    Route::post('/admin', [AdminController::class, 'index'])->name('admin');
+});
 
-Route::post('/admin', [AdminController::class, 'index'])->name('admin');
 
 Route::resource('/admin/cards', AdminCardController::class);
 
@@ -38,4 +40,5 @@ Route::resource('/admin/categories', AdminCategoryController::class);
 
 Route::resource('/admin/users', AdminUserController::class);
 
+// filter routes using 'only' constraint
 Route::resource('/search', HomeCardController::class)->only(['index', 'show']);
