@@ -48,11 +48,13 @@
                                                      document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
+                        @if(Auth::user()->isAdmin)
                         <a class="dropdown-item" href="{{ route('admin') }}"
                            onclick="event.preventDefault();
                                                      document.getElementById('admin-form').submit();">
                             Admin Page
                         </a>
+                        @endif
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
