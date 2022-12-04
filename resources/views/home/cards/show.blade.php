@@ -5,6 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
+                    
                     <div class="card">
 
                         <img class="card-img-top" src={{asset("images/bg-title-01.jpg")}} alt="Card image cap">
@@ -18,6 +19,8 @@
                     </div>
                 </div>
                 <div class="col-md-4">
+
+                    
                     <div class="card border border-secondary">
                         <div class="card-header">
                             <strong class="card-title">Product Name</strong>
@@ -26,11 +29,12 @@
 
                             <div class="alert alert-warning" role="alert">
                                 200$
-                            </div>                                                    
+                            </div>
+
                             <div class="alert alert-success" role="alert">
                                 In stock
                             </div>
-
+                            
                             <button type="button" class="btn btn-outline-primary"
                                     onclick="event.preventDefault();
                                 document.getElementById('purchase-form').submit();">
