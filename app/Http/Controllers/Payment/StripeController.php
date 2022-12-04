@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Payment;
 
 use Stripe;
-use Session;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class StripeController extends Controller
 {
     
-    public function session()
+    public function session(Request $request)
     {
         Stripe\Stripe::setApiKey(config('stripe.sk'));
 
