@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminCardController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Home\HomeCardController;
+use App\Http\Controllers\Payment\StripeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,9 @@ Route::controller(AdminController::class)->group(function () {
     Route::post('/admin', [AdminController::class, 'index'])->name('admin');
 });
 
+Route::controller(StripeController::class)->group(function () {
+    Route::post('/checkout', [StripeController::class, 'session'])->name('checkout');
+});
 
 Route::resource('/admin/cards', AdminCardController::class);
 
@@ -42,3 +46,4 @@ Route::resource('/admin/users', AdminUserController::class);
 
 // filter routes using 'only' constraint
 Route::resource('/search', HomeCardController::class)->only(['index', 'show']);
+
