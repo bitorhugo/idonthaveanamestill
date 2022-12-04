@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Card;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,8 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        /* Checks if user is authenticated */
-        //        $this->middleware('auth');
+
     }
 
     /**
@@ -24,6 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        //return showcase cards
+        $showcase = Card::all()->take(8);
+        return view('home')->with(['showcase' => $showcase]);
     }
 }

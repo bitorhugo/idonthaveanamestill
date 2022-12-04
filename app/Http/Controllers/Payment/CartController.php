@@ -47,7 +47,7 @@ class CartController extends Controller
             $request->quantity,
             array()
         );
-
+        
         return back();
     }
 
