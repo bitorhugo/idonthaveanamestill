@@ -1,23 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Home;
+namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
 use App\Models\Card;
+use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class HomeCardController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $cards = Card::search($request->input('q'))
-                      ->paginate(5);
-        return view('home.cards.index')->with(['cards' => $cards]);
+        $cart = \Cart::session(Auth::user()->id)->getContent();
+        ddd($cart);
+        return view('home.cart.index')->with(['cart' => $cart]);
     }
 
     /**
@@ -38,19 +40,26 @@ class HomeCardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \Cart::add(
+            $request->id,
+            $request->name,
+            $request->price,
+            $request->quantity,
+            array()
+        );
+
+        return back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  Card $card
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id)
+    public function show($id)
     {
-        $card = Card::find($id);
-        return view ('home.cards.show')->with(['card' => $card]);
+        //
     }
 
     /**
@@ -73,7 +82,7 @@ class HomeCardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**

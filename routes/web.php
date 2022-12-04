@@ -8,10 +8,11 @@ use App\Http\Controllers\Admin\AdminCardController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Home\HomeCardController;
+use App\Http\Controllers\Payment\CartController;
 use App\Http\Controllers\Payment\StripeController;
 
 /*
-|--------------------------------------------------------------------------
+|---------p-----------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
@@ -20,6 +21,13 @@ use App\Http\Controllers\Payment\StripeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
+// Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
+// Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+// Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
+// Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
+
 
 Auth::routes();
 
@@ -44,6 +52,6 @@ Route::resource('/admin/categories', AdminCategoryController::class);
 
 Route::resource('/admin/users', AdminUserController::class);
 
-// filter routes using 'only' constraint
 Route::resource('/search', HomeCardController::class)->only(['index', 'show']);
 
+Route::resource('/cart', CartController::class)->except(['create']);

@@ -48,7 +48,7 @@ class AdminUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store( Request $request, User $user)
+    public function store(Request $request, User $user)
     {
         $hashed = $request->collect()
             ->replace(
@@ -88,7 +88,6 @@ class AdminUserController extends Controller
     public function edit(User $user)
     {
         $user->makehidden('id');
-
         return view('admin.users.edit')->with(['user' => $user]);
     }
 

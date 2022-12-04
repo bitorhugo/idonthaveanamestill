@@ -11,9 +11,7 @@
                         <img class="card-img-top" src={{asset("images/bg-title-01.jpg")}} alt="Card image cap">
 
                         <div class="card-body">
-                            <h4 class="card-title mb-3">Description:</h4>
-
-                            <p class="card-text">Product Description</p>
+                            <p class="card-text">{{$card->description}}</p>
                         </div>
 
                     </div>
@@ -23,12 +21,12 @@
                     
                     <div class="card border border-secondary">
                         <div class="card-header">
-                            <strong class="card-title">Product Name</strong>
+                            <strong class="card-title">{{$card->name}}</strong>
                         </div>
                         <div class="card-body">
 
                             <div class="alert alert-warning" role="alert">
-                                200$
+                                {{$card->price}} EUR
                             </div>
 
                             <div class="alert alert-success" role="alert">
@@ -41,9 +39,10 @@
                                 <i class="fa fa-star"></i>&nbsp; Buy Now
                             </button>
 
-                            <button type="button" class="btn btn-outline-warning">
+                            <button type="button" class="btn btn-outline-warning"
+                                    onclick="event.preventDefault();
+                                document.getElementById('add-to-cart-form').submit();">
                                 <i class="fas fa-shopping-basket"> Add to Cart</i>
-
                             </button>
 
                         </div>
@@ -55,6 +54,15 @@
               action="{{ route('checkout') }}"
               method="POST" class="d-none">
             @csrf
+        </form>
+        <form id="add-to-cart-form"
+              action="{{ route('cart.store', ['cart' => $card]) }}"
+              method="POST" class="d-none">
+            @csrf
+            <input type="hidden" value="{{ $card->id }}" name="id">
+            <input type="hidden" value="{{ $card->name }}" name="name">
+            <input type="hidden" value="{{ $card->price }}" name="price">
+            <input type="hidden" value="1" name="quantity">
         </form>
     </section>
 @endsection
