@@ -20,16 +20,16 @@ class StripeController extends Controller
                     'price_data' => [
                         'currency'     => 'eur',
                         'product_data' => [
-                            'name' => 'gimme money!!!!',
+                            'name' => $request->name,
                         ],
-                        'unit_amount'  => 500,
+                        'unit_amount'  => $request->price * 100,
                     ],
-                    'quantity'   => 1,
+                    'quantity'   => $request->quantity,
                 ],
             ],
             'mode'        => 'payment',
             'success_url' => route('home'),
-            'cancel_url'  => route('home'),
+            'cancel_url'  => route('search.show', ['search' => $request->id]),
         ]);
 
         return redirect()->away($session->url);

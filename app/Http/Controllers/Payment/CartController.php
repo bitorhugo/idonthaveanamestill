@@ -17,7 +17,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart = \Cart::session(Auth::user()->id)->getContent();
+        $cart = \Cart::getContent();
         ddd($cart);
         return view('home.cart.index')->with(['cart' => $cart]);
     }
