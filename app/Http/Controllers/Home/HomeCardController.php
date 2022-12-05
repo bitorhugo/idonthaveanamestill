@@ -16,16 +16,31 @@ class HomeCardController extends Controller
      */
     public function index(Request $request)
     {
+        if ($request->input('c') == 'none')
+        {
+            $cards = Card::search($request->input('q'))
+                   ->paginate(5)->
+                   appends(['c' => 'none']);
+            return view('home.cards.index')->with(['cards' => $cards]);
+        }
+        else
+        {
         $category = Category::find($request->input('c'));
 
         $cards = Card::search($request->input('q'))
                ->get();
 
         // filter cards with selected category
-        $filtered = $cards->filter(function ($card) use ($category){
-            return $card->categories()->get()->contains($category->id);
-        })->paginate(2)->withQueryString(); // don't forget to add current request's query string to retrieve category
+        $filtered = $cards->filter(function ($card) use ($category) {
+            return $card
+                ->categories()
+                ->get()
+                ->contains($category->id);
+        })->paginate(2)
+            ->withQueryString(); // don't forget to add current request's query string to retrieve category
+        
         return view('home.cards.index')->with(['cards' => $filtered]);
+        }
     }
 
     /**
