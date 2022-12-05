@@ -48,4 +48,12 @@ class Card extends Model
     public function categories() {
         return $this->belongsToMany(Category::class);
     }
+
+    public function inventory() {
+        return $this->belongsTo(Inventory::class)->withDefault();
+    }
+
+    public function discount() {
+        return $this->belongsTo(Discount::class)->withDefault();
+    }
 }
