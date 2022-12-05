@@ -14,7 +14,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->numerify('category-##'),
+            'name' => $this->faker->unique()->numerify('category-##'),
             'description' => $this->faker->text(),
         ];
     }
