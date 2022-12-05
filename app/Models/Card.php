@@ -46,7 +46,8 @@ class Card extends Model
     }
 
     public function categories() {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'card__categories')
+                    ->as('categories');
     }
 
     public function inventory() {

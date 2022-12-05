@@ -35,6 +35,7 @@
         <!-- Main CSS-->
         <link href="{{URL::asset("css/theme.css")}}" rel="stylesheet" media="all">
         <link href="{{URL::asset("css/lab.css")}}" rel="stylesheet" media="all">
+        <link href="{{URL::asset("css/custom1.css")}}" rel="stylesheet" media="all">
 
         <!-- Jquery JS-->
         <script src="{{URL::asset('vendor_/jquery-3.2.1.min.js')}}"></script>
@@ -52,6 +53,7 @@
         <script src="{{URL::asset('vendor_/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
         <script src="{{URL::asset('vendor_/chartjs/Chart.bundle.min.js')}}"></script>
         <script src="{{URL::asset('vendor_/select2/select2.min.js')}}"></script>
+        
 
         
         <!-- Fontfaces CSS-->
@@ -84,6 +86,7 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{asset('js/custom1.js')}}"></script>
 
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">

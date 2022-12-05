@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Card;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomeCardController extends Controller
@@ -15,9 +16,16 @@ class HomeCardController extends Controller
      */
     public function index(Request $request)
     {
+        $category = Category::find($request->input('c'));
+
         $cards = Card::search($request->input('q'))
-                      ->paginate(5);
-        return view('home.cards.index')->with(['cards' => $cards]);
+               ->get();
+
+        // filter cards with selected category
+        $filtered = $cards->filter(function ($card) use ($category){
+            return $card->categories()->get()->contains($category->id);
+        })->paginate(2)->withQueryString(); // don't forget to add current request's query string to retrieve category
+        return view('home.cards.index')->with(['cards' => $filtered]);
     }
 
     /**
