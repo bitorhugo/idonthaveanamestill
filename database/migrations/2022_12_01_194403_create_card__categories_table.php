@@ -15,15 +15,9 @@ class CreateCardCategoriesTable extends Migration
     {
         Schema::create('card__categories', function (Blueprint $table) {
             $table->id();
-            $table->integer('card')->unsigned();
-            $table->integer('category')->unsigned();            
+            $table->unsignedBigInteger('card_id')->onDelete('cascade');
+            $table->unsignedBigInteger('category_id')->onDelete('cascade');
             $table->timestamps();
-
-            $table->foreignId('card_id')
-                  ->constrained();
-
-            $table->foreignId('category_id')
-                  ->constrained();
         });
     }
 
