@@ -26,7 +26,11 @@ class HomeController extends Controller
     public function index()
     {
         //return showcase cards containing discounts and available categories
-        $showcase = Card::has('discount')->take(8)->get();
+        $showcase = Card::has('inventory')->take(4)->get();
+        $showcase->filter(function ($card) {
+            return $card->discount->exists();
+        });
+
         $categories = Category::all();
         return view('home')->with(
             [

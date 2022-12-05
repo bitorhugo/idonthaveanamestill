@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
-use App\Models\Card;
 use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 
 class CartController extends Controller
 {
@@ -18,8 +17,11 @@ class CartController extends Controller
     public function index()
     {
         $cart = \Cart::getContent();
-        ddd($cart);
-        return view('home.cart.index')->with(['cart' => $cart]);
+        $subTotal = \Cart::getSubtotal();
+        return view('home.cart.index')->with(
+            ['cart' => $cart,
+             'subTotal' => $subTotal,
+            ]);
     }
 
     /**

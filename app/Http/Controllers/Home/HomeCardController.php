@@ -21,10 +21,10 @@ class HomeCardController extends Controller
             $cards = Card::search($request->input('q'))
                    ->paginate(5)
                    ->appends(['c' => 'none']);
+
             return view('home.cards.index')->with(['cards' => $cards]);
         }
-        else
-        {
+
         $category = Category::find($request->input('c'));
 
         $cards = Card::search($request->input('q'))
@@ -40,7 +40,7 @@ class HomeCardController extends Controller
             ->withQueryString(); // don't forget to add current request's query string to retrieve category
         
         return view('home.cards.index')->with(['cards' => $filtered]);
-        }
+
     }
 
     /**

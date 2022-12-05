@@ -15,7 +15,7 @@
                                 <td> {{$card->price}}</td>
                                 <td>
                                     <div class="table-data-feature">
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Show"
+                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Shonw"
                                                 onclick="event.preventDefault();
                                 document.getElementById('show-form{{$card['id']}}').submit();">
 
