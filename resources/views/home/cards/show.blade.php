@@ -51,7 +51,7 @@
             </div>
         </div>
         <form id="purchase-form"
-              action="{{ route('checkout') }}"
+              action="{{ route('payNow') }}"
               method="POST" class="d-none">
             @csrf
             <input type="hidden" value="{{ $card->id }}" name="id">

@@ -43,7 +43,8 @@ Route::controller(AdminController::class)->group(function () {
 });
 
 Route::controller(StripeController::class)->group(function () {
-    Route::post('/checkout', [StripeController::class, 'session'])->name('checkout');
+    Route::post('/checkout', [StripeController::class, 'checkout'])->name('checkout');
+    Route::post('/payNow', [StripeController::class, 'payNow'])->name('payNow');
 });
 
 Route::resource('/admin/cards', AdminCardController::class);
@@ -54,4 +55,4 @@ Route::resource('/admin/users', AdminUserController::class);
 
 Route::resource('/search', HomeCardController::class)->only(['index', 'show']);
 
-Route::resource('/cart', CartController::class)->except(['create', 'show']);
+Route::resource('/cart', CartController::class)->except(['create', 'show', 'edit']);
