@@ -52,7 +52,6 @@
 |        |           |                                  |                    |                                                                        | App\Http\Middleware\Authenticate:sanctum    |
 |        | GET|HEAD  | cart                             | cart.index         | App\Http\Controllers\Payment\CartController@index                      | web                                         |
 |        | POST      | cart                             | cart.store         | App\Http\Controllers\Payment\CartController@store                      | web                                         |
-|        | GET|HEAD  | cart/{cart}                      | cart.show          | App\Http\Controllers\Payment\CartController@show                       | web                                         |
 |        | PUT|PATCH | cart/{cart}                      | cart.update        | App\Http\Controllers\Payment\CartController@update                     | web                                         |
 |        | DELETE    | cart/{cart}                      | cart.destroy       | App\Http\Controllers\Payment\CartController@destroy                    | web                                         |
 |        | GET|HEAD  | cart/{cart}/edit                 | cart.edit          | App\Http\Controllers\Payment\CartController@edit                       | web                                         |
@@ -78,4 +77,5 @@
 |        | GET|HEAD  | sanctum/csrf-cookie              |                    | Laravel\Sanctum\Http\Controllers\CsrfCookieController@show             | web                                         |
 |        | GET|HEAD  | search                           | search.index       | App\Http\Controllers\Home\HomeCardController@index                     | web                                         |
 |        | GET|HEAD  | search/{search}                  | search.show        | App\Http\Controllers\Home\HomeCardController@show                      | web                                         |
+|        | GET|HEAD  | uml                              |                    | Andyabih\LaravelToUML\Http\Controllers\LaravelToUMLController@index    |                                             |
 +--------+-----------+----------------------------------+--------------------+------------------------------------------------------------------------+---------------------------------------------+
