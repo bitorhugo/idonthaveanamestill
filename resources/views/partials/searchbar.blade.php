@@ -7,7 +7,7 @@
                 <div class="input-group">
                     <input type="text" name="q" class="form-control" placeholder="Search for products">
 
-                    <select name="c" form="search-bar">
+                    <select name="c" form="search-bar" style="background:#f8fafc">
                         <option value="none">Category</option>
                         @foreach($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
