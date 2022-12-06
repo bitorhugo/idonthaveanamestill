@@ -11,6 +11,6 @@ class Inventory extends Model
 
     public function cards()
     {
-        return $this->belongsToMany(Card::class);
+        return $this->belongsTo(Card::class);
     }
 }

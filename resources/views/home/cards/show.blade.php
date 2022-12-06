@@ -26,14 +26,27 @@
                         </div>
                         <div class="card-body">
 
-                            <div class="alert alert-warning" role="alert">
-                                {{$card->price}} EUR
+                            <div class="alert alert-primary" role="alert">
+                                <strong>{{$card->price}} EUR</strong>
                             </div>
 
-                            <div class="alert alert-success" role="alert">
-                                In stock
-                            </div>
-                            
+                            @if($card->inventory->quantity >= 10)
+                                <div class="alert alert-success" role="alert">
+                                    <strong>Quantity: {{$card->inventory->quantity}}</strong>
+                                    <span class="badge badge-pill badge-success">In Stock</span>
+                                </div>
+                            @elseif($card->inventory->quantity < 10)
+                                <div class="alert alert-warning" role="alert">
+                                        <strong>Quantity: {{$card->inventory->quantity}}</strong>
+                                        <span class="badge badge-pill badge-warning">Low Stock</span>
+                                </div>
+                        </div>
+                            @else
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Qauntity: {{$card->inventory->quantity}}</strong>
+                            <span class="badge badge-pill badge-danger">No Stock</span>
+                        </div>
+                            @endif
                             <button type="button" class="btn btn-outline-primary"
                                     onclick="event.preventDefault();
                                 document.getElementById('purchase-form').submit();">
@@ -46,10 +59,10 @@
                                 <i class="fas fa-shopping-basket"> Add to Cart</i>
                             </button>
 
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         <form id="purchase-form"
               action="{{ route('payNow') }}"

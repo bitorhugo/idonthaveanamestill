@@ -48,7 +48,7 @@ class CartController extends Controller
             $request->price,
             $request->quantity,
             array()
-        );
+        )->associate('Card');
         
         return back();
     }
