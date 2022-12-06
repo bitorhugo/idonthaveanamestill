@@ -76,15 +76,26 @@ class CartController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update cart.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $id item id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
+        if ($request->input('qty') < 1){
+            return back();
+        }
 
+        \Cart::update($id, [
+            'quantity' => [
+                'relative' => false,
+                'value' => $request->input('qty')
+            ],
+        ]);
+        
+        return redirect()->route('cart.index');
     }
 
     /**
@@ -95,6 +106,7 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        \Cart::remove($id);
+        return redirect()->route('cart.index');
     }
 }
