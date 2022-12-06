@@ -14,7 +14,7 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $cart = \Cart::getContent();
         $subTotal = \Cart::getSubtotal();
@@ -96,7 +96,7 @@ class CartController extends Controller
         ]);
         
         return redirect()->route('cart.index')
-                         ->with('success', 'Item Updated.');
+                         ->with('success', 'Item updated.');
     }
 
     /**

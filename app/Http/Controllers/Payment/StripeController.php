@@ -28,8 +28,8 @@ class StripeController extends Controller
                 ],
             ],
             'mode'        => 'payment',
-            'success_url' => route('home'),
-            'cancel_url'  => route('cart.index'),
+            'success_url' => route('paymentSuccess') ,
+            'cancel_url'  => route('paymentCanceled'),
         ]);
 
         return redirect()->away($session->url);
@@ -53,11 +53,25 @@ class StripeController extends Controller
                 ],
             ],
             'mode'        => 'payment',
-            'success_url' => route('home'),
-            'cancel_url'  => route('search.show', ['search' => $request->id]),
+            'success_url' => route('paymentSuccess'),
+            'cancel_url'  => route('paymentCanceled', ['search' => $request->id]),
         ]);
 
         return redirect()->away($session->url);
     }
-    
+
+    public function success()
+    {
+        return redirect()->route('home')->with('success', 'Payment was fullfilled.');
+    }
+
+    public function canceled(Request $request)
+    {
+        if($request->has('search')) {
+            return redirect()->route('search.show', ['search' => $request->search])
+                             ->with('error', 'Payment Canceled.');
+        }
+        return redirect()->route('cart.index')
+                         ->with('error', 'Payment Canceled.');
+    }
 }

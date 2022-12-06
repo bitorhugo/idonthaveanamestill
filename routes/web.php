@@ -22,13 +22,6 @@ use App\Http\Controllers\Payment\StripeController;
 |
 */
 
-// Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
-// Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
-// Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
-// Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
-// Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
-
-
 Auth::routes();
 
 /* group routes that share the same controller*/
@@ -45,6 +38,8 @@ Route::controller(AdminController::class)->group(function () {
 Route::controller(StripeController::class)->group(function () {
     Route::post('/checkout', [StripeController::class, 'checkout'])->name('checkout');
     Route::post('/payNow', [StripeController::class, 'payNow'])->name('payNow');
+    Route::get('/paymentSuccess', [StripeController::class, 'success'])->name('paymentSuccess');
+    Route::get('/paymentCanceled', [StripeController::class, 'canceled'])->name('paymentCanceled');
 });
 
 Route::resource('/admin/cards', AdminCardController::class);

@@ -1,6 +1,7 @@
 @extends('layouts.masterApp')
 
 @section('content')
+    @include('partials.alert')
     <section class="p-t-20">
         <div class="container">
             <div class="row">
