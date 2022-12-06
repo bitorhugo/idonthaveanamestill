@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-9">
                     <div class="table-responsive table-responsive-data2">
-                        <table class="table table-data2 text-left">
+                        <table class="table table-data2 ">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -34,7 +34,9 @@
                                     </td>
                                     <td>
                                         <div class="table-data-feature">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Send">
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Show"
+                                                    onclick="event.preventDefault();
+        document.getElementById('show-form{{$item->id}}').submit();">
                                                 <i class="zmdi zmdi-mail-send"></i>
                                             </button>
 
@@ -50,6 +52,8 @@
                                 <form id="updateQty-form{{$item->id}}" action="{{route('cart.update', ['cart' => $item->id])}}" method="post" class="">
                                     @csrf
                                     @method('patch')
+                                </form>
+                                <form id="show-form{{$item->id}}" action="{{ route('search.show', ['search' => $item->id]) }}" method="GET" class="d-none">
                                 </form>
                                 <form id="delete-form{{$item->id}}" action="{{ route('cart.destroy', ['cart' => $item->id]) }}" method="POST" class="d-none">
                                     @csrf
