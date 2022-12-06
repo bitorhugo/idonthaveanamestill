@@ -1,7 +1,8 @@
 @extends('layouts.masterApp')
 
 @section('content')
-
+    @include('partials.alert')
+    
     <section class="p-t-20">
         <div class="container">
             <div class="row">
@@ -19,46 +20,46 @@
                             <tbody>
                                 @foreach($cart as $item)
                                     <tr class="tr-shadow">
-                                    <td>{{$item->name}}</td>
-                                    <td>{{$item->price}}</td>
-                                    <td>
-                                        <div class="col col-sm-3">
-                                            <input name="qty" type="number" min="1" placeholder="{{$item->quantity}}" class="form-control" form="updateQty-form{{$item->id}}">
-                                            <span class="badge badge-info">
-                                                <a href="" style="color:white; text-decoration:none;"
-                                                   onclick="event.preventDefault();
+                                        <td>{{$item->name}}</td>
+                                        <td>{{$item->price}}</td>
+                                        <td>
+                                            <div class="col col-sm-3">
+                                                <input name="qty" type="number" min="1" placeholder="{{$item->quantity}}" class="form-control" form="updateQty-form{{$item->id}}">
+                                                <span class="badge badge-info">
+                                                    <a href="" style="color:white; text-decoration:none;"
+                                                       onclick="event.preventDefault();
         document.getElementById('updateQty-form{{$item->id}}').submit();">
-                                                    Update</a></span>
-                                        </div>
+                                                        Update</a></span>
+                                            </div>
 
-                                    </td>
-                                    <td>
-                                        <div class="table-data-feature">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Show"
-                                                    onclick="event.preventDefault();
+                                        </td>
+                                        <td>
+                                            <div class="table-data-feature">
+                                                <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Show"
+                                                        onclick="event.preventDefault();
         document.getElementById('show-form{{$item->id}}').submit();">
-                                                <i class="zmdi zmdi-mail-send"></i>
-                                            </button>
+                                                    <i class="zmdi zmdi-mail-send"></i>
+                                                </button>
 
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
-                                                    onclick="event.preventDefault();
+                                                <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
+                                                        onclick="event.preventDefault();
         document.getElementById('delete-form{{$item->id}}').submit();">
-                                                <i class="zmdi zmdi-delete"></i>
-                                            </button>
+                                                    <i class="zmdi zmdi-delete"></i>
+                                                </button>
 
-                                        </div>
-                                    </td>
-                                </tr>
-                                <form id="updateQty-form{{$item->id}}" action="{{route('cart.update', ['cart' => $item->id])}}" method="post" class="">
-                                    @csrf
-                                    @method('patch')
-                                </form>
-                                <form id="show-form{{$item->id}}" action="{{ route('search.show', ['search' => $item->id]) }}" method="GET" class="d-none">
-                                </form>
-                                <form id="delete-form{{$item->id}}" action="{{ route('cart.destroy', ['cart' => $item->id]) }}" method="POST" class="d-none">
-                                    @csrf
-                                    @method('delete')
-                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <form id="updateQty-form{{$item->id}}" action="{{route('cart.update', ['cart' => $item->id])}}" method="post" class="">
+                                        @csrf
+                                        @method('patch')
+                                    </form>
+                                    <form id="show-form{{$item->id}}" action="{{ route('search.show', ['search' => $item->id]) }}" method="GET" class="d-none">
+                                    </form>
+                                    <form id="delete-form{{$item->id}}" action="{{ route('cart.destroy', ['cart' => $item->id]) }}" method="POST" class="d-none">
+                                        @csrf
+                                        @method('delete')
+                                    </form>
                                 @endforeach
                             </tbody>
                         </table>
@@ -76,7 +77,7 @@
                             <button type="button" class="btn btn-warning"
                                     onclick="event.preventDefault();
         document.getElementById('checkout-form').submit();">
-                            <i class="fa fa-magic"></i>&nbsp; Checkout</button>
+                                <i class="fa fa-magic"></i>&nbsp; Checkout</button>
                         </div>
                     </div>
                 </div>

@@ -85,7 +85,7 @@ class CartController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->input('qty') < 1){
-            return back();
+            return back()->with('error', 'Something went wrong.');
         }
 
         \Cart::update($id, [
@@ -95,7 +95,8 @@ class CartController extends Controller
             ],
         ]);
         
-        return redirect()->route('cart.index');
+        return redirect()->route('cart.index')
+                         ->with('success', 'Item Updated.');
     }
 
     /**
@@ -107,6 +108,7 @@ class CartController extends Controller
     public function destroy($id)
     {
         \Cart::remove($id);
-        return redirect()->route('cart.index');
+        return redirect()->route('cart.index')
+                         ->with('success', 'Item deleted');
     }
 }
