@@ -111,8 +111,5 @@ class StripeController extends Controller
         return $session;
     }
 
-    private function isBuyNowCheckout($request)
-    {
-        
-    }
+    
 }

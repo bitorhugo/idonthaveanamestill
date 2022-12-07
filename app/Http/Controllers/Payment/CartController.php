@@ -21,8 +21,8 @@ class CartController extends Controller
      */
     public function index(Request $request)
     {
-        $cart = \Cart::session(Auth::user()->id)->getContent();
-        $subTotal = \Cart::session(Auth::user()->id)->getSubtotal();
+        $cart = \Cart::session(Auth::id())->getContent();
+        $subTotal = \Cart::session(Auth::id())->getSubtotal();
         return view('home.cart.index')->with(
             ['cart' => $cart,
              'subTotal' => $subTotal,
@@ -47,7 +47,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        \Cart::session(Auth::user()->id)->add(
+        \Cart::session(Auth::id())->add(
             $request->id,
             $request->name,
             $request->price,
@@ -89,11 +89,12 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($request->input('qty') < 1){
+        
+        if ($request->qty < 1){
             return back()->with('error', 'Something went wrong.');
         }
 
-        \Cart::session(Auth::user()->id)->update($id, [
+        \Cart::session(Auth::id())->update($id, [
             'quantity' => [
                 'relative' => false,
                 'value' => $request->input('qty')
@@ -112,7 +113,7 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        \Cart::session(Auth::user()->id)->remove($id);
+        \Cart::session(Auth::id())->remove($id);
         return redirect()->route('cart.index')
                          ->with('success', 'Item deleted');
     }
