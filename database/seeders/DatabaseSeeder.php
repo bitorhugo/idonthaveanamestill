@@ -25,7 +25,5 @@ class DatabaseSeeder extends Seeder
         \App\Models\Card_Category::factory(10)->create();
 
         \App\Models\Inventory::factory(10)->create();
-
-        \App\Models\Discount::factory(10)->create();
     }
 }

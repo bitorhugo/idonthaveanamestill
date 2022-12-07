@@ -31,6 +31,6 @@ class UpdateCardCategoryTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('card__categories');
     }
 }

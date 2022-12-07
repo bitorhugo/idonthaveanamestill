@@ -19,18 +19,9 @@ class UpdateCardsTable extends Migration
                   ->onDelete('cascade')
                   ->nullable();
 
-            $table->unsignedBigInteger('discount_id')
-                  ->onDelete('cascade')
-                  ->onDelete('cascade')
-                  ->nullable();
-
             $table->foreign('inventory_id')
                   ->references('id')
                   ->on('inventories');
-
-            $table->foreign('discount_id')
-                  ->references('id')
-                  ->on('discounts');
         });
     }
 
@@ -41,6 +32,6 @@ class UpdateCardsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('cards');
     }
 }

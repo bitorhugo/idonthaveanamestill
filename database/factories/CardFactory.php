@@ -17,6 +17,7 @@ class CardFactory extends Factory
             'name' => $this->faker->numerify('card-###'),
             'description' => $this->faker->text(),
             'price' => $this->faker->numberBetween(10, 100),
+            'discount_amount' => $this->faker->randomFloat(2, 0.05, 0.75),
         ];
     }
 }

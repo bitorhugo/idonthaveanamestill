@@ -17,7 +17,8 @@ class CreateCardsTable extends Migration
             $table->id();
             $table->text('name');
             $table->text('description');
-            $table->float('price');
+            $table->unsignedDecimal('price');
+            $table->unsignedDecimal('discount_amount')->nullable();
             $table->timestamps();
         });
     }
