@@ -90,9 +90,10 @@
           action="{{ route('checkout') }}"
           method="POST" class="d-none">
         @csrf
-        <input type="hidden" value="Cart" name="name">
-        <input type="hidden" value="{{ $subTotal }}" name="price">
-        <input type="hidden" value="1" name="quantity">
+        <!-- <input type="hidden" value="Cart" name="name">
+             <input type="hidden" value="{{ $subTotal }}" name="price">
+             <input type="hidden" value="1" name="quantity">
+             <input type="hidden" value="{{$cart}}" name="cart"> -->
     </form>
     
 @endsection

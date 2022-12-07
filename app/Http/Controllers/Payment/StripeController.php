@@ -5,33 +5,41 @@ namespace App\Http\Controllers\Payment;
 use Stripe;
 
 use App\Http\Controllers\Controller;
+use Darryldecode\Cart\CartCollection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StripeController extends Controller
 {
 
-    public function checkout(Request $request)
+    public function checkout()
     {
         Stripe\Stripe::setApiKey(config('stripe.sk'));
+        
+        $cart = \Cart::session(Auth::id())->getContent();
 
-        $session = Stripe\Checkout\Session::create([
-            'line_items'  => [
+        $line_items = array();
+        foreach ($cart as $item) {
+            $line_data =
                 [
                     'price_data' => [
-                        'currency'     => 'eur',
+                        'currency' => 'eur',
                         'product_data' => [
-                            'name' => $request->name,
+                            'name' => $item->name,
                         ],
-                        'unit_amount'  => $request->price * 100,
+                        'unit_amount' => $item->price * 100,
                     ],
-                    'quantity'   => $request->quantity,
-                ],
-            ],
+                    'quantity' => $item->quantity,
+                ];
+            array_push($line_items, $line_data);
+        }
+        
+        $session = Stripe\Checkout\Session::create([
+            'line_items'  => $line_items,
             'mode'        => 'payment',
-            'success_url' => route('paymentSuccess') ,
+            'success_url' => route('paymentSuccess'),
             'cancel_url'  => route('paymentCanceled'),
         ]);
-
         return redirect()->away($session->url);
     }
     
@@ -73,5 +81,38 @@ class StripeController extends Controller
         }
         return redirect()->route('cart.index')
                          ->with('error', 'Payment Canceled.');
+    }
+
+    private function isCartCheckout()
+    {
+        $cart = \Cart::session(Auth::id())->getContents();
+        $line_items = array();
+        foreach($cart as $item) {
+            $line_items = array_push(
+                ['price_data' => [
+                    'currency' => 'eur',
+                    'product_data' => [
+                       'name' => $item->name,
+                    ],
+                    'unit_amount' => $item->price * 100,
+                ],
+                 'quantity' => $item->quantity,
+                ]
+            );
+        }
+
+        $session = Stripe\Checkout\Session::create([
+            'line_items'  => $line_items,
+            'mode'        => 'payment',
+            'success_url' => route('paymentSuccess'),
+            'cancel_url'  => route('paymentCanceled'),
+        ]);
+
+        return $session;
+    }
+
+    private function isBuyNowCheckout($request)
+    {
+        
     }
 }

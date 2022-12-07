@@ -5,10 +5,15 @@ namespace App\Http\Controllers\Payment;
 use App\Http\Controllers\Controller;
 use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +21,8 @@ class CartController extends Controller
      */
     public function index(Request $request)
     {
-        $cart = \Cart::getContent();
-        $subTotal = \Cart::getSubtotal();
+        $cart = \Cart::session(Auth::user()->id)->getContent();
+        $subTotal = \Cart::session(Auth::user()->id)->getSubtotal();
         return view('home.cart.index')->with(
             ['cart' => $cart,
              'subTotal' => $subTotal,
@@ -42,14 +47,14 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        \Cart::add(
+        \Cart::session(Auth::user()->id)->add(
             $request->id,
             $request->name,
             $request->price,
             $request->quantity,
             array()
-        )->associate('Card');
-        
+        )->associate('App\Models\Card');
+
         return back();
     }
 
@@ -88,7 +93,7 @@ class CartController extends Controller
             return back()->with('error', 'Something went wrong.');
         }
 
-        \Cart::update($id, [
+        \Cart::session(Auth::user()->id)->update($id, [
             'quantity' => [
                 'relative' => false,
                 'value' => $request->input('qty')
@@ -107,7 +112,7 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        \Cart::remove($id);
+        \Cart::session(Auth::user()->id)->remove($id);
         return redirect()->route('cart.index')
                          ->with('success', 'Item deleted');
     }
