@@ -19,6 +19,7 @@
     },
     "require-dev": {
         "andyabih/laravel-to-uml": "^1.0",
+        "barryvdh/laravel-debugbar": "^3.7",
         "brianium/paratest": "^6.6",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",

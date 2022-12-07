@@ -89,7 +89,6 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
         if ($request->qty < 1){
             return back()->with('error', 'Something went wrong.');
         }
