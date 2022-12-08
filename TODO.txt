@@ -1,1 +1,1 @@
-Merge discount table into Card
+create routes for inventory
