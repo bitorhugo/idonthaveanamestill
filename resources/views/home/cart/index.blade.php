@@ -21,7 +21,12 @@
                                 @foreach($cart as $item)
                                     <tr class="tr-shadow">
                                         <td>{{$item->name}}</td>
-                                        <td>{{$item->price}}</td>
+                                        <td>
+                                            {{$item->getPriceSumWithConditions()}}€</br>
+                                            @if($item->model->discount_amount > 0)
+                                                <del>{{$item->price}}€</del>
+                                            @endif
+                                        </td>
                                         <td>
                                             <div class="col col-sm-3">
                                                 <input name="qty" type="number" min="1" placeholder="{{$item->quantity}}" class="form-control" form="updateQty-form{{$item->id}}">
@@ -69,7 +74,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="statistic__item statistic__item--white">
                         <span class="desc">Total</span>
-                        <h2 class="number">{{$subTotal}}$</h2>
+                        <h3 class="number" style="color:#0d6efd">{{$subTotal}}€</h3>
                         <div class="icon">
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
