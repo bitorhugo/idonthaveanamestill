@@ -47,12 +47,19 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+        $discount = new \Darryldecode\Cart\CartCondition(array(
+            'name' => 'SALE ' . $request->discount * 100,
+            'type' => 'discounts',
+            'value' => '-' . ($request->discount * 100) . '%',
+        ));
+        
         \Cart::session(Auth::id())->add(
             $request->id,
             $request->name,
             $request->price,
             $request->quantity,
-            array()
+            array(),
+            $discount
         )->associate('App\Models\Card');
 
         return back();

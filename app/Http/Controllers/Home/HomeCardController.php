@@ -74,8 +74,8 @@ class HomeCardController extends Controller
     {
         $card = Card::find($id);
         // update card price with discount
-        if($card->discount->exists()) {
-            $card->price = $card->price - ($card->price * $card->discount->discount_amount);
+        if($card->discount_amount) {
+            $card->price = $card->price - ($card->price * $card->discount_amount);
         }
         return view ('home.cards.show')->with(['card' => $card]);
     }
