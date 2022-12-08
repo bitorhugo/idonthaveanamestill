@@ -20,6 +20,8 @@ class StripeController extends Controller
 
         $line_items = array();
         foreach ($cart as $item) {
+            $priceWithDiscount =
+                $item->getPriceWithConditions() - ($item->getPriceWithConditions() * $item->discount_amount);
             $line_data =
                 [
                     'price_data' => [
@@ -27,7 +29,7 @@ class StripeController extends Controller
                         'product_data' => [
                             'name' => $item->name,
                         ],
-                        'unit_amount' => $item->price * 100,
+                        'unit_amount' => $priceWithDiscount * 100,
                     ],
                     'quantity' => $item->quantity,
                     'adjustable_quantity' => ['enabled' => true],

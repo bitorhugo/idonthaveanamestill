@@ -24,7 +24,7 @@
                                         <td>
                                             {{$item->getPriceSumWithConditions()}}€</br>
                                             @if($item->model->discount_amount > 0)
-                                                <del>{{$item->price}}€</del>
+                                                <span class="badge badge-dark">{{$item->conditions->getValue()}}</span>
                                             @endif
                                         </td>
                                         <td>
