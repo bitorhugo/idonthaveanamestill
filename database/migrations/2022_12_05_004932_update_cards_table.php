@@ -14,14 +14,7 @@ class UpdateCardsTable extends Migration
     public function up()
     {
         Schema::table('cards', function (Blueprint $table) {
-            $table->unsignedBigInteger('inventory_id')
-                  ->onDelete('cascade')
-                  ->onDelete('cascade')
-                  ->nullable();
 
-            $table->foreign('inventory_id')
-                  ->references('id')
-                  ->on('inventories');
         });
     }
 

@@ -14,10 +14,10 @@ class CardFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->numerify('card-###'),
+            'name' => $this->faker->numerify('card-#####'),
             'description' => $this->faker->text(),
-            'price' => $this->faker->numberBetween(10, 100),
-            'discount_amount' => $this->faker->randomFloat(2, 0.05, 0.75),
+            'price' => $this->faker->numberBetween(10, 5000),
+            'discount_amount' => $this->faker->randomFloat(2, 0, 0.75),
         ];
     }
 }

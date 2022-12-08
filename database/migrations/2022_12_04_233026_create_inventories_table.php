@@ -17,6 +17,16 @@ class CreateInventoriesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('quantity');
             $table->timestamps();
+
+            $table->unsignedBigInteger('card_id')
+                  ->onDelete('cascade')
+                  ->onDelete('cascade')
+                  ->unique()
+                  ->nullable();
+
+            $table->foreign('card_id')
+                  ->references('id')
+                  ->on('cards');
         });
     }
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Card;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {
@@ -26,10 +28,13 @@ class HomeController extends Controller
     public function index()
     {
         //return showcase cards containing discounts and available categories
-        $showcase = Card::has('inventory')->take(4)->get();
-        $showcase->filter(function ($card) {
-            return $card->discount->exists();
-        });
+        
+        $showcase = DB::table('cards')
+                  ->join('inventories', 'cards.id', '=', 'inventories.card_id')
+                  ->where('inventories.quantity', '>', '0')
+                  ->where('cards.discount_amount', '>', '0')
+                  ->limit(4)
+                  ->get();
 
         $categories = Category::all();
         return view('home')->with(

@@ -14,7 +14,8 @@ class InventoryFactory extends Factory
     public function definition()
     {
         return [
-            'quantity' =>$this->faker->numberBetween(10, 500),
+            'quantity' => $this->faker->numberBetween(10, 500),
+            'card_id' => $this->faker->unique()->numberBetween(1, 1000),
         ];
     }
 }

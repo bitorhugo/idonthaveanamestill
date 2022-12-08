@@ -14,8 +14,8 @@ class Card_CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'category_id' => $this->faker->numberBetween(1, 5),
-            'card_id' => $this->faker->unique()->numberBetween(1, 10),
+            'category_id' => $this->faker->numberBetween(1, 10),
+            'card_id' => $this->faker->unique()->numberBetween(1, 1000),
         ];
     }
 }

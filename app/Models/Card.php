@@ -51,10 +51,7 @@ class Card extends Model
     }
 
     public function inventory() {
-        return $this->belongsTo(Inventory::class)->withDefault();
+        return $this->hasOne(Inventory::class)->withDefault();
     }
 
-    public function discount() {
-        return $this->belongsTo(Discount::class)->withDefault();
-    }
 }
