@@ -30,6 +30,7 @@ class StripeController extends Controller
                         'unit_amount' => $item->price * 100,
                     ],
                     'quantity' => $item->quantity,
+                    'adjustable_quantity' => ['enabled' => true],
                 ];
             array_push($line_items, $line_data);
         }
