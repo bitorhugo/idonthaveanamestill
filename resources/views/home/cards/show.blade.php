@@ -74,12 +74,14 @@
             <input type="hidden" value="1" name="quantity">
         </form>
         <form id="add-to-cart-form"
-              action="{{ route('cart.store', ['cart' => $card]) }}"
+              action="{{ route('cart.store') }}"
               method="POST" class="d-none">
             @csrf
             <input type="hidden" value="{{ $card->id }}" name="id">
             <input type="hidden" value="{{ $card->name }}" name="name">
             <input type="hidden" value="{{ $card->price }}" name="price">
+            <input type="hidden" value="{{ $card->inventory->quantity }}" name="stock">
+            <input type="hidden" value="{{ $card->discount_amount }}" name="discount">
             <input type="hidden" value="1" name="quantity">
         </form>
     </section>
