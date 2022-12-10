@@ -16,19 +16,19 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
-                        <a href="{{route('search.show', ['search' => $card->id])}}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                        <a href="{{route('search.show', ['search' => $card->card_id])}}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
                         <a href="" class="btn btn-sm text-dark p-0"
                            onclick="event.preventDefault();
-                                document.getElementById('add-to-cart-form{{$card->id}}').submit();">
+                                document.getElementById('add-to-cart-form{{$card->card_id}}').submit();">
                             <i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                     </div>
                 </div>
             </div>
-            <form id="add-to-cart-form{{$card->id}}"
+            <form id="add-to-cart-form{{$card->card_id}}"
                   action="{{ route('cart.store') }}"
                   method="POST" class="d-none">
                 @csrf
-                <input type="hidden" value="{{ $card->id }}" name="id">
+                <input type="hidden" value="{{ $card->card_id }}" name="id">
                 <input type="hidden" value="{{ $card->name }}" name="name">
                 <input type="hidden" value="{{ $card->price }}" name="price">
                 <input type="hidden" value="{{ $card->discount_amount }}" name="discount">
