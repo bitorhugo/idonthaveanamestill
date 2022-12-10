@@ -9,10 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->middleware('auth');
-        $this->middleware('EnsureStockIsValid');
+        if($request->isMethod('post')){
+            $this->middleware('EnsureStockIsValid');
+        }
     }
     
     /**
@@ -20,7 +22,7 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $cart = \Cart::session(Auth::id())->getContent();
         $subTotal = \Cart::session(Auth::id())->getSubtotal();
@@ -48,6 +50,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+
         $discount = new \Darryldecode\Cart\CartCondition(array(
             'name' => 'SALE ' . $request->discount * 100,
             'type' => 'discounts',

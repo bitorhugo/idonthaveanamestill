@@ -28,8 +28,14 @@ class HomeController extends Controller
     public function index()
     {
         //return showcase cards containing discounts and available categories
-        $showcase = DB::table('cards')
-                  ->join('inventories', 'cards.id', '=', 'inventories.card_id')
+        // $showcase = DB::table('cards')
+        //           ->join('inventories', 'cards.id', '=', 'inventories.card_id')
+        //           ->where('inventories.quantity', '>', '0')
+        //           ->where('cards.discount_amount', '>', '0')
+        //           ->limit(4)
+        //           ->get();
+
+        $showcase = Card::join('inventories', 'cards.id', '=', 'inventories.card_id')
                   ->where('inventories.quantity', '>', '0')
                   ->where('cards.discount_amount', '>', '0')
                   ->limit(4)

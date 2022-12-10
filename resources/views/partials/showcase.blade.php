@@ -31,6 +31,7 @@
                 <input type="hidden" value="{{ $card->card_id }}" name="id">
                 <input type="hidden" value="{{ $card->name }}" name="name">
                 <input type="hidden" value="{{ $card->price }}" name="price">
+                <input type="hidden" value="{{ $card->quantity }}" name="stock">
                 <input type="hidden" value="{{ $card->discount_amount }}" name="discount">
                 <input type="hidden" value="1" name="quantity">
             </form>
