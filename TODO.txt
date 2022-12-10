@@ -1,5 +1,5 @@
+- create routes for inventory
 
-- add <li> tags instead of selects in admin page t filter data
 
 - update cart after checkout 
     

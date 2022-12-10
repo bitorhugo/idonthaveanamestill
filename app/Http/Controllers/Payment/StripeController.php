@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Payment;
 use Stripe;
 
 use App\Http\Controllers\Controller;
+use App\Models\Card;
+use App\Services\InventoryService;
 use Darryldecode\Cart\CartCollection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +42,7 @@ class StripeController extends Controller
         $session = Stripe\Checkout\Session::create([
             'line_items'  => $line_items,
             'mode'        => 'payment',
-            'success_url' => route('paymentSuccess', ['items_bought' => $cart]),
+            'success_url' => route('paymentSuccess'),
             'cancel_url'  => route('paymentCanceled'),
         ]);
         return redirect()->away($session->url);
@@ -76,11 +78,10 @@ class StripeController extends Controller
      */
     public function success(Request $request)
     {
-        // handle respose from payNow 
-        if($request->has('item_id')) {
-            
+        if ($request->has('item_id')) {
+            return $this->successPayNow($request->item_id);
         }
-        return redirect()->route('home')->with('success', 'Payment was fullfilled.');
+        return $this->successCheckout();
     }
 
     public function canceled(Request $request)
@@ -93,32 +94,57 @@ class StripeController extends Controller
             ->with('error', 'Payment Canceled.');
     }
 
-    private function isCartCheckout()
+
+    private function successPayNow($item_id)
     {
-        $cart = \Cart::session(Auth::id())->getContents();
-        $line_items = array();
-        foreach ($cart as $item) {
-            $line_items = array_push(
-                [
-                    'price_data' => [
-                        'currency' => 'eur',
-                        'product_data' => [
-                            'name' => $item->name,
-                        ],
-                        'unit_amount' => $item->price * 100,
-                    ],
-                    'quantity' => $item->quantity,
-                ]
-            );
-        }
+        //update inventory by 1
+        $inv = Card::find($item_id)->inventory;
+        InventoryService::update($inv, $inv->quantity - 1);
 
-        $session = Stripe\Checkout\Session::create([
-            'line_items'  => $line_items,
-            'mode'        => 'payment',
-            'success_url' => route('paymentSuccess'),
-            'cancel_url'  => route('paymentCanceled'),
-        ]);
-
-        return $session;
+        return redirect() ->route('search.show', ['search' => $item_id])
+                          ->with('success', 'Payment was fullfilled.');
     }
+
+    private function successCheckout()
+    {
+        // update cart inventory by qty
+        \Cart::session(Auth::id())
+            ->getContent()
+            ->each(function ($item) {
+                $inv = $item->model->inventory;
+                InventoryService::update($inv, $inv->quantity - $item->quantity);
+            });
+        // clear the cart
+        \Cart::session(Auth::id())->clear();
+        return redirect()->route('home');
+    }
+    
+    // private function isCartCheckout()
+    // {
+    //     $cart = \Cart::session(Auth::id())->getContents();
+    //     $line_items = array();
+    //     foreach ($cart as $item) {
+    //         $line_items = array_push(
+    //             [
+    //                 'price_data' => [
+    //                     'currency' => 'eur',
+    //                     'product_data' => [
+    //                         'name' => $item->name,
+    //                     ],
+    //                     'unit_amount' => $item->price * 100,
+    //                 ],
+    //                 'quantity' => $item->quantity,
+    //             ]
+    //         );
+    //     }
+
+    //     $session = Stripe\Checkout\Session::create([
+    //         'line_items'  => $line_items,
+    //         'mode'        => 'payment',
+    //         'success_url' => route('paymentSuccess'),
+    //         'cancel_url'  => route('paymentCanceled'),
+    //     ]);
+
+    //     return $session;
+    // }
 }
