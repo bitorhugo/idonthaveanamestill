@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Auth;
 class StripeController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('EnsureStockIsValid');
+    }
+    
     public function checkout()
     {
         Stripe\Stripe::setApiKey(config('stripe.sk'));
@@ -73,9 +78,6 @@ class StripeController extends Controller
         return redirect()->away($session->url);
     }
 
-    /**
-     * @TODO make inventory resource controller
-     */
     public function success(Request $request)
     {
         if ($request->has('item_id')) {
@@ -114,37 +116,11 @@ class StripeController extends Controller
                 $inv = $item->model->inventory;
                 InventoryService::update($inv, $inv->quantity - $item->quantity);
             });
+
         // clear the cart
         \Cart::session(Auth::id())->clear();
+        
         return redirect()->route('home');
     }
     
-    // private function isCartCheckout()
-    // {
-    //     $cart = \Cart::session(Auth::id())->getContents();
-    //     $line_items = array();
-    //     foreach ($cart as $item) {
-    //         $line_items = array_push(
-    //             [
-    //                 'price_data' => [
-    //                     'currency' => 'eur',
-    //                     'product_data' => [
-    //                         'name' => $item->name,
-    //                     ],
-    //                     'unit_amount' => $item->price * 100,
-    //                 ],
-    //                 'quantity' => $item->quantity,
-    //             ]
-    //         );
-    //     }
-
-    //     $session = Stripe\Checkout\Session::create([
-    //         'line_items'  => $line_items,
-    //         'mode'        => 'payment',
-    //         'success_url' => route('paymentSuccess'),
-    //         'cancel_url'  => route('paymentCanceled'),
-    //     ]);
-
-    //     return $session;
-    // }
 }
