@@ -24,7 +24,7 @@ class CartController extends Controller
         $cart = \Cart::session(Auth::id())->getContent();
         $subTotal = \Cart::session(Auth::id())->getSubtotal();
         return view('home.cart.index')->with(
-            ['cart' => $cart,
+            ['cart'     => $cart,
              'subTotal' => $subTotal,
             ]);
     }
@@ -103,7 +103,7 @@ class CartController extends Controller
         \Cart::session(Auth::id())->update($id, [
             'quantity' => [
                 'relative' => false,
-                'value' => $request->input('qty')
+                'value'    => $request->input('qty')
             ],
         ]);
         

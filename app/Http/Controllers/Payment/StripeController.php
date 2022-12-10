@@ -31,7 +31,7 @@ class StripeController extends Controller
                         ],
                         'unit_amount' => $priceWithDiscount * 100,
                     ],
-                    'quantity' => $item->quantity,
+                    'quantity'            => $item->quantity,
                     'adjustable_quantity' => ['enabled' => true],
                 ];
             array_push($line_items, $line_data);
@@ -85,7 +85,6 @@ class StripeController extends Controller
 
     public function canceled(Request $request)
     {
-                ddd($request);
         if ($request->has('search')) {
             return redirect()->route('search.show', ['search' => $request->search])
                 ->with('error', 'Payment Canceled.');

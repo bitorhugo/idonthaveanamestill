@@ -24,8 +24,8 @@ class AdminUserController extends Controller
     public function index()
     {
         $allUsers['usersjson'] = User::paginate(10);
-        $allUsers['users'] = $allUsers['usersjson']->toArray();
-        $allUsers['keys'] = array_keys(current($allUsers['users']['data']));
+        $allUsers['users']     = $allUsers['usersjson']->toArray();
+        $allUsers['keys']      = array_keys(current($allUsers['users']['data']));
         return view('admin.users.index')->with($allUsers);
     }
 

@@ -22,8 +22,8 @@ class AdminCategoryController extends Controller
     public function index()
     {
         $allCategories['categoriesjson'] = Category::simplePaginate(10);
-        $allCategories['categories'] = $allCategories['categoriesjson']->toArray();
-        $allCategories['keys'] = array_keys(current($allCategories['categories']['data']));
+        $allCategories['categories']     = $allCategories['categoriesjson']->toArray();
+        $allCategories['keys']           = array_keys(current($allCategories['categories']['data']));
         return view('admin.categories.index')->with($allCategories);
     }
 
