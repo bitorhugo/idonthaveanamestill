@@ -35,8 +35,10 @@ class AdminCardController extends Controller
     public function create()
     {
         // use make() in order to not persist model in database
-        $arr['card'] = Card::factory()->make();
-        return view('admin.cards.create')->with($arr);
+        $card = Card::factory()->make();
+        return view('admin.cards.create')->with([
+            'card' => $card,
+        ]);
     }
 
     /**
@@ -47,6 +49,7 @@ class AdminCardController extends Controller
      */
     public function store(Request $request, Card $card)
     {
+        ddd($request);
         $filtered = $request->collect()
             ->except(['_token']);
 
@@ -78,7 +81,9 @@ class AdminCardController extends Controller
     public function edit(Card $card)
     {
         $card->makehidden('id');
-        return view('admin.cards.edit')->with(['card' => $card]);
+        return view('admin.cards.edit')->with([
+            'card' => $card
+        ]);
     }
 
     /**

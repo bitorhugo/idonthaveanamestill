@@ -19,12 +19,6 @@
                     <table class="table table-data2">
                         <thead>
                             <tr>
-                                <th>
-                                    <label class="au-checkbox">
-                                        <input type="checkbox">
-                                        <span class="au-checkmark"></span>
-                                    </label>
-                                </th>
                                 <!-- get the first element and iter all cols -->
                                 @foreach($keys as $key)
                                     <th>{{$key}}</th>
@@ -35,10 +29,9 @@
                             @foreach($cards['data'] as $card)
                                 <tr class="tr-shadow">
                                     <td>
-                                        <label class="au-checkbox">
-                                            <input type="checkbox">
-                                            <span class="au-checkmark"></span>
-                                        </label>
+                                        <div class="avatar">
+                                            <img src="{{url('/images/defaultImageCard.jpg')}}" alt="img">
+                                        </div>
                                     </td>
 
                                     @foreach(array_keys($card) as $key)
