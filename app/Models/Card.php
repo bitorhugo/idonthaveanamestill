@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Card extends Model
+class Card extends Model implements HasMedia
 {
     private $name;
     
-    use HasFactory, Searchable;
+    use HasFactory, Searchable, InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.

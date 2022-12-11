@@ -15,6 +15,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "spatie/laravel-collection-macros": "^7.12",
+        "spatie/laravel-medialibrary": "^9.0.0",
         "stripe/stripe-php": "^10.0"
     },
     "require-dev": {
