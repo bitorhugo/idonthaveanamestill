@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Card;
 use Illuminate\Http\Request;
+use App\Services\MediaService;
+use Illuminate\Support\Facades\Storage;
 
 class AdminCardController extends Controller
 {
@@ -49,14 +51,23 @@ class AdminCardController extends Controller
      */
     public function store(Request $request, Card $card)
     {
-        ddd($request);
+        ddd(Storage::disk('public')->get('defaultImageCard.jpg'));
+        if($request->file()) {
+            MediaService::addMedia($card, collect($request->file('image')));
+        }
+        else {
+            MediaService::addMedia($card, collect(Storage::disk('public')
+                                                  ->get('defaultImageCard.jpg')));
+        }
+
+        // no need to filter file since collect is used
         $filtered = $request->collect()
-            ->except(['_token']);
+                            ->except(['_token']);
 
         $filtered->collect()
-            ->each(         // on ->each, the order of $key $value gets flipped
-                fn ($value, $key) => $card->$key = $value
-            );
+                 ->each(         // on ->each, the order of $key $value gets flipped
+                     fn ($value, $key) => $card->$key = $value
+                 );
         $card->save();
         return redirect()->route('cards.index');
     }

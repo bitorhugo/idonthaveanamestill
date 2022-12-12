@@ -16,9 +16,9 @@
             <div class="row">
                 <div class="col-md-12">
 
-                    <table class="table table-data2">
+                    <table class="table table-data2 text-center">
                         <thead>
-                            <tr>
+                            <th>Image</th>
                                 <!-- get the first element and iter all cols -->
                                 @foreach($keys as $key)
                                     <th>{{$key}}</th>
@@ -30,7 +30,7 @@
                                 <tr class="tr-shadow">
                                     <td>
                                         <div class="avatar">
-                                            <img src="{{url('/images/defaultImageCard.jpg')}}" alt="img">
+                                            <img src="{{asset('storage/defaultImageCard.jpg')}}" alt="img">
                                         </div>
                                     </td>
 
