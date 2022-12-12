@@ -32,7 +32,7 @@ return [
         
         'media' => [
             'driver' => 'local',
-            'root'   => public_path('media'),
+            'root'   => public_path('/storage/media'),
             'url'    => env('PORT_URL').'/storage/media',
         ],
         

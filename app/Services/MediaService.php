@@ -15,7 +15,6 @@ class MediaService {
     {
         $images->each(function($image) use ($card){
                 $card->addMedia($image)
-                     ->preservingOriginal()
                      ->toMediaCollection();
             });
     }

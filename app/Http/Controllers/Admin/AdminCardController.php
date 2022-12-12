@@ -7,6 +7,7 @@ use App\Models\Card;
 use Illuminate\Http\Request;
 use App\Services\MediaService;
 use Illuminate\Support\Facades\Storage;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 
 class AdminCardController extends Controller
 {
@@ -51,12 +52,12 @@ class AdminCardController extends Controller
      */
     public function store(Request $request, Card $card)
     {
+        // ddd(Storage::disk('public')->has('defaultImageCard.jpg'));
         if($request->has('image')) {
             MediaService::addMedia($card, collect($request->file('image')));
         }
         else {
-            MediaService::addMedia($card, collect(Storage::disk('public')
-                                                  ->get('defaultImageCard.jpg')));
+            $card->addMedia(public_path('storage/defaultImageCard.jpg'))->toMediaCollection();
         }
 
         // no need to filter file since collect is used
