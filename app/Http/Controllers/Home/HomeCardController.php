@@ -16,8 +16,7 @@ class HomeCardController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->input('c') == 'none')
-        {
+        if ($request->input('c') == 'none') {
             $cards = Card::search($request->input('q'))
                    ->paginate(5)
                    ->appends(['c' => 'none']);
@@ -74,10 +73,10 @@ class HomeCardController extends Controller
     {
         $card = Card::find($id);
         // update card price with discount
-        if($card->discount_amount) {
+        if ($card->discount_amount) {
             $card->price = $card->price - ($card->price * $card->discount_amount);
         }
-        return view ('home.cards.show')->with(['card' => $card]);
+        return view('home.cards.show')->with(['card' => $card]);
     }
 
     /**

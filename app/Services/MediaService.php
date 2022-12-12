@@ -13,10 +13,16 @@ class MediaService {
     
     public static function addMedia(Card $card, $images): void
     {
-        $images->each(function($image) use ($card){
-                $card->addMedia($image)
-                     ->toMediaCollection();
-            });
+        if($images->isEmpty()) {
+            $card ->addMedia(public_path('storage/baseImage.jpg'))
+                  ->preservingOriginal()
+                  ->toMediaCollection();
+        }
+        
+        $images->each(function ($image) use ($card) {
+            $card ->addMedia($image)
+                  ->toMediaCollection();
+        });
     }
 
 

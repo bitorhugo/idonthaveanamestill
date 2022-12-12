@@ -52,14 +52,8 @@ class AdminCardController extends Controller
      */
     public function store(Request $request, Card $card)
     {
-        // ddd(Storage::disk('public')->has('defaultImageCard.jpg'));
-        if($request->has('image')) {
-            MediaService::addMedia($card, collect($request->file('image')));
-        }
-        else {
-            $card->addMedia(public_path('storage/defaultImageCard.jpg'))->toMediaCollection();
-        }
-
+        MediaService::addMedia($card, collect($request->file('image')));
+        
         // no need to filter file since collect is used
         $filtered = $request->collect()
                             ->except(['_token']);
