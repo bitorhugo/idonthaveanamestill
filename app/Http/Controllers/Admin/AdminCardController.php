@@ -51,7 +51,7 @@ class AdminCardController extends Controller
      */
     public function store(Request $request, Card $card)
     {
-        if($request->file()) {
+        if($request->has('image')) {
             MediaService::addMedia($card, collect($request->file('image')));
         }
         else {

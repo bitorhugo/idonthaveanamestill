@@ -30,7 +30,7 @@
                                 <tr class="tr-shadow">
                                     <td>
                                         <div class="avatar">
-                                            <img src="{{$card->getFirstMediaUrl()}}" alt="img">
+                                            <img src="" alt="img">
                                         </div>
                                     </td>
 
