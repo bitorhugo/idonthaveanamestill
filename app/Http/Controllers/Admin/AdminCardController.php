@@ -51,13 +51,13 @@ class AdminCardController extends Controller
      */
     public function store(Request $request, Card $card)
     {
-        // if($request->file()) {
-        //     MediaService::addMedia($card, collect($request->file('image')));
-        // }
-        // else {
-        //     MediaService::addMedia($card, collect(Storage::disk('public')
-        //                                           ->get('defaultImageCard.jpg')));
-        // }
+        if($request->file()) {
+            MediaService::addMedia($card, collect($request->file('image')));
+        }
+        else {
+            MediaService::addMedia($card, collect(Storage::disk('public')
+                                                  ->get('defaultImageCard.jpg')));
+        }
 
         // no need to filter file since collect is used
         $filtered = $request->collect()

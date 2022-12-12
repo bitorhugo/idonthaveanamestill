@@ -53,15 +53,3 @@ Route::resource('/admin/users', AdminUserController::class);
 Route::resource('/search', HomeCardController::class)->only(['index', 'show']);
 
 Route::resource('/cart', CartController::class)->except(['create', 'show', 'edit']);
-
-Route::get('/add-media', function () {
-
-    Card::create([
-        'name' => 'test',
-        'description' => 'desc',
-        'price' => 10,
-        'discount_amount' => 0
-    ])
-        ->addMedia(storage_path('app/pokemon.jpg'))
-        ->toMediaCollection();
-});
