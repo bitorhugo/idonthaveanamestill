@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Home\HomeCardController;
 use App\Http\Controllers\Payment\CartController;
 use App\Http\Controllers\Payment\StripeController;
+use App\Models\Card;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |---------p-----------------------------------------------------------------
@@ -51,3 +53,15 @@ Route::resource('/admin/users', AdminUserController::class);
 Route::resource('/search', HomeCardController::class)->only(['index', 'show']);
 
 Route::resource('/cart', CartController::class)->except(['create', 'show', 'edit']);
+
+Route::get('/add-media', function () {
+
+    Card::create([
+        'name' => 'test',
+        'description' => 'desc',
+        'price' => 10,
+        'discount_amount' => 0
+    ])
+        ->addMedia(storage_path('app/pokemon.jpg'))
+        ->toMediaCollection();
+});

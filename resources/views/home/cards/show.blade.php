@@ -9,7 +9,7 @@
                     
                     <div class="card">
 
-                        <img class="card-img-top" src={{asset("images/bg-title-01.jpg")}} alt="Card image cap">
+                        <img class="card-img-top" src="{{$card->getFirstMediaUrl()}}" alt="image">
 
                         <div class="card-body">
                             <p class="card-text">{{$card->description}}</p>
