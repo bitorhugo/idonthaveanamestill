@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 /* group routes that share the same controller*/
 Route::controller(HomeController::class)->group(function () {
