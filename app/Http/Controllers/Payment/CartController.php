@@ -11,8 +11,9 @@ class CartController extends Controller
 {
     public function __construct(Request $request)
     {
-        $this->middleware('auth');
-        if($request->isMethod('post')){
+        $this->middleware(['auth', 'verified']);
+        
+        if ($request->isMethod('post')){
             $this->middleware('EnsureStockIsValid');
         }
     }

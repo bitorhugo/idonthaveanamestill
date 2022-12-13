@@ -16,7 +16,7 @@ class StripeController extends Controller
 
     public function __construct()
     {
-        $this->middleware('EnsureStockIsValid');
+        $this->middleware(['EnsureStockIsValid', 'verified']);
     }
     
     public function checkout()
