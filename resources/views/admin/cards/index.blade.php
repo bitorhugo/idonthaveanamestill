@@ -24,6 +24,7 @@
                             <th>Description</th>
                             <th>Price</th>
                             <th>Discount</th>
+                            <th>Category</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,7 +40,11 @@
                                     <td>{{$card->description}}</td>
                                     <td>{{$card->price}}</td>
                                     <td>{{$card->discount_amount}}</td>
-
+                                    <td>
+                                        @foreach($card->categories as $cat)
+                                            {{$cat->name}}
+                                        @endforeach
+                                    </td>
                                     <td>
                                         <div class="table-data-feature">
                                             <button class="item" data-toggle="tooltip" data-placement="top" title="Show"

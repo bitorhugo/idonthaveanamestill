@@ -27,7 +27,6 @@ class HomeCardController extends Controller
             return view('home.cards.index')->with(['cards' => $cards]);
         }
         
-
         $category = Category::find($request->input('c'));
         $cards = Card::
                join('card__categories', 'cards.id', '=', 'card__categories.card_id')
