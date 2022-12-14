@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AdminUserController extends Controller
 {
@@ -21,12 +22,11 @@ class AdminUserController extends Controller
         $this->middleware('isAdmin');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $allUsers['usersjson'] = User::paginate(10);
-        $allUsers['users']     = $allUsers['usersjson']->toArray();
-        $allUsers['keys']      = array_keys(current($allUsers['users']['data']));
-        return view('admin.users.index')->with($allUsers);
+        return view('admin.users.index')->with([
+            'users' => User::paginate(),
+        ]);
     }
 
     /**
@@ -52,16 +52,16 @@ class AdminUserController extends Controller
     {
         $hashed = $request->collect()
             ->replace(
-                ['password' => Hash::make($request['password'])]
+                ['password' => Hash::make($request['password']),
+                 'remember_token' => Str::random(10),
+                ]
             );
 
-        $filtered = $hashed->collect()
-            ->except(['_token']);
+        $filtered = $hashed->except(['_token']);
 
-        $filtered->collect()
-            ->each(         // on ->each, the order of $key $value gets flipped
-                fn ($value, $key) => $user->$key = $value
-            );
+        $filtered->each(
+            fn ($value, $key) => $user->$key = $value
+        );
 
         $user->save();
         return redirect()->route('users.index');
@@ -100,15 +100,18 @@ class AdminUserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $filtered = $request->collect()
-            ->except(['_token', '_method']);
+        $filtered = $request ->collect()
+                             ->except(['_token', '_method']);
 
-        $filtered->collect()
-            ->each(         // on ->each, the order of $key $value gets flipped
-                fn ($value, $key) => $user->$key = $value
-            );
-
+        $filtered->each(
+            function ($value, $key) use ($user) {
+                if ($value) {
+                    $user->$key = $value;
+                }
+            });
+        
         $user->save();
+
         return redirect()->route('users.index');
     }
 

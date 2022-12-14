@@ -21,10 +21,9 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        $allCategories['categoriesjson'] = Category::simplePaginate(10);
-        $allCategories['categories']     = $allCategories['categoriesjson']->toArray();
-        $allCategories['keys']           = array_keys(current($allCategories['categories']['data']));
-        return view('admin.categories.index')->with($allCategories);
+        return view('admin.categories.index')->with([
+            'categories' => Category::paginate(),
+        ]);
     }
 
     /**
@@ -49,10 +48,9 @@ class AdminCategoryController extends Controller
         $filtered = $request->collect()
             ->except(['_token']);
 
-        $filtered->collect()
-            ->each(         // on ->each, the order of $key $value gets flipped
-                fn ($value, $key) => $category->$key = $value
-            );
+        $filtered->each(         // on ->each, the order of $key $value gets flipped
+            fn ($value, $key) => $category->$key = $value
+        );
         $category->save();
         return redirect()->route('categories.index');
     }
@@ -92,12 +90,15 @@ class AdminCategoryController extends Controller
         $filtered = $request->collect()
             ->except(['_token', '_method']);
 
-        $filtered->collect()
-            ->each(         // on ->each, the order of $key $value gets flipped
-                fn ($value, $key) => $category->$key = $value
-            );
+        $filtered->each(         // on ->each, the order of $key $value gets flipped
+            function ($value, $key) use ($category){
+                if($category){
+                    $category->$key = $value;
+                }
+            });
 
         $category->save();
+
         return redirect()->route('categories.index');
     }
 

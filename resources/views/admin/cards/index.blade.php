@@ -19,41 +19,43 @@
                     <table class="table table-data2 text-center">
                         <thead>
                             <th>Image</th>
-                                <!-- get the first element and iter all cols -->
-                                @foreach($keys as $key)
-                                    <th>{{$key}}</th>
-                                @endforeach
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Discount</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($cards['data'] as $card)
+                            @foreach($cards as $card)
                                 <tr class="tr-shadow">
                                     <td>
                                         <div class="avatar">
-                                            <img src="" alt="img">
+                                            <img src={{$card->getFirstMediaUrl()}} alt="img">
                                         </div>
                                     </td>
-
-                                    @foreach(array_keys($card) as $key)
-                                        <td>{{$card[$key]}}</td>
-                                    @endforeach
+                                    <td>{{$card->id}}</td>
+                                    <td>{{$card->name}}</td>
+                                    <td>{{$card->description}}</td>
+                                    <td>{{$card->price}}</td>
+                                    <td>{{$card->discount_amount}}</td>
 
                                     <td>
                                         <div class="table-data-feature">
                                             <button class="item" data-toggle="tooltip" data-placement="top" title="Show"
                                                     onclick="event.preventDefault();
-                                document.getElementById('show-form{{$card['id']}}').submit();">
+                                document.getElementById('show-form{{$card->id}}').submit();">
 
                                                 <i class="zmdi zmdi-mail-send"></i>
                                             </button>
                                             <button class="item" data-toggle="tooltip" data-placement="top" title="Edit"
                                                     onclick="event.preventDefault();
-                                                     document.getElementById('edit-form{{$card['id']}}').submit();">
+                                                     document.getElementById('edit-form{{$card->id}}').submit();">
                                                 <i class="zmdi zmdi-edit"></i>
                                             </button>
                                             <button class="item" data-toggle="tooltip" data-placement="top" title="Delete"
                                                     onclick="event.preventDefault();
-                                document.getElementById('delete-form{{$card['id']}}').submit();">
+                                document.getElementById('delete-form{{$card->id}}').submit();">
                                                 <i class="zmdi zmdi-delete"></i>
                                             </button>
                                             <!-- <button class="item" data-toggle="tooltip" data-placement="top" title="More">
@@ -63,16 +65,16 @@
                                     </td>
                                 </tr>
                                 <!-- add a slug to route to identify which card we want to alter -->
-                                <form id="edit-form{{$card['id']}}"
-                                      action="{{ route('cards.edit', ['card' => $card['id']]) }}"
+                                <form id="edit-form{{$card->id}}"
+                                      action="{{ route('cards.edit', ['card' => $card->id]) }}"
                                       method="GET" class="d-none">
                                     @csrf
                                 </form>
-                                <form id="delete-form{{$card['id']}}" action="{{ route('cards.destroy', ['card' => $card['id']]) }}" method="POST" class="d-none">
+                                <form id="delete-form{{$card->id}}" action="{{ route('cards.destroy', ['card' => $card->id]) }}" method="POST" class="d-none">
                                     @csrf
                                     @method('delete')
                                 </form>
-                                <form id="show-form{{$card['id']}}" action="{{ route('cards.show', ['card' => $card['id']]) }}" method="GET" class="d-none">
+                                <form id="show-form{{$card->id}}" action="{{ route('cards.show', ['card' => $card->id]) }}" method="GET" class="d-none">
                                     @csrf
                                 </form>
                                 <form id="additem-button" action="{{ route('cards.create') }}" method="GET" class="d-none">
@@ -82,7 +84,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{$cardsjson->links()}}
+                    {{$cards->links('pagination::bootstrap-4')}}
                 </div>
             </div>
         </div>

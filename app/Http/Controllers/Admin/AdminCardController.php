@@ -24,10 +24,9 @@ class AdminCardController extends Controller
      */
     public function index()
     {
-        $allCards['cardsjson'] = Card::simplePaginate(10);
-        $allCards['cards']     = $allCards['cardsjson']->toArray();
-        $allCards['keys']      = array_keys(current($allCards['cards']['data']));
-        return view('admin.cards.index')->with($allCards);
+        return view('admin.cards.index')->with([
+            'cards' => Card::paginate(15),
+        ]);
     }
 
     /**
@@ -58,10 +57,9 @@ class AdminCardController extends Controller
         $filtered = $request->collect()
                             ->except(['_token']);
 
-        $filtered->collect()
-                 ->each(         // on ->each, the order of $key $value gets flipped
-                     fn ($value, $key) => $card->$key = $value
-                 );
+        $filtered->each(         // on ->each, the order of $key $value gets flipped
+            fn ($value, $key) => $card->$key = $value
+        );
         $card->save();
         return redirect()->route('cards.index');
     }
@@ -103,10 +101,12 @@ class AdminCardController extends Controller
         $filtered = $request->collect()
                             ->except(['_token', '_method']);
 
-        $filtered->collect()
-            ->each(         // on ->each, the order of $key $value gets flipped
-                fn ($value, $key) => $card->$key = $value
-            );
+        $filtered->each(         // on ->each, the order of $key $value gets flipped
+            function ($value, $key) use ($card) {
+                if ($card) {
+                    $card->$key = $value;
+                }
+            });
 
         $card->save();
         return redirect()->route('cards.index');
