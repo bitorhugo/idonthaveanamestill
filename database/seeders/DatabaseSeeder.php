@@ -14,16 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // seed database with one admin user
-        // \App\Models\User::factory()->state(['name' => 'admin', 'password' => Hash::make('adminadmin'), 'email' => 'admin@email.com', 'isAdmin' => true])->create();
-        // \App\Models\User::factory(1000)->create();
-
-        // \App\Models\Category::factory(10)->create();
-
-        // \App\Models\Card::factory(1000)->create();
-
-        // \App\Models\Card_Category::factory(1000)->create();
-
-        \App\Models\Inventory::factory(1000)->create();
+        return $this->call([
+            UserSeeder::class,
+            CategorySeeder::class,
+            CardSeeder::class,
+            Card_CategorySeeder::class,
+        ]);
     }
 }
