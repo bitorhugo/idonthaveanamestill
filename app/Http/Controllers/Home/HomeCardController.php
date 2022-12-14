@@ -7,6 +7,7 @@ use App\Models\Card;
 use App\Models\Card_Category;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeCardController extends Controller
 {
@@ -17,7 +18,7 @@ class HomeCardController extends Controller
      */
     public function index(Request $request)
     {
-        //TODO fix query
+
         if ($request->input('c') == 'none') {
             $cards = Card::search($request->input('q'))
                    ->paginate(5)
@@ -25,11 +26,17 @@ class HomeCardController extends Controller
 
             return view('home.cards.index')->with(['cards' => $cards]);
         }
+        
 
-        $cards = Card::search($request->input('q'));
         $category = Category::find($request->input('c'));
-
-
+        $cards = Card::
+               join('card__categories', 'cards.id', '=', 'card__categories.card_id')
+               ->join('categories', 'categories.id', '=', 'card__categories.category_id')
+               ->where('card__categories.category_id', '=', $category->id)
+               ->where('cards.name', 'ilike', '%' . $request->input('q') . '%')
+               ->select('cards.*')
+               ->get()
+               ->paginate();
 
         return view('home.cards.index')->with(['cards' => $cards]);
 
