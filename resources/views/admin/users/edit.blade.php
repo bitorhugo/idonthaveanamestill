@@ -12,7 +12,7 @@
                 <input type="text" id="name" name="name" placeholder="name : {{$user->name}}" class="form-control">
                 <input type="text" id="email" name="email" placeholder="email : {{$user->email}}" class="form-control">
                 <input type="text" id="isAdmin" name="isAdmin" placeholder="isAdmin : {{$user->isAdmin}}" class="form-control">
-
+                
                 <div class="form-actions form-group">
                     <button type="submit" class="btn btn-success btn-sm">Submit</button>
                 </div>

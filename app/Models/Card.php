@@ -43,7 +43,6 @@ class Card extends Model implements HasMedia
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            // 'price' => $this->price,
         ];
     }
 

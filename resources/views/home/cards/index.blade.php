@@ -10,9 +10,18 @@
                     <table class="table table-data2">
                         <tbody>
                             @foreach($cards as $card)
-                                <td> {{$card->name}}</td>
-                                <td> {{$card->description}}</td>
-                                <td> {{$card->price}}</td>
+                                @if($card->getFirstMediaUrl())
+                                    <td>
+                                        <img src=" {{$card->getFirstMediaUrl() }}" alt="img">
+                                    </td>
+                                @else
+                                    <td>
+                                        <img src="{{asset('storage/baseImage.jpg')}}" alt="img">
+                                    </td>
+                                @endif
+                                <td> {{$card->name }}</td>
+                                <td> {{$card->description }}</td>
+                                <td> {{$card->price }}</td>
                                 <td>
                                     <div class="table-data-feature">
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Shonw"
