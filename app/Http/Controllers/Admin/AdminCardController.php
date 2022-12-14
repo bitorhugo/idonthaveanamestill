@@ -7,7 +7,6 @@ use App\Models\Card;
 use Illuminate\Http\Request;
 use App\Services\MediaService;
 use Illuminate\Support\Facades\Storage;
-use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 
 class AdminCardController extends Controller
 {
@@ -24,8 +23,14 @@ class AdminCardController extends Controller
      */
     public function index()
     {
+        $cards = Card::join('card__categories', 'cards.id', '=', 'card__categories.card_id')
+            ->join('categories', 'categories.id', '=', 'card__categories.category_id')
+            ->select('cards.*', 'categories.name as cat_name')
+            ->get()
+            ->paginate();
+
         return view('admin.cards.index')->with([
-            'cards' => Card::paginate(15),
+            'cards' => $cards,
         ]);
     }
 
