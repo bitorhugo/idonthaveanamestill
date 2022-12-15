@@ -45,26 +45,43 @@
                     </div>
                 </div>
 
+
                 <div class="row form-group">
                     <div class="col col-md-2">
-                        <label class=" form-control-label">Images</label>
+                        <label for="hf-userdiscount" class=" form-control-label">Categories</label>
                     </div>
-                    <div class="col-12 col-md-5">
-                        <div class="input-group">
-                            <input type="file" name="image[]" class="form-control" multiple>
+
+                    <div class="col col-md-9">
+                        <div class="form-check-inline form-check">
+                            @foreach($categories as $cat)
+                                <label for="inline-checkbox1" class="form-check-label ">
+                                    <input type="checkbox" id="category{{$cat->id}}" name="categories[]" value="{{$cat->id}}" class="form-check-input">{{$cat->id}}
+                                </label>
+                            @endforeach
                         </div>
                     </div>
-                </div>                
+                </div>
+                    
+                    <div class="row form-group">
+                        <div class="col col-md-2">
+                            <label class=" form-control-label">Images</label>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <div class="input-group">
+                                <input type="file" name="image[]" class="form-control" multiple>
+                            </div>
+                        </div>
+                    </div>                
             </form>                
+                </div>
+                <div class="card-footer">
+                    <button form="addCardForm" type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Submit
+                    </button>
+                    <button form="addCardForm" type="reset" class="btn btn-danger btn-sm">
+                        <i class="fa fa-ban"></i> Reset
+                    </button>
+                </div>
         </div>
-        <div class="card-footer">
-            <button addCardForm="addCardForm" type="submit" class="btn btn-primary btn-sm">
-                <i class="fa fa-dot-circle-o"></i> Submit
-            </button>
-            <button addCardForm="addCardForm" type="reset" class="btn btn-danger btn-sm">
-                <i class="fa fa-ban"></i> Reset
-            </button>
-        </div>
-    </div>
-    
+        
 @endsection

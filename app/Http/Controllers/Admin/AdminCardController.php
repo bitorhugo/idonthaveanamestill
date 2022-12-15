@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Card;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Services\MediaService;
 use Illuminate\Support\Facades\Storage;
@@ -23,14 +24,8 @@ class AdminCardController extends Controller
      */
     public function index()
     {
-        $cards = Card::join('card__categories', 'cards.id', '=', 'card__categories.card_id')
-            ->join('categories', 'categories.id', '=', 'card__categories.category_id')
-            ->select('cards.*', 'categories.name as cat_name')
-            ->get()
-            ->paginate();
-
         return view('admin.cards.index')->with([
-            'cards' => $cards,
+            'cards' => Card::paginate(),
         ]);
     }
 
@@ -43,8 +38,10 @@ class AdminCardController extends Controller
     {
         // use make() in order to not persist model in database
         $card = Card::factory()->make();
+        $categories = Category::all();
         return view('admin.cards.create')->with([
             'card' => $card,
+            'categories' => $categories,
         ]);
     }
 
@@ -56,16 +53,21 @@ class AdminCardController extends Controller
      */
     public function store(Request $request, Card $card)
     {
-        MediaService::addMedia($card, collect($request->file('image')));
-        
         // no need to filter file since collect is used
         $filtered = $request->collect()
-                            ->except(['_token']);
+                            ->except(['_token', 'categories']);
 
         $filtered->each(         // on ->each, the order of $key $value gets flipped
             fn ($value, $key) => $card->$key = $value
         );
         $card->save();
+
+        // get images
+        MediaService::addMedia($card, collect($request->file('image')));
+
+        // attach categories to card
+        $card->categories()->attach($request->categories);
+        
         return redirect()->route('cards.index');
     }
 

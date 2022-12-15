@@ -19,7 +19,6 @@ class Card_Category extends Model
     {
         return [
              'category_id' => $this->category_id,
-
         ];
     }
 }
