@@ -33,7 +33,7 @@
                                     <td>
                                         <div class="avatar">
                                             <img src={{$card->getFirstMediaUrl()}} alt="img">
-                                        </div>
+                                         </div>
                                     </td>
                                     <td>{{$card->id}}</td>
                                     <td>{{$card->name}}</td>
