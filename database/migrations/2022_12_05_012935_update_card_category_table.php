@@ -16,11 +16,13 @@ class UpdateCardCategoryTable extends Migration
         Schema::table('card__categories', function (Blueprint $table) {
             $table->foreign('card_id')
                   ->references('id')
-                  ->on('cards');
+                  ->on('cards')
+                  ->onDelete('cascade');
             
             $table->foreign('category_id')
                   ->references('id')
-                  ->on('categories');
+                  ->on('categories')
+                  ->onDelete('cascade');
         });
     }
 

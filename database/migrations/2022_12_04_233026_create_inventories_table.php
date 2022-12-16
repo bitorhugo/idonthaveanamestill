@@ -26,7 +26,8 @@ class CreateInventoriesTable extends Migration
 
             $table->foreign('card_id')
                   ->references('id')
-                  ->on('cards');
+                  ->on('cards')
+                  ->onDelete('cascade');
         });
     }
 
