@@ -50,6 +50,8 @@ class AdminUserController extends Controller
      */
     public function store(Request $request, User $user)
     {
+        $request->validate(['password' => ['required', 'string', 'min:8', 'confirmed']]);
+        
         $hashed = $request->collect()
             ->replace(
                 ['password' => Hash::make($request['password']),
