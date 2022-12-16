@@ -1,27 +1,45 @@
 @extends('layouts.masterAdmin')
 @section('content')
     <div class="card">
-        <div class="card-header">Edit Category</div>
+        <div class="card-header">
+            <strong>EDIT CATEGORY</strong>
+        </div>
         <div class="card-body card-block">
             <form action="{{route('categories.update', ['category' => $category])}}" method="post" class="">
                 @csrf
                 @method('patch')
 
-                @foreach(json_decode($category) as $key => $value)
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                            </div>
-                            <input type="text" id="username" name="{{$key}}" placeholder="{{$key}} : {{$value}}" class="form-control">
-                        </div>
+                <div class="row form-group">
+                    <div class="col col-md-2">
+                        <label for="hf-username" class=" form-control-label">Name</label>
                     </div>
-                @endforeach
-
-                <div class="form-actions form-group">
-                    <button type="submit" class="btn btn-success btn-sm">Submit</button>
+                    <div class="col-12 col-md-5">
+                        <input type="text" id="hf-name" name="name" placeholder="{{$category->name}}" class="form-control">
+                    </div>
                 </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-2">
+                        <label for="hf-description" class=" form-control-label">Description</label>
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <input type="description" id="hf-description" name="description" placeholder="{{$category->description}}" class="form-control">
+                    </div>
+                </div>
+                
             </form>
         </div>
+
+        <div class="card-footer">
+            <button form="addCategoryForm" type="submit" class="btn btn-primary btn-sm">
+                <i class="fa fa-dot-circle-o"></i> Submit
+            </button>
+            <button form="addCategoryForm" type="reset" class="btn btn-danger btn-sm">
+                <i class="fa fa-ban"></i> Reset
+            </button>
+        </div>
+
     </div>
+
 @endsection
 
