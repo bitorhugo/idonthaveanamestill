@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Card;
 use App\Models\Category;
+use App\Models\Inventory;
 use Illuminate\Http\Request;
 use App\Services\MediaService;
-use Illuminate\Support\Facades\Storage;
 
 class AdminCardController extends Controller
 {
@@ -55,12 +55,16 @@ class AdminCardController extends Controller
     {
         // no need to filter file since collect is used
         $filtered = $request->collect()
-                            ->except(['_token', 'categories']);
+                            ->except(['_token', 'categories', 'quantity']);
 
         $filtered->each(         // on ->each, the order of $key $value gets flipped
             fn ($value, $key) => $card->$key = $value
         );
+
         $card->save();
+
+        // add inventory
+        $card->inventory()->save(new Inventory(['quantity' => $request->quantity]));
 
         // get images
         MediaService::addMedia($card, collect($request->file('image')));
@@ -92,7 +96,9 @@ class AdminCardController extends Controller
     {
         $card->makehidden('id');
         return view('admin.cards.edit')->with([
-            'card' => $card
+            'card' => $card,
+            'cardCategories' => $card->categories,
+            'categories' => Category::all(),
         ]);
     }
 
@@ -106,16 +112,26 @@ class AdminCardController extends Controller
     public function update(Request $request, Card $card)
     {
         $filtered = $request->collect()
-                            ->except(['_token', '_method']);
-
+                            ->except(['_token', '_method', 'categories', 'quantity', 'image']);
+        
         $filtered->each(         // on ->each, the order of $key $value gets flipped
             function ($value, $key) use ($card) {
-                if ($card) {
+                if ($value) {
                     $card->$key = $value;
                 }
             });
 
-        $card->save();
+        //update inventory
+        if($request->quantity){
+            $card->inventory->quantity = $request->quantity;
+        }
+        
+        //save both card and relation
+        $card->push();
+
+        //update categories
+        $card->categories()->sync($request->categories);
+
         return redirect()->route('cards.index');
     }
 

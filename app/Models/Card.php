@@ -48,7 +48,9 @@ class Card extends Model implements HasMedia
 
     public function categories() {
         return $this->belongsToMany(Category::class, 'card__categories')
+                    ->withTimestamps()
                     ->as('categories');
+
     }
 
     public function inventory() {

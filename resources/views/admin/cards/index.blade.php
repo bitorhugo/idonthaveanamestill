@@ -24,6 +24,7 @@
                             <th>Description</th>
                             <th>Price</th>
                             <th>Discount</th>
+                            <th>Qty</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,6 +40,7 @@
                                     <td>{{$card->description}}</td>
                                     <td>{{$card->price}}</td>
                                     <td>{{$card->discount_amount}}</td>
+                                    <td>{{$card->inventory->quantity}}</td>
                                     <td>
                                         <div class="table-data-feature">
                                             <button class="item" data-toggle="tooltip" data-placement="top" title="Show"

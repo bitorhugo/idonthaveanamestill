@@ -41,10 +41,18 @@
                         <label for="hf-userdiscount" class=" form-control-label">Discount</label>
                     </div>
                     <div class="col-12 col-md-5">
-                        <input type="number" id="hf-discount" discount="discount" placeholder="Enter Discount..." class="form-control">
+                        <input type="number" id="hf-discount" discount="discount_amount" placeholder="Enter Discount..." class="form-control">
                     </div>
                 </div>
 
+                <div class="row form-group">
+                    <div class="col col-md-2">
+                        <label for="hf-userdiscount" class=" form-control-label">Quantity</label>
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <input type="number" id="hf-quantity" name="quantity" placeholder="Enter Quantity..." class="form-control">
+                    </div>
+                </div>
 
                 <div class="row form-group">
                     <div class="col col-md-2">
@@ -61,17 +69,18 @@
                         </div>
                     </div>
                 </div>
-                    
-                    <div class="row form-group">
-                        <div class="col col-md-2">
-                            <label class=" form-control-label">Images</label>
+                
+                <div class="row form-group">
+                    <div class="col col-md-2">
+                        <label class=" form-control-label">Images</label>
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <div class="input-group">
+                            <input type="file" name="image[]" class="form-control" multiple>
                         </div>
-                        <div class="col-12 col-md-5">
-                            <div class="input-group">
-                                <input type="file" name="image[]" class="form-control" multiple>
-                            </div>
-                        </div>
-                    </div>                
+                    </div>
+                </div>                
+
             </form>                
                 </div>
                 <div class="card-footer">

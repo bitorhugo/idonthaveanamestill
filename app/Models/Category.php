@@ -47,6 +47,7 @@ class Category extends Model
     public function cards()
     {
         return $this->belongsToMany(Card::class, 'card__categories')
+                    ->withTimestamps()
                     ->as('cards');
     }
 }
