@@ -4,7 +4,6 @@ namespace App\Http\Requests\admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class UserPatchRequest extends FormRequest
 {
@@ -26,9 +25,10 @@ class UserPatchRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail|alpha|max:50',
-            'email' => 'bail|email',
-             'isAdmin' => 'bail|boolean',
+            'name' => 'nullable|alpha|max:50',
+            'email' => 'nullable|email',
+            'isAdmin' => 'nullable|boolean',
+            'password' => 'nullable|confirmed|min:8'
         ];
     }
 }

@@ -99,16 +99,14 @@ class AdminUserController extends Controller
      */
     public function update(UserPatchRequest $request, User $user)
     {
-        $filtered = $request ->collect()
-                             ->except(['_token', '_method']);
+        $filtered = collect($request->validated());
 
         $filtered->each(
             function ($value, $key) use ($user) {
-                if ($value) {
+                if (!is_null($value)) {
                     $user->$key = $value;
                 }
             });
-        
         $user->save();
 
         return redirect()->route('users.index');

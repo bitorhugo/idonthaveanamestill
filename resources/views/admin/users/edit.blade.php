@@ -1,5 +1,6 @@
 @extends('layouts.masterAdmin')
 @section('content')
+    @include('partials.requestAlerts')
     <div class="card">
         <div class="card-header">
             <strong>EDIT USER</strong>
@@ -33,7 +34,7 @@
                         <label for="hf-username" class=" form-control-label">Password</label>
                     </div>
                     <div class="col-12 col-md-5">
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
 
                         @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -49,7 +50,7 @@
                         <label for="password-confirm" class=" form-control-label">Confirm Password</label>
                     </div>
                     <div class="col-12 col-md-5">
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
                     </div>
                 </div>
 
@@ -57,15 +58,19 @@
                     <div class="col col-md-2">
                         <label for="hf-isAdmin" class=" form-control-label">isAdmin</label>
                     </div>
-                    <div class="col-12 col-md-5">
-                        @if($user->isAdmin)
-                            <input class="p-l-10" type="checkbox" id="idAdmin" name="isAdmin"  class="form-check-input" checked>
-                        @else
-                            <input class="p-l-10" type="checkbox" id="idAdmin" name="isAdmin"  class="form-check-input">
-                        @endif
+
+                    <div class="col col-md-9">
+                        <div class="form-check-inline form-check">
+                            <label for="inline-radio1" class="form-check-label p-r-5">
+                                <input type="radio" id="inline-radio1" name="isAdmin" value="1" class="form-check-input" {{$user->isAdmin ? 'checked' : ''}}>TRUE
+                            </label>
+                            <label for="inline-radio2" class="form-check-label ">
+                                <input type="radio" id="inline-radio2" name="isAdmin" value="0" class="form-check-input" {{$user->isAdmin ? '' : 'checked'}}>FALSE
+                            </label>
+                        </div>
                     </div>
+                    
                 </div>
-                
             </form>
         </div>
 
