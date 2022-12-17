@@ -45,5 +45,6 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'isAdmin' => 'boolean',
     ];
 }

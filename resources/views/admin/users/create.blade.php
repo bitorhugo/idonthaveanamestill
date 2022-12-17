@@ -58,7 +58,7 @@
                         <label for="hf-isAdmin" class=" form-control-label">isAdmin</label>
                     </div>
                     <div class="col-12 col-md-5">
-                        <input class="p-l-10" type="checkbox" id="idAdmin" name="isAdmin"  class="form-check-input">
+                        <input class="p-l-10" type="checkbox" id="idAdmin" name="isAdmin" value="1"  class="form-check-input" {{old('isAdmin') ? 'checked = checked' : ''}}>
                     </div>
                 </div>
                 

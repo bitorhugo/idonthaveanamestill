@@ -50,15 +50,13 @@ class AdminUserController extends Controller
      */
     public function store(UserPostRequest $request, User $user)
     {
-        $hashed = $request->collect()
-            ->replace(
-                ['password' => Hash::make($request['password']),
-                 'remember_token' => Str::random(10),
-                ]
-            );
-
-        $filtered = $hashed->except(['_token']);
-
+        $filtered = collect($request->validated())
+                  ->replace(
+                      ['password' => Hash::make($request['password']),
+                       'remember_token' => Str::random(10),
+                      ]
+                  );
+        
         $filtered->each(
             fn ($value, $key) => $user->$key = $value
         );
