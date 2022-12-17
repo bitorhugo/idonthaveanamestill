@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Cards\CardPostRequest;
 use App\Models\Card;
 use App\Models\Category;
 use App\Models\Inventory;
@@ -51,7 +52,7 @@ class AdminCardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Card $card)
+    public function store(CardPostRequest $request, Card $card)
     {
         // no need to filter file since collect is used
         $filtered = $request->collect()

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\UserPatchRequest;
 use App\Http\Requests\admin\UserPostRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -23,7 +22,7 @@ class AdminUserController extends Controller
         $this->middleware('isAdmin');
     }
 
-    public function index(Request $request)
+    public function index()
     {
         return view('admin.users.index')->with([
             'users' => User::paginate(),

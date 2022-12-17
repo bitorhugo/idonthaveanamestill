@@ -1,6 +1,6 @@
 @extends('layouts.masterAdmin')
 @section('content')
-
+    @include('partials.requestAlerts')
     <div class="card">
         <div class="card-header">
             <strong>ADD CARD</strong>
@@ -14,7 +14,7 @@
                         <label for="hf-username" class=" form-control-label">Name</label>
                     </div>
                     <div class="col-12 col-md-5">
-                        <input type="text" id="hf-name" name="name" placeholder="Enter Name..." class="form-control">
+                        <input type="text" id="hf-name" name="name" placeholder="Enter Name..." value="{{old('name')}}" class="form-control">
                     </div>
                 </div>
                 
@@ -23,7 +23,7 @@
                         <label for="hf-email" class=" form-control-label">Description</label>
                     </div>
                     <div class="col-12 col-md-5">
-                        <input type="text" id="hf-description" name="description" placeholder="Enter Description..." class="form-control">
+                        <input type="text" id="hf-description" name="description" placeholder="Enter Description..." value="{{old('description')}}" class="form-control">
                     </div>
                 </div>
                 
@@ -32,7 +32,7 @@
                         <label for="hf-price" class=" form-control-label">Price</label>
                     </div>
                     <div class="col-12 col-md-5">
-                        <input type="number" id="hf-price" name="price" placeholder="Enter Price..." class="form-control">
+                        <input type="number" id="hf-price" name="price" placeholder="Enter Price..." value="{{old('price')}}" class="form-control">
                     </div>
                 </div>
 
@@ -41,7 +41,7 @@
                         <label for="hf-userdiscount" class=" form-control-label">Discount</label>
                     </div>
                     <div class="col-12 col-md-5">
-                        <input type="number" id="hf-discount" discount="discount_amount" placeholder="Enter Discount..." class="form-control">
+                        <input type="number" step="0.01" min="0" id="hf-discount" name="discount_amount" placeholder="Enter Discount..." value="{{old('discount_amount')}}" class="form-control">
                     </div>
                 </div>
 
@@ -50,7 +50,7 @@
                         <label for="hf-userdiscount" class=" form-control-label">Quantity</label>
                     </div>
                     <div class="col-12 col-md-5">
-                        <input type="number" id="hf-quantity" name="quantity" placeholder="Enter Quantity..." class="form-control">
+                        <input type="number" id="hf-quantity" name="quantity" placeholder="Enter Quantity..." value="{{old('quantity')}}" class="form-control">
                     </div>
                 </div>
 
