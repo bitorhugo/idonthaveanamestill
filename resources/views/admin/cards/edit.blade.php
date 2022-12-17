@@ -1,10 +1,11 @@
 @extends('layouts.masterAdmin')
 
 @section('content')
+    @include('partials.requestAlerts')
     <div class="card">
         <div class="card-header">Edit Card</div>
         <div class="card-body card-block">
-            <form action="{{route('cards.update', ['card' => $card])}}" method="post" class="">
+            <form id="editCardForm" action="{{route('cards.update', ['card' => $card])}}" method="post" class="">
                 @csrf
                 @method('patch')
                 <div class="row form-group">
@@ -60,7 +61,7 @@
                     <div class="col col-md-9">
                         <div class="form-check-inline form-check">
                             @foreach($categories as $cat)
-                                <label for="inline-checkbox1" class="form-check-label ">
+                                <label for="inline-checkbox1" class="form-check-label">
                                     @if($cardCategories->contains($cat))
                                         <input type="checkbox" id="category{{$cat->id}}" name="categories[]" value="{{$cat->id}}" class="form-check-input" checked>{{$cat->id}}
                                     @else
@@ -81,10 +82,17 @@
                         </div>
                     </div>
                 </div>                
-                
-                <div class="form-actions form-group">
-                    <button type="submit" class="btn btn-success btn-sm">Submit</button>
                 </div>
+
+                <div class="card-footer">
+                    <button form="editCardForm" type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Submit
+                    </button>
+                    <button form="editCardForm" type="reset" class="btn btn-danger btn-sm">
+                        <i class="fa fa-ban"></i> Reset
+                    </button>
+                </div>                
+
             </form>
         </div>
     </div>

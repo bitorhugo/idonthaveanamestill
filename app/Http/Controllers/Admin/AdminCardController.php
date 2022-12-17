@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Cards\CardPatchRequest;
 use App\Http\Requests\Admin\Cards\CardPostRequest;
 use App\Models\Card;
 use App\Models\Category;
@@ -110,10 +111,10 @@ class AdminCardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Card $card)
+    public function update(CardPatchRequest $request, Card $card)
     {
-        $filtered = $request->collect()
-                            ->except(['_token', '_method', 'categories', 'quantity', 'image']);
+        $filtered = collect($request->validated())
+                            ->except(['categories', 'quantity', 'image']);
         
         $filtered->each(         // on ->each, the order of $key $value gets flipped
             function ($value, $key) use ($card) {

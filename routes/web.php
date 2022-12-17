@@ -53,3 +53,4 @@ Route::resource('/admin/users', AdminUserController::class);
 Route::resource('/search', HomeCardController::class)->only(['index', 'show']);
 
 Route::resource('/cart', CartController::class)->except(['create', 'show', 'edit']);
+

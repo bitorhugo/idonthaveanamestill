@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\admin;
+namespace App\Http\Requests\Admin\Categories;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class UserPostRequest extends FormRequest
+class CategoryPostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,8 @@ class UserPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail|required|alpha|max:50',
-            'email' => 'bail|required|email',
-            'password' => 'bail|required|confirmed|min:8',
-            'isAdmin' => 'bail|boolean',
+            'name' => 'bail|required|alpha_num|max:150',
+            'description' => 'bail|required|alpha_num|max:150',
         ];
     }
 }

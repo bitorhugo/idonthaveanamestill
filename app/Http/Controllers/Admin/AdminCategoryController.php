@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Categories\CategoryPatchRequest;
+use App\Http\Requests\Admin\Categories\CategoryPostRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -43,13 +45,16 @@ class AdminCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Category $category)
+    public function store(CategoryPostRequest $request, Category $category)
     {
-        $filtered = $request->collect()
-            ->except(['_token']);
+        $filtered = collect($request->validated());
 
-        $filtered->each(         // on ->each, the order of $key $value gets flipped
-            fn ($value, $key) => $category->$key = $value
+        $filtered->each(
+            function ($value, $key) use ($category){
+                if(!is_null($value)){
+                    $category->$key = $value;                      
+                }
+            } 
         );
         $category->save();
         return redirect()->route('categories.index');
@@ -85,14 +90,13 @@ class AdminCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryPatchRequest $request, Category $category)
     {
-        $filtered = $request->collect()
-            ->except(['_token', '_method']);
+        $filtered = collect($request->validated());
 
         $filtered->each(         // on ->each, the order of $key $value gets flipped
             function ($value, $key) use ($category){
-                if($category){
+                if(!is_null($value)){
                     $category->$key = $value;
                 }
             });

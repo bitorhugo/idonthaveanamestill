@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\admin;
+namespace App\Http\Requests\Admin\Cards;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class UserPatchRequest extends FormRequest
+class CardPatchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,12 @@ class UserPatchRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'nullable|alpha|max:50',
-            'email' => 'nullable|email',
-            'isAdmin' => 'nullable|boolean',
-            'password' => 'nullable|confirmed|min:8'
+            'name' => 'bail|alpha_num|max:50|nullable',
+            'description' => 'bail|alpha_num|max:150|nullable',
+            'price' => 'bail|gt:0|numeric|nullable',
+            'discount_amount' => 'bail|between:0,1|numeric|nullable',
+            'quantity' => 'bail|gte:0|numeric|nullable',
+            'categories' => 'bail|array|nullable',
         ];
     }
 }

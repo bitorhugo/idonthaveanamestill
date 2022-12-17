@@ -1,11 +1,12 @@
 @extends('layouts.masterAdmin')
 @section('content')
+    @include('partials.requestAlerts')
     <div class="card">
         <div class="card-header">
             <strong>ADD CATEGORY</strong>
         </div>
         <div class="card-body card-block">
-            <form action="{{route('categories.store')}}" method="post" class="">
+            <form id="addCategoryForm" action="{{route('categories.store')}}" method="post" class="">
                 @csrf
 
                 <div class="row form-group">

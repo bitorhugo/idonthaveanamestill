@@ -1,11 +1,12 @@
 @extends('layouts.masterAdmin')
 @section('content')
+    @include('partials.requestAlerts')
     <div class="card">
         <div class="card-header">
             <strong>EDIT CATEGORY</strong>
         </div>
         <div class="card-body card-block">
-            <form action="{{route('categories.update', ['category' => $category])}}" method="post" class="">
+            <form id="editCategoryForm" action="{{route('categories.update', ['category' => $category])}}" method="post" class="">
                 @csrf
                 @method('patch')
 
@@ -31,10 +32,10 @@
         </div>
 
         <div class="card-footer">
-            <button form="addCategoryForm" type="submit" class="btn btn-primary btn-sm">
+            <button form="editCategoryForm" type="submit" class="btn btn-primary btn-sm">
                 <i class="fa fa-dot-circle-o"></i> Submit
             </button>
-            <button form="addCategoryForm" type="reset" class="btn btn-danger btn-sm">
+            <button form="editCategoryForm" type="reset" class="btn btn-danger btn-sm">
                 <i class="fa fa-ban"></i> Reset
             </button>
         </div>
