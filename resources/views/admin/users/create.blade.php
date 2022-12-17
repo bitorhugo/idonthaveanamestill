@@ -1,5 +1,7 @@
 @extends('layouts.masterAdmin')
 @section('content')
+    @include('partials.requestAlerts')
+    
     <div class="card">
         <div class="card-header">
             <strong>ADD USER</strong>
@@ -13,7 +15,7 @@
                         <label for="hf-username" class=" form-control-label">Name</label>
                     </div>
                     <div class="col-12 col-md-5">
-                        <input type="text" id="hf-name" name="name" placeholder="Enter Name..." class="form-control">
+                        <input type="text" id="hf-name" name="name" value="{{old('name')}}" placeholder="Enter Name..." class="form-control">
                     </div>
                 </div>
 
@@ -22,7 +24,7 @@
                         <label for="hf-email" class=" form-control-label">Email</label>
                     </div>
                     <div class="col-12 col-md-5">
-                        <input type="email" id="hf-email" name="email" placeholder="Enter Email..." class="form-control">
+                        <input type="email" id="hf-email" name="email" value="{{old('email')}}" placeholder="Enter Email..." class="form-control">
                     </div>
                 </div>
 
@@ -41,7 +43,6 @@
                         @enderror
                     </div>
                 </div>
-
 
                 <div class="row form-group">
                     <div class="col col-md-2">
