@@ -5,7 +5,7 @@
             <strong>EDIT USER</strong>
         </div>
         <div class="card-body card-block">
-            <form action="{{route('users.update', ['user' => $user])}}" method="post" class="">
+            <form id="addUserForm" action="{{route('users.update', ['user' => $user])}}" method="post" class="">
                 @csrf
                 @method('patch')
                 

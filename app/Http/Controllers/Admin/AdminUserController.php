@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\UserPatchRequest;
 use App\Http\Requests\admin\UserPostRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -96,7 +97,7 @@ class AdminUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserPatchRequest $request, User $user)
     {
         $filtered = $request ->collect()
                              ->except(['_token', '_method']);
