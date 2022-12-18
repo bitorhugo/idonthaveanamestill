@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Card;
-use App\Models\Card_Category;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class HomeCardController extends Controller
 {
@@ -18,7 +16,6 @@ class HomeCardController extends Controller
      */
     public function index(Request $request)
     {
-
         if ($request->input('c') == 'none') {
             $cards = Card::search($request->input('q'))
                    ->paginate(5)
