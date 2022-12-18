@@ -30,14 +30,20 @@ class HomeController extends Controller
         $showcase = Card::join('inventories', 'cards.id', '=', 'inventories.card_id')
                   ->where('inventories.quantity', '>', '0')
                   ->where('cards.discount_amount', '>', '0')
-                  ->limit(4)
+                  ->limit(8)
                   ->get();
 
+        $recent = Card::orderBy('created_at', 'desc')
+                ->take(8)
+                ->get();
+        
         $categories = Category::all();
+
         return view('home')->with(
             [
+                'categories' => $categories,
                 'showcase' => $showcase,
-                'categories' => $categories
+                'recent' => $recent,
             ]);
     }
 }

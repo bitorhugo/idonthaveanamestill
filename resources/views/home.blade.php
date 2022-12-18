@@ -4,5 +4,6 @@
 
     @include('partials.searchbar')
     @include('partials.showcase')
+    @include('partials.recentCards')
     
 @endsection

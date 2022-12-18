@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Card extends Model implements HasMedia
 {
-    private $name;
-    
-    use HasFactory, Searchable, InteractsWithMedia;
+    use HasFactory, Searchable;
+    use InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -46,14 +46,16 @@ class Card extends Model implements HasMedia
         ];
     }
 
-    public function categories() {
+    public function categories()
+    {
         return $this->belongsToMany(Category::class, 'card__categories')
                     ->withTimestamps()
                     ->as('categories');
 
     }
 
-    public function inventory() {
+    public function inventory()
+    {
         return $this->hasOne(Inventory::class)->withDefault();
     }
 
