@@ -118,13 +118,13 @@ class AdminCardController extends Controller
         
         $filtered->each(         // on ->each, the order of $key $value gets flipped
             function ($value, $key) use ($card) {
-                if ($value) {
+                if (!is_null($value))  {
                     $card->$key = $value;
                 }
             });
 
         //update inventory
-        if($request->quantity){
+        if(!is_null($request->quantity)){
             $card->inventory->quantity = $request->quantity;
         }
         

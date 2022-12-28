@@ -36,7 +36,7 @@ class AdminCategoryController extends Controller
     public function create()
     {
         $arr['category'] = Category::factory()->make();
-        return view('admin.categories.create')->with($arr);
+       return view('admin.categories.create')->with($arr);
     }
 
     /**
