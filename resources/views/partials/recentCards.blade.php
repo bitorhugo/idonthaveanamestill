@@ -8,7 +8,7 @@
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                         @if(Storage::disk('media')->exists($card->id))
-                            <img src="{{asset('storage/media/'.$card->id.'/0.jpg')}}" alt='image'>
+                            <img src="{{asset('storage/media/'.$card->id.'/conversion/0-thumb.jpg')}}" alt='image'>
                         @else
                             <img src="{{asset('storage/baseImage.jpg')}}" alt='image'>
                         @endif

@@ -32,7 +32,11 @@
                                 <tr class="tr-shadow">
                                     <td>
                                         <div class="avatar">
-                                            <img src={{asset('storage/baseImage.jpg')}} alt="img">
+                                            @if(Storage::disk('media')->exists($card->id))
+                                                <img src="{{asset('storage/media/'.$card->id.'/conversion/0-thumb.jpg')}}" alt='image'>
+                                            @else
+                                                <img src="{{asset('storage/baseImage.jpg')}}" alt='image'>
+                                            @endif
                                          </div>
                                     </td>
                                     <td>{{$card->id}}</td>
