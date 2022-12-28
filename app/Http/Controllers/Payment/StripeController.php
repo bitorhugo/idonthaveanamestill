@@ -14,9 +14,14 @@ use Illuminate\Support\Facades\Auth;
 class StripeController extends Controller
 {
 
-    public function __construct()
+    public function __construct(Request $request)
     {
-        $this->middleware(['EnsureStockIsValid', 'verified']);
+        if ($request->has('stock')) {
+            $this->middleware(['EnsureStockIsValid']);
+        }
+        else {
+            $this->middleware(['verified']);            
+        }
     }
     
     public function checkout()

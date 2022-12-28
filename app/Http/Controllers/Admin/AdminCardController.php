@@ -55,7 +55,6 @@ class AdminCardController extends Controller
      */
     public function store(CardPostRequest $request, Card $card)
     {
-
         // no need to filter file since collect is used
         $filtered = $request->collect()
                             ->except(['_token', 'categories', 'quantity']);
