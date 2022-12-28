@@ -1,7 +1,9 @@
 @extends('layouts.masterApp')
 
 @section('content')
+    @include('partials.searchbar')
     @include('partials.datatable')
+
     <section class="p-t-20">
         <div class="container">
             <div class="row">

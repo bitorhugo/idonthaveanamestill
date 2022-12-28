@@ -20,7 +20,10 @@ class HomeCardController extends Controller
             $cards = Card::search($request->input('q'))
                    ->paginate(5)
                    ->appends(['c' => 'none']);
-            return view('home.cards.index')->with(['cards' => $cards]);
+            return view('home.cards.index')->with([
+                'cards' => $cards,
+                'categories' => Category::all(),
+            ]);
         }
         
         $category = Category::find($request->input('c'));
@@ -33,7 +36,10 @@ class HomeCardController extends Controller
                ->get()
                ->paginate();
 
-        return view('home.cards.index')->with(['cards' => $cards]);
+        return view('home.cards.index')->with([
+            'cards' => $cards,
+            'categories' => Category::all(),
+        ]);
     }
 
     /**
