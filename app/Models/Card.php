@@ -32,6 +32,13 @@ class Card extends Model implements HasMedia
      */
     protected $hidden = ['created_at', 'updated_at'];
 
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+              ->width(225)
+             ->height(225);
+    }
+    
     /**
      * Get the indexable data array for the model.
      *

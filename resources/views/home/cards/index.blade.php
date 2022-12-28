@@ -10,15 +10,17 @@
                     <table class="table table-data2">
                         <tbody>
                             @foreach($cards as $card)
-                                @if($card->getFirstMediaUrl())
+                                @if(Storage::disk('media')->exists($card->id))
                                     <td>
-                                        <img src=" {{$card->getFirstMediaUrl() }}" alt="img">
+                                        <img src="{{asset('storage/media/'.$card->id.'/conversion/0-thumb.jpg')}}" alt='image'>
                                     </td>
                                 @else
                                     <td>
-                                        <img src="{{asset('storage/baseImage.jpg')}}" alt="img">
+                                        <img src="{{asset('storage/baseImage.jpg')}}" alt='image'>
                                     </td>
                                 @endif
+                                
+
                                 <td> {{$card->name }}</td>
                                 <td> {{$card->description }}</td>
                                 <td> {{$card->price }}</td>
