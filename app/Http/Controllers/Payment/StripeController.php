@@ -19,9 +19,8 @@ class StripeController extends Controller
         if ($request->has('stock')) {
             $this->middleware(['EnsureStockIsValid']);
         }
-        else {
-            $this->middleware(['verified']);            
-        }
+        $this->middleware(['verified']);            
+
     }
     
     public function checkout()

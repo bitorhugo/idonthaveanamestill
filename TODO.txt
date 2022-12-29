@@ -1,5 +1,0 @@
-- create routes for inventory
-
-
-- update cart after checkout 
-    
