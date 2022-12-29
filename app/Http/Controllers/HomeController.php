@@ -27,11 +27,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $showcase = Card::join('inventories', 'cards.id', '=', 'inventories.card_id')
-                  ->where('inventories.quantity', '>', '0')
-                  ->where('cards.discount_amount', '>', '0')
-                  ->limit(8)
-                  ->get();
+        $showcase = cache()->remember('showcase', now()->addMinute(1), function () {
+            return Card::join('inventories', 'cards.id', '=', 'inventories.card_id')
+            ->where('inventories.quantity', '>', '0')
+                ->where('cards.discount_amount', '>', '0')
+                ->limit(8)
+                ->get();
+        });
 
         $recent = Card::orderBy('created_at', 'desc')
                 ->take(8)
