@@ -20,7 +20,7 @@ class StripeController extends Controller
         $this->middleware(['verified']);            
     }
     
-    public function checkout()
+    public function checkout(Request $request)
     {
         Stripe\Stripe::setApiKey(config('stripe.sk'));
 

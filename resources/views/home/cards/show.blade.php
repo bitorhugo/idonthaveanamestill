@@ -27,6 +27,7 @@
 
                             <div class="alert alert-primary" role="alert">
                                 <strong>{{$card->price - ($card->price * $card->discount_amount)}}</strong><strong class="text-muted ml-2"><del>{{$card->price}}</del></strong>
+                                EUR
                             </div>
 
                             @if($card->inventory->quantity >= 10)
