@@ -16,11 +16,8 @@ class StripeController extends Controller
 
     public function __construct(Request $request)
     {
-        if ($request->has('stock')) {
-            $this->middleware(['EnsureStockIsValid']);
-        }
+        $this->middleware(['EnsureStockIsValid']);
         $this->middleware(['verified']);            
-
     }
     
     public function checkout()
@@ -69,14 +66,15 @@ class StripeController extends Controller
                         'product_data' => [
                             'name' => $request->name,
                         ],
-                        'unit_amount'  => $request->price * 100,
+                        'unit_amount'  => ($request->price - ($request->price * $request->discount)) * 100,
                     ],
                     'quantity'   => $request->quantity,
                 ],
             ],
             'mode'        => 'payment',
             'success_url' => route('paymentSuccess', ['item_id' => $request->id]),
-            'cancel_url'  => route('paymentCanceled', ['search' => $request->id]),
+            'cancel_url'  => route('paymentCanceled', ['search' => $request->id,
+                                                       'stock' => $request->quantity]),
         ]);
 
         return redirect()->away($session->url);

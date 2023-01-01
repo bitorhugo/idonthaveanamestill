@@ -26,7 +26,7 @@
                         <div class="card-body">
 
                             <div class="alert alert-primary" role="alert">
-                                <strong>{{$card->price}} EUR</strong>
+                                <strong>{{$card->price - ($card->price * $card->discount_amount)}}</strong><strong class="text-muted ml-2"><del>{{$card->price}}</del></strong>
                             </div>
 
                             @if($card->inventory->quantity >= 10)
@@ -70,6 +70,7 @@
             <input type="hidden" value="{{ $card->id }}" name="id">
             <input type="hidden" value="{{ $card->name }}" name="name">
             <input type="hidden" value="{{ $card->price }}" name="price">
+            <input type="hidden" value="{{ $card->discount_amount }}" name="discount">
             <input type="hidden" value="{{ $card->inventory->quantity }}" name="stock">
             <input type="hidden" value="1" name="quantity">
         </form>

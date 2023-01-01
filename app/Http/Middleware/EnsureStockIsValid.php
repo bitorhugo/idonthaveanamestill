@@ -19,6 +19,6 @@ class EnsureStockIsValid
         return $request->stock > 0
             ? $next($request)
             : redirect()->route('search.show', ['search' => $request->id])
-                        ->with('error', 'Out of Stock.');
+                        ->with('error', 'Out of Stock.');            
     }
 }
