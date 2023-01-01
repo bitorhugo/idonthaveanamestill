@@ -8,7 +8,7 @@
                 
                 <!-- <h3 class="title-5 m-b-35"> {{  current(explode('.', Route::currentRouteName())) }} data table</h3> -->
                 
-                
+
                 <div class="table-data__tool">
                     <div class="table-data__tool-left">
 

@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $showcase = cache()->remember('showcase', now()->addMinute(1), function () {
+        $showcase = cache()->remember('showcase', now()->addSeconds(5), function () {
             return Card::join('inventories', 'cards.id', '=', 'inventories.card_id')
             ->where('inventories.quantity', '>', '0')
                 ->where('cards.discount_amount', '>', '0')

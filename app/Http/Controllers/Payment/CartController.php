@@ -51,7 +51,6 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-
         $discount = new \Darryldecode\Cart\CartCondition(array(
             'name' => 'SALE ' . $request->discount * 100,
             'type' => 'discounts',

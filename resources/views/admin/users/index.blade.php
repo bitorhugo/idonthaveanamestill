@@ -9,12 +9,12 @@
 @endsection
 
 
+
 @section('content')
     <section class="p-t-20">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-
                     @include('partials.datatable')
 
                     <table class="table table-data2">
