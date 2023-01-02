@@ -9,7 +9,11 @@
                     
                     <div class="card">
 
-                        <img class="card-img-top" src="{{$card->getFirstMediaUrl()}}" alt="image">
+                        @if(Storage::disk('media')->exists($card->id))
+                            <img src="{{asset('storage/media/'.$card->id.'/conversion/0-thumb.jpg')}}" alt='image'>
+                        @else
+                            <img src="{{asset('storage/baseImage.jpg')}}" alt='image'>
+                        @endif
 
                         <div class="card-body">
                             <p class="card-text">{{$card->description}}</p>
@@ -26,7 +30,10 @@
                         <div class="card-body">
 
                             <div class="alert alert-primary" role="alert">
-                                <strong>{{$card->price - ($card->price * $card->discount_amount)}}</strong><strong class="text-muted ml-2"><del>{{$card->price}}</del></strong>
+                                <strong>{{$card->price - ($card->price * $card->discount_amount)}}</strong>
+                                <strong class="text-muted ml-2">
+                                    <del>{{$card->price}}</del>
+                                </strong>
                                 EUR
                             </div>
 

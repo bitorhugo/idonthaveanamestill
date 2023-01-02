@@ -14,13 +14,13 @@ use Illuminate\Support\Facades\Auth;
 class StripeController extends Controller
 {
 
-    public function __construct(Request $request)
+    public function __construct()
     {
         $this->middleware(['EnsureStockIsValid']);
         $this->middleware(['verified']);            
     }
     
-    public function checkout(Request $request)
+    public function checkout()
     {
         Stripe\Stripe::setApiKey(config('stripe.sk'));
 
@@ -45,11 +45,26 @@ class StripeController extends Controller
             array_push($line_items, $line_data);
         }
 
+        $shipping_cost = 7.50;
         $session = Stripe\Checkout\Session::create([
-            'line_items'  => $line_items,
-            'mode'        => 'payment',
-            'success_url' => route('paymentSuccess'),
-            'cancel_url'  => route('paymentCanceled'),
+            'shipping_address_collection' => ['allowed_countries' => ['PT', 'ES']],
+            'shipping_options' => [
+                [
+                    'shipping_rate_data'    => [
+                        'type'              => 'fixed_amount',
+                        'fixed_amount'      => ['amount' => $shipping_cost * 100, 'currency' => 'eur'],
+                        'display_name'      => 'Shipping Costs',
+                        'delivery_estimate' => [
+                            'minimum'       => ['unit' => 'business_day', 'value' => 3],
+                            'maximum'       => ['unit' => 'business_day', 'value' => 5],
+                        ],
+                    ],
+                ],
+            ],
+            'line_items'       => $line_items,
+            'mode'             => 'payment',
+            'success_url'      => route('paymentSuccess'),
+            'cancel_url'       => route('paymentCanceled'),
         ]);
         return redirect()->away($session->url);
     }
@@ -58,7 +73,23 @@ class StripeController extends Controller
     {
         Stripe\Stripe::setApiKey(config('stripe.sk'));
 
+        $shipping_cost = 7.50;
+                
         $session = Stripe\Checkout\Session::create([
+            'shipping_address_collection' => ['allowed_countries' => ['PT', 'ES']],
+            'shipping_options' => [
+                [
+                    'shipping_rate_data'    => [
+                        'type'              => 'fixed_amount',
+                        'fixed_amount'      => ['amount' => $shipping_cost * 100, 'currency' => 'eur'],
+                        'display_name'      => 'Shipping Costs',
+                        'delivery_estimate' => [
+                            'minimum'       => ['unit' => 'business_day', 'value' => 3],
+                            'maximum'       => ['unit' => 'business_day', 'value' => 5],
+                        ],
+                    ],
+                ],
+            ],
             'line_items'  => [
                 [
                     'price_data' => [
@@ -122,7 +153,7 @@ class StripeController extends Controller
         // clear the cart
         \Cart::session(Auth::id())->clear();
         
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', 'Payment was fullfilled.');
     }
     
 }

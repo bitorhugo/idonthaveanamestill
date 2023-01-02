@@ -18,6 +18,7 @@ class EnsureStockIsValid
      */
     public function handle(Request $request, Closure $next)
     {
+        // single purchase
         if ($request->has('id')) {
             return $request->stock > 0
                 ? $next($request)
