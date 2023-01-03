@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
+use App\Models\Card;
 use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -100,7 +101,13 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //check for negative qty
         if ($request->qty < 1){
+            return back()->with('error', 'Something went wrong.');
+        }
+
+        //check for available stock
+        if (Card::find($id)->inventory->quantity < $request->qty){
             return back()->with('error', 'Something went wrong.');
         }
 

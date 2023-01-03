@@ -54,3 +54,8 @@ Route::resource('/search', HomeCardController::class)->only(['index', 'show']);
 
 Route::resource('/cart', CartController::class)->except(['create', 'show', 'edit']);
 
+Route::post('/stripe/webhook', function(){
+    Stripe\Stripe::setApiKey(config('stripe.sk'));
+    $payload = @file_get_contents('php://input');
+    error_log($payload);
+});

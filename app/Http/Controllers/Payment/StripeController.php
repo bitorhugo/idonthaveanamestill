@@ -71,11 +71,10 @@ class StripeController extends Controller
 
     public function payNow(Request $request)
     {
-        Stripe\Stripe::setApiKey(config('stripe.sk'));
-
+        \Stripe\Stripe::setApiKey(config('stripe.sk'));
         $shipping_cost = 7.50;
                 
-        $session = Stripe\Checkout\Session::create([
+        $session = \Stripe\Checkout\Session::create([
             'shipping_address_collection' => ['allowed_countries' => ['PT', 'ES']],
             'shipping_options' => [
                 [
@@ -111,13 +110,19 @@ class StripeController extends Controller
         return redirect()->away($session->url);
     }
 
+    public function webhook(Request $request)
+    {
+
+        
+    }
+
     public function success(Request $request)
     {
         if ($request->has('item_id')) {
             return $this->successPayNow($request->item_id);
         }
         return $this->successCheckout();
-    }
+     }
 
     public function canceled(Request $request)
     {
@@ -132,7 +137,7 @@ class StripeController extends Controller
 
     private function successPayNow($item_id)
     {
-        //update inventory by 1
+        // update inventory by 1
         $inv = Card::find($item_id)->inventory;
         InventoryService::update($inv, $inv->quantity - 1);
 
@@ -155,5 +160,7 @@ class StripeController extends Controller
         
         return redirect()->route('home')->with('success', 'Payment was fullfilled.');
     }
+
+   
     
 }
