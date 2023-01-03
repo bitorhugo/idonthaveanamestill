@@ -40,9 +40,13 @@ class StripeController extends Controller
                         'unit_amount' => $priceWithDiscount * 100,
                     ],
                     'quantity'            => $item->quantity,
-                    'adjustable_quantity' => ['enabled' => true],
+                    'adjustable_quantity' => [
+                        'enabled' => true,
+                        'minimum' => 1,
+                        'maximum' => $item->model->inventory->quantity,
+                    ],
                 ];
-            array_push($line_items, $line_data);
+            Array_push($line_items, $line_data);
         }
 
         $shipping_cost = 7.50;
