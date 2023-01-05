@@ -51,6 +51,7 @@ class StripeController extends Controller
 
         $shipping_cost = 7.50;
         $session = Stripe\Checkout\Session::create([
+
             'shipping_address_collection' => ['allowed_countries' => ['PT', 'ES']],
             'shipping_options' => [
                 [
@@ -79,8 +80,9 @@ class StripeController extends Controller
         $shipping_cost = 7.50;
                 
         $session = \Stripe\Checkout\Session::create([
+            'customer_email'              => $request->email,
             'shipping_address_collection' => ['allowed_countries' => ['PT', 'ES']],
-            'shipping_options' => [
+            'shipping_options'            => [
                 [
                     'shipping_rate_data'    => [
                         'type'              => 'fixed_amount',
@@ -106,7 +108,7 @@ class StripeController extends Controller
                 ],
             ],
             'mode'        => 'payment',
-            'success_url' => route('paymentSuccess', ['item_id' => $request->id]),
+            'success_url' => route('home'),
             'cancel_url'  => route('paymentCanceled', ['search' => $request->id,
                                                        'stock' => $request->quantity]),
         ]);

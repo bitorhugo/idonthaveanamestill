@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Card;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeCardController extends Controller
 {
@@ -72,7 +73,10 @@ class HomeCardController extends Controller
     public function show(int $id)
     {
         $card = Card::find($id);
-        return view('home.cards.show')->with(['card' => $card]);
+        return view('home.cards.show')->with([
+            'card' => $card,
+            'email' => Auth::user()->email,
+        ]);
     }
 
     /**
