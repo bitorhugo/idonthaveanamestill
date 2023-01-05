@@ -114,12 +114,6 @@ class StripeController extends Controller
         return redirect()->away($session->url);
     }
 
-    public function webhook(Request $request)
-    {
-
-        
-    }
-
     public function success(Request $request)
     {
         if ($request->has('item_id')) {
