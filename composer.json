@@ -16,7 +16,8 @@
         "laravel/ui": "^3.4",
         "spatie/laravel-collection-macros": "^7.12",
         "spatie/laravel-medialibrary": "^9.0.0",
-        "stripe/stripe-php": "^10.0"
+        "stripe/stripe-php": "^10.0",
+        "swiftmailer/swiftmailer": "^6.2"
     },
     "require-dev": {
         "andyabih/laravel-to-uml": "^1.0",

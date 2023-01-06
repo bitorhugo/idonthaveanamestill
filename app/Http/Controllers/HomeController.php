@@ -35,7 +35,9 @@ class HomeController extends Controller
                 ->get();
         });
 
-        $recent = Card::orderBy('created_at', 'desc')
+        $recent = Card::join('inventories', 'cards.id', '=', 'inventories.card_id')
+                ->where('inventories.quantity', '>', '0')
+                ->orderBy('cards.created_at', 'desc')
                 ->take(8)
                 ->get();
         

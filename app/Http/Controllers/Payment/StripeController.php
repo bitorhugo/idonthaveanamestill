@@ -110,7 +110,8 @@ class StripeController extends Controller
                 ],
             ],
             'mode'        => 'payment',
-            'success_url' => route('paymentSuccess'),
+            
+            'success_url' => route('paymentSuccess', ['item_id' => $request->id]),
             'cancel_url'  => route('paymentCanceled', ['search' => $request->id,
                                                        'stock' => $request->quantity]),
         ]);
@@ -118,14 +119,12 @@ class StripeController extends Controller
         return redirect()->away($session->url);
     }
 
-    public function success()
+    public function success(Request $request)
     {
-        Mail::to('admin@email.com')->send(new PaymentFulfilled());
-        return redirect()->route('home')->with('success', 'Payment was fulfilled.');
-        // if ($request->has('item_id')) {
-        //     return $this->successPayNow($request->item_id);
-        // }
-        // return $this->successCheckout();
+        if ($request->has('item_id')) {
+            return $this->successPayNow($request->item_id);
+        }
+        return $this->successCheckout();
      }
 
     public function canceled(Request $request)

@@ -41,11 +41,12 @@ class StripeCheckoutService
                 'id' => $event->data->object->id,
                 'expand' => ['line_items'],
             ]);
-            // $line_items = $session->line_items;
+            $line_items = $session->line_items;
             // $this->updateInv($line_items);
 
             // Send email to buyer
             $email = $session->customer_email;
+            $this->sendEmail($email);
         }
         
         http_response_code(200);
@@ -54,11 +55,6 @@ class StripeCheckoutService
     private function sendEmail($email)
     {
         Mail::to($email)->send(new PaymentFulfilled());
-    }
-
-    private function updateInv($items)
-    {
-        
     }
 
 }
