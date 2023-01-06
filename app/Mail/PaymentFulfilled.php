@@ -28,6 +28,7 @@ class PaymentFulfilled extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.paymentFulfilled');
+        return $this->from('seekNfind@email.com', 'seekNfind')
+                    ->view('emails.paymentFulfilled');
     }
 }

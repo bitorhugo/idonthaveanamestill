@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Payment;
 use Stripe;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PaymentFulfilled;
 use App\Models\Card;
 use App\Services\InventoryService;
 use Darryldecode\Cart\CartCollection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class StripeController extends Controller
 {
@@ -108,7 +110,7 @@ class StripeController extends Controller
                 ],
             ],
             'mode'        => 'payment',
-            'success_url' => route('home'),
+            'success_url' => route('paymentSuccess'),
             'cancel_url'  => route('paymentCanceled', ['search' => $request->id,
                                                        'stock' => $request->quantity]),
         ]);
@@ -116,12 +118,14 @@ class StripeController extends Controller
         return redirect()->away($session->url);
     }
 
-    public function success(Request $request)
+    public function success()
     {
-        if ($request->has('item_id')) {
-            return $this->successPayNow($request->item_id);
-        }
-        return $this->successCheckout();
+        Mail::to('admin@email.com')->send(new PaymentFulfilled());
+        return redirect()->route('home')->with('success', 'Payment was fulfilled.');
+        // if ($request->has('item_id')) {
+        //     return $this->successPayNow($request->item_id);
+        // }
+        // return $this->successCheckout();
      }
 
     public function canceled(Request $request)

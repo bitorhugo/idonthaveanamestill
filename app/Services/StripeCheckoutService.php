@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Mail\PaymentFulfilled;
-use App\Models\Card;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Stripe\Stripe;
 
@@ -41,22 +41,26 @@ class StripeCheckoutService
                 'id' => $event->data->object->id,
                 'expand' => ['line_items'],
             ]);
-
             // $line_items = $session->line_items;
-            
+            // $this->updateInv($line_items);
+
             // Send email to buyer
-            $this->sendEmail($session->customer_email);
+            $email = $session->customer_email;
         }
-        error_log("Passed signature verification!");
+        
         http_response_code(200);
-        error_log($payload);
     }
     
-    public function sendEmail($email)
+    private function sendEmail($email)
     {
         Mail::to($email)->send(new PaymentFulfilled());
     }
-    
+
+    private function updateInv($items)
+    {
+        
+    }
+
 }
 
 
