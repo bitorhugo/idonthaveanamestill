@@ -26,7 +26,7 @@ class CardPostRequest extends FormRequest
     {
         return [
             'name' => 'bail|required|alpha_num|max:50|',
-            'description' => 'bail|required|alpha_num|max:150',
+            'description' => 'bail|required|string|max:150',
             'price' => 'bail|required|gt:0|numeric',
             'discount_amount' => 'bail|required|between:0,1|numeric',
             'quantity' => 'bail|required|gte:0|numeric',

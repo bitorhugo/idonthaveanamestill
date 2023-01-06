@@ -27,7 +27,16 @@
                         <div class="card-header">
                             <strong class="card-title">{{$card->name}}</strong>
                         </div>
+
                         <div class="card-body">
+
+                            <div class="alert alert-info" role="alert">
+                                <strong>
+                                    @foreach($categories as $cat)
+                                        {{$cat->name}}
+                                    @endforeach
+                                </strong>
+                            </div>
 
                             <div class="alert alert-primary" role="alert">
                                 <strong>{{$card->price - ($card->price * $card->discount_amount)}}</strong>
@@ -37,12 +46,12 @@
                                 EUR
                             </div>
 
-                            @if($card->inventory->quantity >= 10)
+                            @if($card->inventory->quantity >= 25)
                                 <div class="alert alert-success" role="alert">
                                     <strong>Quantity: {{$card->inventory->quantity}}</strong>
                                     <span class="badge badge-pill badge-success">In Stock</span>
                                 </div>
-                            @elseif($card->inventory->quantity < 10 && $card->inventory->quantity > 0)
+                            @elseif($card->inventory->quantity < 25 && $card->inventory->quantity > 0)
                                 <div class="alert alert-warning" role="alert">
                                     <strong>Quantity: {{$card->inventory->quantity}}</strong>
                                     <span class="badge badge-pill badge-warning">Low Stock</span>
@@ -65,6 +74,7 @@
                                 document.getElementById('add-to-cart-form').submit();">
                                 <i class="fas fa-shopping-basket"> Add to Cart</i>
                             </button>
+
 
                         </div>
                     </div>

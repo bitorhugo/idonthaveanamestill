@@ -5,5 +5,6 @@
     @include('partials.searchbar')
     @include('partials.showcase')
     @include('partials.recentCards')
-    
-@endsection
+    @include('partials.promoCatXCards')
+    @include('partials.lowStockDiscountCards')
+    @endsection

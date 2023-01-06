@@ -28,10 +28,12 @@ class StripeCheckoutService
         } catch (\UnexpectedValueException $e) {
             // Invalid payload
             http_response_code(400);
+            error_log($e);
             exit();
         } catch (\Stripe\Exception\SignatureVerificationException $e) {
             // Invalid signature
             http_response_code(400);
+            error_log($e);
             exit();
         }
 

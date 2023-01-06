@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\Users\UserPatchRequest;
 use App\Http\Requests\Admin\Users\UserPostRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class AdminUserController extends Controller
@@ -22,8 +23,15 @@ class AdminUserController extends Controller
         $this->middleware('isAdmin');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        if($request->has('q')){
+            $users = User::search($request->input('q'))
+                   ->paginate(15);
+            return view('admin.users.index')->with([
+                'users' => $users,
+            ]);
+        }
         return view('admin.users.index')->with([
             'users' => User::paginate(),
         ]);

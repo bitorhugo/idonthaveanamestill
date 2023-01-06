@@ -10,7 +10,9 @@
 
 
 
+
 @section('content')
+    @include('partials.usersAdminSearchBar')
     <section class="p-t-20">
         <div class="container">
             <div class="row">

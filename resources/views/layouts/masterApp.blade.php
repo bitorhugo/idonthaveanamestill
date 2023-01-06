@@ -69,7 +69,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     
-    <body class="animsition">
+    <body class="animsition" style="background:black" >
         <div class="page-wrapper">
             <div class="page-content--bgf7">
                 @include('partials.headerApp')

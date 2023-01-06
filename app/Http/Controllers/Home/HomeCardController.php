@@ -22,7 +22,7 @@ class HomeCardController extends Controller
                    ->paginate(5)
                    ->appends(['c' => 'none']);
             return view('home.cards.index')->with([
-                'cards' => $cards,
+                'cards'      => $cards,
                 'categories' => Category::all(),
             ]);
         }
@@ -73,9 +73,11 @@ class HomeCardController extends Controller
     public function show(int $id)
     {
         $card = Card::find($id);
+        $categories = $card->categories;
         return view('home.cards.show')->with([
-            'card' => $card,
-            'email' => Auth::user()->email,
+            'card'       => $card,
+            'categories' => $categories,
+            'email'      => Auth::user()->email,
         ]);
     }
 
