@@ -3,9 +3,10 @@
 namespace App\Services;
 
 use App\Mail\PaymentFulfilled;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Card;
 use Illuminate\Support\Facades\Mail;
 use Stripe\Stripe;
+use Illuminate\Support\Str;
 
 class StripeCheckoutService
 {
@@ -41,8 +42,10 @@ class StripeCheckoutService
                 'id' => $event->data->object->id,
                 'expand' => ['line_items'],
             ]);
+
+            // Update Inventory
             $line_items = $session->line_items;
-            // $this->updateInv($line_items);
+            $this->updateInv($line_items);
 
             // Send email to buyer
             $email = $session->customer_email;
@@ -55,6 +58,16 @@ class StripeCheckoutService
     private function sendEmail($email)
     {
         Mail::to($email)->send(new PaymentFulfilled());
+    }
+
+    private function updateInv($line_items)
+    {
+        $items = collect($line_items->data);
+        $items->each(function($item){
+            $id = Str::between($item->description, 'id=', ')');
+            $inv = Card::find($id)->inventory;
+            InventoryService::update($inv, $inv->quantity - $item->quantity);
+        });
     }
 
 }

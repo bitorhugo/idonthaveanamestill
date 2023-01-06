@@ -5,13 +5,8 @@ namespace App\Http\Controllers\Payment;
 use Stripe;
 
 use App\Http\Controllers\Controller;
-use App\Mail\PaymentFulfilled;
-use App\Models\Card;
-use App\Services\InventoryService;
-use Darryldecode\Cart\CartCollection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class StripeController extends Controller
 {
@@ -37,14 +32,14 @@ class StripeController extends Controller
                     'price_data' => [
                         'currency' => 'eur',
                         'product_data' => [
-                            'name' => $item->name,
+                            'name' => $item->name . '(id=' . $item->id . ')',
                         ],
                         'unit_amount' => $priceWithDiscount * 100,
                     ],
                     'quantity'            => $item->quantity,
                     'adjustable_quantity' => [
                         'enabled' => true,
-                        'minimum' => 1,
+                        'minimum' => 0,
                         'maximum' => $item->model->inventory->quantity,
                     ],
                 ];
@@ -80,7 +75,7 @@ class StripeController extends Controller
     {
         \Stripe\Stripe::setApiKey(config('stripe.sk'));
         $shipping_cost = 7.50;
-                
+
         $session = \Stripe\Checkout\Session::create([
             'customer_email'              => $request->email,
             'shipping_address_collection' => ['allowed_countries' => ['PT', 'ES']],
@@ -102,7 +97,7 @@ class StripeController extends Controller
                     'price_data' => [
                         'currency'     => 'eur',
                         'product_data' => [
-                            'name' => $request->name,
+                            'name' => $request->name . '(id=' . $request->id . ')',
                         ],
                         'unit_amount'  => ($request->price - ($request->price * $request->discount)) * 100,
                     ],
@@ -122,7 +117,8 @@ class StripeController extends Controller
     public function success(Request $request)
     {
         if ($request->has('item_id')) {
-            return $this->successPayNow($request->item_id);
+            return redirect()->route('search.show', ['search' => $request->item_id])
+                ->with('success', 'Payment was fullfilled.');
         }
         return $this->successCheckout();
      }
@@ -137,30 +133,9 @@ class StripeController extends Controller
             ->with('error', 'Payment Canceled.');
     }
 
-
-    private function successPayNow($item_id)
-    {
-        // update inventory by 1
-        $inv = Card::find($item_id)->inventory;
-        InventoryService::update($inv, $inv->quantity - 1);
-
-        return redirect() ->route('search.show', ['search' => $item_id])
-                          ->with('success', 'Payment was fullfilled.');
-    }
-
     private function successCheckout()
     {
-        // update cart inventory by qty
-        \Cart::session(Auth::id())
-            ->getContent()
-            ->each(function ($item) {
-                $inv = $item->model->inventory;
-                InventoryService::update($inv, $inv->quantity - $item->quantity);
-            });
-
-        // clear the cart
         \Cart::session(Auth::id())->clear();
-        
         return redirect()->route('home')->with('success', 'Payment was fullfilled.');
     }
 
