@@ -12,31 +12,31 @@
                 <div class="table-data__tool">
                     <div class="table-data__tool-left">
 
-                        <div class="row">
-                            <div class="col">
-                                <select name="select" id="select" class="form-control-sm form-control">
-                                    <option value="priceUp">Price ↥</option>
-                                    <option value="priceDown">Price ↧</option>
-                                    <option value="3">Option #3</option>
-                                </select>
-                            </div>
-                            <div class="col">
-                                <select name="select" id="select" class="form-control-sm form-control">
-                                    <option value="0">Please select</option>
-                                    <option value="1">Option #1</option>
-                                    <option value="2">Option #2</option>
-                                    <option value="3">Option #3</option>
-                                </select>
-                            </div>
-                            <div class="col">
-                                <select name="select" id="select" class="form-control-sm form-control">
-                                    <option value="0">Please select</option>
-                                    <option value="1">Option #1</option>
-                                    <option value="2">Option #2</option>
-                                    <option value="3">Option #3</option>
-                                </select>
-                            </div>
-                        </div>
+                        <!-- <div class="row">
+                             <div class="col">
+                             <select name="select" id="select" class="form-control-sm form-control">
+                             <option value="priceUp">Price ↥</option>
+                             <option value="priceDown">Price ↧</option>
+                             <option value="3">Option #3</option>
+                             </select>
+                             </div>
+                             <div class="col">
+                             <select name="select" id="select" class="form-control-sm form-control">
+                             <option value="0">Please select</option>
+                             <option value="1">Option #1</option>
+                             <option value="2">Option #2</option>
+                             <option value="3">Option #3</option>
+                             </select>
+                             </div>
+                             <div class="col">
+                             <select name="select" id="select" class="form-control-sm form-control">
+                             <option value="0">Please select</option>
+                             <option value="1">Option #1</option>
+                             <option value="2">Option #2</option>
+                             <option value="3">Option #3</option>
+                             </select>
+                             </div>
+                             </div> -->
 
                     </div>
                     <div class="table-data__tool-right">
