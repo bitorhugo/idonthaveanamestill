@@ -8,17 +8,18 @@ class CustomPathGenerator implements PathGenerator
 {
    public function getPath(Media $media): string
    {
-    return $media->model_id . '/';
+    return $media->model_type . '/' . $media->model_id . '/';
    }
 
    public function getPathForConversions(Media $media): string
    {
-    return $media->model_id . '/conversion/';
+    return $media->model_type . '/' . $media->model_id . '/conversion/';
    }
 
    public function getPathForResponsiveImages(Media $media): string
    {
-    return $media->model_id . '/responsive-images/';
+    return $media->model_type . '/' . $media->model_id . '/responsive-images/';
    }
+
    
 }
