@@ -77,7 +77,6 @@ class HomeCardController extends Controller
         return view('home.cards.show')->with([
             'card'       => $card,
             'categories' => $categories,
-            'email'      => Auth::user()->email,
         ]);
     }
 

@@ -54,17 +54,14 @@
                                 <form id="edit-form{{$category->id}}"
                                       action="{{ route('categories.edit', ['category' => $category->id]) }}"
                                       method="GET" class="d-none">
-                                    @csrf
                                 </form>
                                 <form id="delete-form{{$category->id}}" action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="POST" class="d-none">
                                     @csrf
                                     @method('delete')
                                 </form>
                                 <form id="show-form{{$category->id}}" action="{{ route('categories.show', ['category' => $category->id]) }}" method="GET" class="d-none">
-                                    @csrf
                                 </form>
                                 <form id="additem-button" action="{{ route('categories.create') }}" method="GET" class="d-none">
-                                    @csrf
                                 </form>
 
                             @endforeach

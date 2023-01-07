@@ -74,17 +74,14 @@
                                 <form id="edit-form{{$card->id}}"
                                       action="{{ route('cards.edit', ['card' => $card->id]) }}"
                                       method="GET" class="d-none">
-                                    @csrf
                                 </form>
                                 <form id="delete-form{{$card->id}}" action="{{ route('cards.destroy', ['card' => $card->id]) }}" method="POST" class="d-none">
                                     @csrf
                                     @method('delete')
                                 </form>
                                 <form id="show-form{{$card->id}}" action="{{ route('cards.show', ['card' => $card->id]) }}" method="GET" class="d-none">
-                                    @csrf
                                 </form>
                                 <form id="additem-button" action="{{ route('cards.create') }}" method="GET" class="d-none">
-                                    @csrf
                                 </form>
 
                             @endforeach
