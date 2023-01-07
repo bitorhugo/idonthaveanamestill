@@ -21,8 +21,15 @@ class AdminCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('q')) {
+            $categories = Category::search($request->input('q'))
+                ->paginate(15);
+            return view('admin.categories.index')->with([
+                'categories' => $categories,
+            ]);
+        }
         return view('admin.categories.index')->with([
             'categories' => Category::paginate(),
         ]);

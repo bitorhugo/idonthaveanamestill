@@ -24,8 +24,15 @@ class AdminCardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('q')) {
+            $cards = Card::search($request->input('q'))
+                ->paginate(15);
+            return view('admin.cards.index')->with([
+                'cards' => $cards,
+            ]);
+        }
         return view('admin.cards.index')->with([
             'cards' => Card::paginate(),
         ]);

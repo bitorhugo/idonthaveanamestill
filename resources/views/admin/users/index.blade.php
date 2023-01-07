@@ -12,7 +12,7 @@
 
 
 @section('content')
-    @include('partials.usersAdminSearchBar')
+    @include('partials.adminSearchBar')
     <section class="p-t-20">
         <div class="container">
             <div class="row">

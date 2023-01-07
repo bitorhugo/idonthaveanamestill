@@ -11,6 +11,7 @@
 
 
 @section('content')
+    @include('partials.adminSearchBar')
     @include('partials.datatable')
     <section class="p-t-20">
         <div class="container">
