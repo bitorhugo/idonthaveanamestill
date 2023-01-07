@@ -25,7 +25,7 @@ class CardPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail|required|alpha_num|max:50|',
+            'name' => 'bail|required|string|max:50|',
             'description' => 'bail|required|string|max:150',
             'price' => 'bail|required|gt:0|numeric',
             'discount_amount' => 'bail|required|between:0,1|numeric',
