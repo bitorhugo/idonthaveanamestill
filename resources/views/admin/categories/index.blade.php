@@ -1,6 +1,4 @@
 @extends('layouts.masterAdmin')
-
-
 @section('desired_create_route')
     <button class="au-btn au-btn-icon au-btn--green au-btn--small"
             onclick="event.preventDefault();
@@ -35,11 +33,6 @@
 
                                     <td>
                                         <div class="table-data-feature">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Show"
-                                                    onclick="event.preventDefault();
-                                document.getElementById('show-form{{$category->id}}').submit();">
-
-                                                <i class="zmdi zmdi-mail-send"></i>
                                             </button>
                                             <button class="item" data-toggle="tooltip" data-placement="top" title="Edit"
                                                     onclick="event.preventDefault();

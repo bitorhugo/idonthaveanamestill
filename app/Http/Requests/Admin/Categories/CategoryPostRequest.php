@@ -25,8 +25,8 @@ class CategoryPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail|required|alpha_num|max:150',
-            'description' => 'bail|required|alpha_num|max:150',
+            'name' => 'bail|required|string|max:150',
+            'description' => 'bail|required|string|max:150',
         ];
     }
 }

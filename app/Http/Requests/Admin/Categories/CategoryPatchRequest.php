@@ -25,8 +25,8 @@ class CategoryPatchRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail|alpha_num|max:150|nullable',
-            'description' => 'bail|alpha_num|max:150|nullable',
+            'name' => 'bail|string|max:150|nullable',
+            'description' => 'bail|string|max:150|nullable',
         ];
     }
 }

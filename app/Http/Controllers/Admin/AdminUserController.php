@@ -81,8 +81,7 @@ class AdminUserController extends Controller
      */
     public function show(User $user)
     {
-
-        //        return view('admin.users.show')->with(['user' => $user]);
+        return view('admin.users.show')->with(['user' => $user]);
     }
 
     /**
