@@ -28,7 +28,8 @@ class UserPatchRequest extends FormRequest
             'name' => 'nullable|alpha|max:50',
             'email' => 'nullable|email',
             'isAdmin' => 'nullable|boolean',
-            'password' => 'nullable|confirmed|min:8'
+            'password' => 'nullable|confirmed|min:8',
+            'image' => 'nullable|image',
         ];
     }
 }

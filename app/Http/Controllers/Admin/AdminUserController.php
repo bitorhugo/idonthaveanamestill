@@ -112,7 +112,7 @@ class AdminUserController extends Controller
     public function update(UserPatchRequest $request, User $user)
     {
         $safe = $request->safe();
-        $filtered = collect($safe);
+        $filtered = collect($safe->except('image'));
 
         $filtered->each(
             function ($value, $key) use ($user) {
@@ -122,6 +122,10 @@ class AdminUserController extends Controller
             });
         
         $user->save();
+
+        // update image
+        $user->clearMediaCollection();
+        MediaService::addUserMedia($user, $safe->image);
 
         return redirect()->route('users.index');
     }

@@ -25,12 +25,13 @@ class CardPatchRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail|string|max:50|nullable',
-            'description' => 'bail|string|max:150|nullable',
-            'price' => 'bail|gt:0|numeric|nullable',
+            'name'            => 'bail|string|max:50|nullable',
+            'description'     => 'bail|string|max:150|nullable',
+            'price'           => 'bail|gt:0|numeric|nullable',
             'discount_amount' => 'bail|between:0,1|numeric|nullable',
-            'quantity' => 'bail|gte:0|numeric|nullable',
-            'categories' => 'bail|array|nullable',
+            'quantity'        => 'bail|gte:0|numeric|nullable',
+            'categories'      => 'bail|array|nullable',
+            'image.*'         => 'image'
         ];
     }
 }

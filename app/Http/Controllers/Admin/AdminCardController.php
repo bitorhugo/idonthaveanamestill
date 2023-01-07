@@ -125,6 +125,7 @@ class AdminCardController extends Controller
     public function update(CardPatchRequest $request, Card $card)
     {
         $safe = $request->safe();
+        
         $filtered = collect($safe->except(['categories', 'quantity', 'image']));
         
         $filtered->each(         // on ->each, the order of $key $value gets flipped
@@ -134,17 +135,21 @@ class AdminCardController extends Controller
                 }
             });
 
-        //update inventory
+        // update inventory
         if(!is_null($safe->quantity)){
             $card->inventory->quantity = $safe->quantity;
         }
         
-        //save both card and relation
+        // save both card and relation
         $card->push();
 
-        //update categories
+        // update categories
         $card->categories()->sync($request->categories);
 
+        // update images
+        $card->clearMediaCollection();
+        MediaService::addCardMedia($card, collect($safe->image));
+        
         return redirect()->route('cards.index');
     }
 
