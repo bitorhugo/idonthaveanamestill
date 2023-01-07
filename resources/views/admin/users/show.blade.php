@@ -6,7 +6,13 @@
                 <div class="card-header user-header alt bg-dark">
                     <div class="media">
                         <a href="#">
-                            <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="images/icon/avatar-01.jpg">
+                            @if(Storage::disk('media')->exists($user->id))
+                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;"
+                                     src="{{asset('storage/media/'.$user->id.'/conversion/'.$user->id.'-thumb.jpg')}}" alt='image'>
+                            @else
+                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;"
+                                     src="{{asset('storage/baseImage.jpg')}}" alt='image'>
+                            @endif
                         </a>
                         <div class="media-body">
                             <h2 class="text-light display-6">{{$user->name}}</h2>
