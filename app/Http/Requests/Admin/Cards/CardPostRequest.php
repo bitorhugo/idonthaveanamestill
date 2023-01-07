@@ -31,7 +31,7 @@ class CardPostRequest extends FormRequest
             'discount_amount' => 'bail|required|between:0,1|numeric',
             'quantity' => 'bail|required|gte:0|numeric',
             'categories' => 'bail|required|array',
-            'image' => 'array'
+            'image.*' => 'image',
         ];
     }
 }

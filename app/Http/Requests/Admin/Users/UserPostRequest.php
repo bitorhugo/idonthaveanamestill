@@ -29,6 +29,7 @@ class UserPostRequest extends FormRequest
             'email' => 'bail|required|email',
             'password' => 'bail|required|confirmed|min:8',
             'isAdmin' => 'bail|boolean',
+            'image' => 'image'
         ];
     }
 }

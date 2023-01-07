@@ -10,6 +10,7 @@ use Laravel\Scout\Searchable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class User extends Authenticatable implements MustVerifyEmail, HasMedia
 {
@@ -40,6 +41,13 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
             'name' => $this->name,
             'email' => $this->email,
         ];
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+             ->width(200)
+            ->height(200);
     }
 
     /**

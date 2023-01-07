@@ -2,20 +2,18 @@
 
 namespace App\Services;
 
-use App\Models\Card;
 
 class MediaService {
     
-    public static function addMedia(Card $card, $images): void
+    public static function addMedia($item, $images): void
     {
         if (!$images->isEmpty()) {
-            $images->each(function ($image, $key) use ($card) {
-                $card->addMedia($image)
+            $images->each(function ($image, $key) use ($item) {
+                $item->addMedia($image->path())
                      ->usingFileName($key . '.jpg')
                      ->toMediaCollection();
             });
         }
     }
-
 
 }

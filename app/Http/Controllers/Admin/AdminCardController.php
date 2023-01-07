@@ -9,11 +9,11 @@ use App\Models\Card;
 use App\Models\Category;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
+
 use App\Services\MediaService;
 
 class AdminCardController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('isAdmin');
@@ -62,9 +62,10 @@ class AdminCardController extends Controller
      */
     public function store(CardPostRequest $request, Card $card)
     {
-        // no need to filter file since collect is used
-        $filtered = $request->collect()
-                            ->except(['_token', 'categories', 'quantity']);
+        $safe = $request->safe();
+
+        $filtered = collect($safe)
+                  ->except(['_token', 'categories', 'quantity', 'image']);
 
         $filtered->each(         // on ->each, the order of $key $value gets flipped
             fn ($value, $key) => $card->$key = $value
@@ -75,8 +76,8 @@ class AdminCardController extends Controller
         // add inventory
         $card->inventory()->save(new Inventory(['quantity' => $request->quantity]));
 
-        // get images
-        MediaService::addMedia($card, collect($request->file('image')));
+        // add media
+        MediaService::addMedia($card, collect($safe->image));
 
         // attach categories to card
         $card->categories()->attach($request->categories);
@@ -123,8 +124,8 @@ class AdminCardController extends Controller
      */
     public function update(CardPatchRequest $request, Card $card)
     {
-        $filtered = collect($request->validated())
-                            ->except(['categories', 'quantity', 'image']);
+        $safe = $request->safe();
+        $filtered = collect($safe->except(['categories', 'quantity', 'image']));
         
         $filtered->each(         // on ->each, the order of $key $value gets flipped
             function ($value, $key) use ($card) {

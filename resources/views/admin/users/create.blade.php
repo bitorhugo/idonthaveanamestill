@@ -7,7 +7,7 @@
             <strong>ADD USER</strong>
         </div>
         <div class="card-body card-block">
-            <form id="addUserForm" action="{{route('users.store')}}" method="post" class="">
+            <form id="addUserForm" action="{{route('users.store')}}" method="post" class="" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row form-group">
@@ -61,6 +61,17 @@
                         <input class="p-l-10" type="checkbox" id="idAdmin" name="isAdmin" value="1"  class="form-check-input" {{old('isAdmin') ? 'checked = checked' : ''}}>
                     </div>
                 </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-2">
+                        <label class=" form-control-label">Profile Image</label>
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <div class="input-group">
+                            <input type="file" name="image" class="form-control">
+                        </div>
+                    </div>
+                </div>    
                 
             </form>
         </div>

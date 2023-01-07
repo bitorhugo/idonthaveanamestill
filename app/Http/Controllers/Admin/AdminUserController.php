@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Users\UserPatchRequest;
 use App\Http\Requests\Admin\Users\UserPostRequest;
 use App\Models\User;
+use App\Services\MediaService;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -45,9 +46,9 @@ class AdminUserController extends Controller
     public function create()
     {
         // use make() in order to not persist model in database
-        $arr['user'] = User::factory()->make();
-        $arr['user']->makeVisible('password');
-        return view('admin.users.create')->with($arr);
+        $user = User::factory()->make();
+        $user->makeVisible('password');
+        return view('admin.users.create')->with(['user' => $user]);
     }
 
     /**
@@ -58,9 +59,10 @@ class AdminUserController extends Controller
      */
     public function store(UserPostRequest $request, User $user)
     {
-        $filtered = collect($request->validated())
+        $safe = $request->safe();
+        $filtered = collect($safe->except('image'))
                   ->replace(
-                      ['password' => Hash::make($request['password']),
+                      ['password' => Hash::make($safe->password),
                        'remember_token' => Str::random(10),
                       ]
                   );
@@ -68,8 +70,12 @@ class AdminUserController extends Controller
         $filtered->each(
             fn ($value, $key) => $user->$key = $value
         );
-
+        
         $user->save();
+        
+        // get images
+        MediaService::addMedia($user, collect($safe->image));
+                
         return redirect()->route('users.index');
     }
 
