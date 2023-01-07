@@ -74,13 +74,13 @@ class AdminCardController extends Controller
         $card->save();
 
         // add inventory
-        $card->inventory()->save(new Inventory(['quantity' => $request->quantity]));
+        $card->inventory()->save(new Inventory(['quantity' => $safe->quantity]));
 
         // add media
-        MediaService::addMedia($card, collect($safe->image));
+        MediaService::addCardMedia($card, collect($safe->image));
 
         // attach categories to card
-        $card->categories()->attach($request->categories);
+        $card->categories()->attach($safe->categories);
         
         return redirect()->route('cards.index');
     }
@@ -135,8 +135,8 @@ class AdminCardController extends Controller
             });
 
         //update inventory
-        if(!is_null($request->quantity)){
-            $card->inventory->quantity = $request->quantity;
+        if(!is_null($safe->quantity)){
+            $card->inventory->quantity = $safe->quantity;
         }
         
         //save both card and relation

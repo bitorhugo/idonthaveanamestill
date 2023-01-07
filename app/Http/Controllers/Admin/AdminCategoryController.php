@@ -54,7 +54,8 @@ class AdminCategoryController extends Controller
      */
     public function store(CategoryPostRequest $request, Category $category)
     {
-        $filtered = collect($request->validated());
+        $safe = $request->safe();
+        $filtered = collect($safe);
 
         $filtered->each(
             function ($value, $key) use ($category){
@@ -63,7 +64,9 @@ class AdminCategoryController extends Controller
                 }
             } 
         );
+        
         $category->save();
+        
         return redirect()->route('categories.index');
     }
 
@@ -99,7 +102,8 @@ class AdminCategoryController extends Controller
      */
     public function update(CategoryPatchRequest $request, Category $category)
     {
-        $filtered = collect($request->validated());
+        $safe = $request->safe();
+        $filtered = collect($safe);
 
         $filtered->each(         // on ->each, the order of $key $value gets flipped
             function ($value, $key) use ($category){

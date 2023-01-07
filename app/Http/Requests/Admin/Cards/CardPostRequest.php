@@ -30,7 +30,7 @@ class CardPostRequest extends FormRequest
             'price' => 'bail|required|gt:0|numeric',
             'discount_amount' => 'bail|required|between:0,1|numeric',
             'quantity' => 'bail|required|gte:0|numeric',
-            'categories' => 'bail|required|array',
+            'categories.*' => 'bail|required|numeric',
             'image.*' => 'image',
         ];
     }

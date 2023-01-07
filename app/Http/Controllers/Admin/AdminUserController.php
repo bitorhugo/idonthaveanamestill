@@ -74,7 +74,7 @@ class AdminUserController extends Controller
         $user->save();
         
         // get images
-        MediaService::addMedia($user, collect($safe->image));
+        MediaService::addUserMedia($user, $safe->image);
                 
         return redirect()->route('users.index');
     }
@@ -111,7 +111,8 @@ class AdminUserController extends Controller
      */
     public function update(UserPatchRequest $request, User $user)
     {
-        $filtered = collect($request->validated());
+        $safe = $request->safe();
+        $filtered = collect($safe);
 
         $filtered->each(
             function ($value, $key) use ($user) {
@@ -119,6 +120,7 @@ class AdminUserController extends Controller
                     $user->$key = $value;
                 }
             });
+        
         $user->save();
 
         return redirect()->route('users.index');
