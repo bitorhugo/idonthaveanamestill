@@ -11,6 +11,9 @@ use Illuminate\Support\Str;
 class StripeCheckoutService
 {
 
+    /**
+     * handleCheckoutSessionCompleted
+     */
     public function handleCheckoutSessionCompleted()
     {
         Stripe::setApiKey(config('stripe.sk'));
@@ -57,12 +60,28 @@ class StripeCheckoutService
         http_response_code(200);
     }
     
-    private function sendEmail($email)
+
+    /**
+     * sendEmail
+     *
+     * @param string $email
+     *
+     * @return void
+     */
+    private function sendEmail(string $email): void
     {
         Mail::to($email)->send(new PaymentFulfilled());
     }
 
-    private function updateInv($line_items)
+
+    /**
+     * updateInv
+     *
+     * @param mixed $line_items
+     *
+     * @return void
+     */
+    private function updateInv($line_items): void
     {
         $items = collect($line_items->data);
         $items->each(function($item){

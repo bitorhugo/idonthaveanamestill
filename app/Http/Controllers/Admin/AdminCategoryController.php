@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 class AdminCategoryController extends Controller
 {
 
+    /**
+     * __construct
+     */
     public function __construct()
     {
         $this->middleware('isAdmin');

@@ -34,9 +34,9 @@ class Card extends Model implements HasMedia
 
     public function registerMediaConversions(Media $media = null): void
     {
-        $this->addMediaConversion('thumb')
+        $this ->addMediaConversion('thumb')
               ->width(225)
-             ->height(225);
+              ->height(225);
     }
     
     /**

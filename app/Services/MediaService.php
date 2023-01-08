@@ -8,6 +8,12 @@ use App\Models\User;
 class MediaService {
     
 
+    /**
+     * addCardMedia
+     *
+     * @param Card $card
+     * @param mixed $images
+     */
     public static function addCardMedia(Card $card, $images)
     {
         if (!$images->isEmpty()) {
@@ -19,6 +25,12 @@ class MediaService {
         }
     }
 
+    /**
+     * addUserMedia
+     *
+     * @param User $user
+     * @param mixed $image
+     */
     public static function addUserMedia(User $user, $image)
     {
         $user->addMedia($image->path())
