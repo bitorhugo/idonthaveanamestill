@@ -12,9 +12,9 @@
                     <table class="table table-data2">
                         <tbody>
                             @foreach($cards as $card)
-                                @if(Storage::disk('media')->exists($card->id))
+                                @if(Storage::disk('media')->exists('App/Models/Card/' . $card->id))
                                     <td>
-                                        <img src="{{asset('storage/media/'.$card->id.'/conversion/0-thumb.jpg')}}" alt='image'>
+                                        <img src="{{asset('storage/media/App/Models/Card/'.$card->id.'/conversion/0-thumb.jpg')}}" alt='image'>
                                     </td>
                                 @else
                                     <td>

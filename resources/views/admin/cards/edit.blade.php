@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header">Edit Card</div>
         <div class="card-body card-block">
-            <form id="editCardForm" action="{{route('cards.update', ['card' => $card])}}" method="post" class="">
+            <form id="editCardForm" action="{{route('cards.update', ['card' => $card])}}" method="post" class="" enctype="multipart/form-data">
                 @csrf
                 @method('patch')
                 <div class="row form-group">

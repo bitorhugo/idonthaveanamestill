@@ -6,7 +6,7 @@
             <strong>EDIT USER</strong>
         </div>
         <div class="card-body card-block">
-            <form id="addUserForm" action="{{route('users.update', ['user' => $user])}}" method="post" class="">
+            <form id="addUserForm" action="{{route('users.update', ['user' => $user])}}" method="post" class="" enctype="multipart/form-data">
                 @csrf
                 @method('patch')
                 
@@ -58,7 +58,6 @@
                     <div class="col col-md-2">
                         <label for="hf-isAdmin" class=" form-control-label">isAdmin</label>
                     </div>
-
                     <div class="col col-md-9">
                         <div class="form-check-inline form-check">
                             <label for="inline-radio1" class="form-check-label p-r-5">
@@ -69,19 +68,29 @@
                             </label>
                         </div>
                     </div>
-                    
                 </div>
+                
+                <div class="row form-group">
+                    <div class="col col-md-2">
+                        <label class=" form-control-label">Profile Picture</label>
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <div class="input-group">
+                            <input type="file" name="image" class="form-control">
+                        </div>
+                    </div>
+                </div>        
             </form>
-        </div>
+    </div>
 
-        <div class="card-footer">
-            <button form="addUserForm" type="submit" class="btn btn-primary btn-sm">
-                <i class="fa fa-dot-circle-o"></i> Submit
-            </button>
-            <button form="addUserForm" type="reset" class="btn btn-danger btn-sm">
-                <i class="fa fa-ban"></i> Reset
-            </button>
-        </div>
+    <div class="card-footer">
+        <button form="addUserForm" type="submit" class="btn btn-primary btn-sm">
+            <i class="fa fa-dot-circle-o"></i> Submit
+        </button>
+        <button form="addUserForm" type="reset" class="btn btn-danger btn-sm">
+            <i class="fa fa-ban"></i> Reset
+        </button>
+    </div>
 
     </div>
 

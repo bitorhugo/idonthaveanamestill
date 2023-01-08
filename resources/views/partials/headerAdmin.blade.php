@@ -36,12 +36,11 @@
                                     onclick="event.preventDefault();
                                 document.getElementById('show-logged-user-form').submit();">
                                 <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                    @if(Storage::disk('media')->exists(Auth::user()->id))
-                                        <img src="{{asset('storage/media/'.Auth::user()->id.'/conversion/0-thumb.jpg')}}" alt='image'>
+                                    @if(Storage::disk('media')->exists('App/Models/User/' . Auth::user()->id))
+                                        <img src="{{asset('storage/media/App/Models/User/' . Auth::user()->id . '/conversion/' . Auth::user()->id .'-thumb.jpg')}}" alt=''>
                                     @else
                                         <img src="{{asset('storage/baseImage.jpg')}}" alt='image'>
                                     @endif
-                                    <img src="" alt="image" />
                             </button>
                         </div>
                 

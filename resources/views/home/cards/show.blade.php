@@ -8,13 +8,11 @@
                 <div class="col-md-6">
                     
                     <div class="card">
-
-                        @if(Storage::disk('media')->exists($card->id))
-                            <img src="{{asset('storage/media/'.$card->id.'/conversion/0-thumb.jpg')}}" alt='image'>
+                        @if(Storage::disk('media')->exists('App/Models/Card/' . $card->id))
+                            <img src="{{asset('storage/media/App/Models/Card/'.$card->id.'/conversion/0-thumb.jpg')}}" alt='image'>
                         @else
                             <img src="{{asset('storage/baseImage.jpg')}}" alt='image'>
                         @endif
-
                         <div class="card-body">
                             <p class="card-text">{{$card->description}}</p>
                         </div>
