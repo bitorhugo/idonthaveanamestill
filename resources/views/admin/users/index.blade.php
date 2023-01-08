@@ -9,8 +9,6 @@
 @endsection
 
 
-
-
 @section('content')
     @include('partials.adminSearchBar')
     <section class="p-t-20">
@@ -22,6 +20,7 @@
                     <table class="table table-data2">
                         <thead>
                             <tr>
+                                <th>Image</th>
                                 <th>ID</th>
                                 <th>NAME</th>
                                 <th>EMAIL</th>
@@ -31,6 +30,15 @@
                         <tbody>
                             @foreach($users as $user)
                                 <tr class="tr-shadow">
+                                    <td>
+                                        <div class="avatar">
+                                            @if(Storage::disk('media')->exists('App/Models/User/' . $user->id))
+                                                <img src="{{asset('storage/media/App/Models/User/' . $user->id . '/conversion/' . $user->id . '-thumb.jpg')}}" alt='image'>
+                                            @else
+                                                <img src="{{asset('storage/baseImage.jpg')}}" alt='image'>
+                                            @endif
+                                        </div>
+                                    </td>
                                     <td>{{$user->id}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
