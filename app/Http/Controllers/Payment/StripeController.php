@@ -125,6 +125,12 @@ class StripeController extends Controller
         return $this->successCheckout();
      }
 
+    private function successCheckout()
+    {
+        \Cart::session(Auth::id())->clear();
+        return redirect()->route('home')->with('success', 'Payment was fullfilled.');
+    }
+    
     public function canceled(Request $request)
     {
         if ($request->has('search')) {
@@ -135,12 +141,6 @@ class StripeController extends Controller
             ->with('error', 'Payment Canceled.');
     }
 
-    private function successCheckout()
-    {
-        \Cart::session(Auth::id())->clear();
-        return redirect()->route('home')->with('success', 'Payment was fullfilled.');
-    }
-
-   
+    
     
 }
