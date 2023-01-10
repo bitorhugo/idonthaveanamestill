@@ -75,8 +75,10 @@ class AdminUserController extends Controller
         $user->save();
         
         // get images
-        MediaService::addUserMedia($user, $safe->image);
-                
+        if(!is_null($safe->image)) {
+            MediaService::addUserMedia($user, $safe->image);
+        }
+                            
         return redirect()->route('users.index');
     }
 
@@ -124,10 +126,10 @@ class AdminUserController extends Controller
         
         $user->save();
 
-        // update image
-        $user->clearMediaCollection();
-        MediaService::addUserMedia($user, $safe->image);
-
+        if(!is_null($safe->image)) {
+            $user->clearMediaCollection();
+            MediaService::addUserMedia($user, $safe->image);            
+        }
         return redirect()->route('users.index');
     }
 
