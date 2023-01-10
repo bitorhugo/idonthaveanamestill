@@ -5,7 +5,7 @@
 
             <form id="search-bar" action="{{route('search.index')}}">
                 <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search for products">
+                    <input type="search" name="q" class="form-control" placeholder="Search for products">
                     <input type="hidden" name="sort" id="sort" value="none">
                     
                     <select name="category" id="category" form="search-bar" style="background:#f8fafc">

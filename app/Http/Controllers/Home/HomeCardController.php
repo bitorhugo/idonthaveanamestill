@@ -30,25 +30,6 @@ class HomeCardController extends Controller
             'cards'      => $cards,
             'categories' => Category::all(),
         ]);
-
-        // if ($request->has('s')) {
-        //     switch ($request->s) {
-        //         case ('age-asc'):
-
-        //             break;
-        //         case ('age-desc'):
-        //             break;
-        //         case ('price-asc'):
-        //             break;
-        //         case ('price-desc'):
-        //             break;
-        //         case ('discount-asc'):
-        //             break;
-        //         case ('discount-desc'):
-        //             break;
-        //     }
-        // }
-
     }
 
     /**

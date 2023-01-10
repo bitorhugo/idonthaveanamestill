@@ -8,14 +8,14 @@ use Illuminate\Support\Str;
 
 class SearchService
 {
-
+    
     /**
      * handleSearchCards
-     * 
-     * @param string $input user input
-     * @param string $category category of cards to search
+     *
+     * @param mixed $input
+     * @param mixed $category
      */
-    public static function handleSearchCards(string $input, string $category)
+    public static function handleSearchCards($input, $category)
     {
         if ($category == 'none') {
             $cards = Card::where('cards.name', 'ilike', '%' . $input . '%')

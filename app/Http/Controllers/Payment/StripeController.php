@@ -68,6 +68,8 @@ class StripeController extends Controller
             'success_url'      => route('paymentSuccess'),
             'cancel_url'       => route('paymentCanceled'),
         ]);
+
+
         return redirect()->away($session->url);
     }
 
