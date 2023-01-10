@@ -30,7 +30,9 @@ class CardPatchRequest extends FormRequest
             'price'           => 'bail|gt:0|numeric|nullable',
             'discount_amount' => 'bail|between:0,1|numeric|nullable',
             'quantity'        => 'bail|gte:0|numeric|nullable',
+            'categories'      => 'array|nullable',
             'categories'      => 'bail|array|nullable',
+            'image'           => 'bail|array|nullable',
             'image.*'         => 'image'
         ];
     }

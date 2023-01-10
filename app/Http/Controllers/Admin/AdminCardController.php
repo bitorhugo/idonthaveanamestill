@@ -78,7 +78,9 @@ class AdminCardController extends Controller
         $card->inventory()->save(new Inventory(['quantity' => $safe->quantity]));
 
         // add media
-        MediaService::addCardMedia($card, collect($safe->image));
+        if(!is_null($safe->image)) {
+            MediaService::addCardMedia($card, collect($safe->image));            
+        }
 
         // attach categories to card
         $card->categories()->attach($safe->categories);
@@ -137,7 +139,7 @@ class AdminCardController extends Controller
             });
 
         // update inventory
-        if(!is_null($safe->quantity)){
+        if($safe->__isset('quantity')){
             $card->inventory->quantity = $safe->quantity;
         }
         
@@ -145,11 +147,14 @@ class AdminCardController extends Controller
         $card->push();
 
         // update categories
-        $card->categories()->sync($request->categories);
-
+        if($safe->__isset('categories')){
+            $card->categories()->sync($request->categories);
+        }
+        
         // update images
-        $card->clearMediaCollection();
-        MediaService::addCardMedia($card, collect($safe->image));
+        if ($safe->__isset('image')) {
+            MediaService::addCardMedia($card, collect($safe->image));
+        }
         
         return redirect()->route('cards.index');
     }
