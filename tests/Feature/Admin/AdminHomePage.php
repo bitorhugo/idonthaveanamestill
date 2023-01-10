@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Admin;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -48,7 +48,7 @@ class AdminHomePage extends TestCase
         )->create();
 
         $response = $this->actingAs($basic)->get('/admin');
-        $response->assertStatus(302);
+        $response->assertRedirectContains('home');
     
     }
 }

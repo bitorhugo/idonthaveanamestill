@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\HomePage;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -13,13 +13,13 @@ class HomePageTest extends TestCase
      *
      * @return void
      */
-    function test_index()
+    function test_index_request()
     {
         $response = $this->get('/');
         $response->assertStatus(200);
     }
 
-    function test_home()
+    function test_home_request()
     {
         $response = $this->get('/home');
         $response->assertStatus(200);
