@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Models\Card;
 use App\Models\Category;
+use App\Services\SearchService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 
 class HomeCardController extends Controller
 {
@@ -17,30 +18,37 @@ class HomeCardController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->input('c') == 'none') {
-            $cards = Card::search($request->input('q'))
-                   ->paginate(5)
-                   ->appends(['c' => 'none']);
-            return view('home.cards.index')->with([
-                'cards'      => $cards,
-                'categories' => Category::all(),
-            ]);
+        if ($request->sort == 'none') {
+            $cards = SearchService::handleSearchCards($request->q, $request->category, $request->sort);
+        } else {
+            $cards = SearchService::handleOrderedSearchCards($request->q, $request->category, $request->sort);
         }
-        
-        $category = Category::find($request->input('c'));
-        $cards = Card::
-               join('card__categories', 'cards.id', '=', 'card__categories.card_id')
-               ->join('categories', 'categories.id', '=', 'card__categories.category_id')
-               ->where('card__categories.category_id', '=', $category->id)
-               ->where('cards.name', 'ilike', '%' . $request->input('q') . '%')
-               ->select('cards.*')
-               ->get()
-               ->paginate();
-
         return view('home.cards.index')->with([
-            'cards' => $cards,
+            'q'          => $request->q,
+            'sort'       => $request->sort,
+            'category'   => $request->category,
+            'cards'      => $cards,
             'categories' => Category::all(),
         ]);
+
+        // if ($request->has('s')) {
+        //     switch ($request->s) {
+        //         case ('age-asc'):
+
+        //             break;
+        //         case ('age-desc'):
+        //             break;
+        //         case ('price-asc'):
+        //             break;
+        //         case ('price-desc'):
+        //             break;
+        //         case ('discount-asc'):
+        //             break;
+        //         case ('discount-desc'):
+        //             break;
+        //     }
+        // }
+
     }
 
     /**

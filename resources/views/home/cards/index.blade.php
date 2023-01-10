@@ -2,7 +2,7 @@
 
 @section('content')
     @include('partials.searchbar')
-    @include('partials.datatable')
+    @include('partials.filters')
 
     <section class="p-t-20">
         <div class="container">
@@ -43,7 +43,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{$cards->links('pagination::bootstrap-4')}}
+                    {{$cards->appends(['q' => $q, 'category' => $category, 'sort' => $sort])->links('pagination::bootstrap-4')}}
                 </div>
             </div>
         </div>

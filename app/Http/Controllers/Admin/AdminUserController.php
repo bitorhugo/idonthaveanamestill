@@ -26,6 +26,7 @@ class AdminUserController extends Controller
 
     public function index(Request $request)
     {
+
         if($request->has('q')){
             $users = User::search($request->input('q'))
                    ->paginate(15);
