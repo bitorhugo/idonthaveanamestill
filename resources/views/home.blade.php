@@ -7,4 +7,4 @@
     @include('partials.recentCards')
     @include('partials.promoCatXCards')
     @include('partials.lowStockDiscountCards')
-    @endsection
+@endsection
