@@ -56,6 +56,34 @@ class AdminCardsTest extends TestCase
     
     }
 
+    public function test_search_card()
+    {
+        $admin = User::factory()->state(
+            [
+                'name'     => 'hugo',
+                'email'    => 'admin@email.com',
+                'password' => 'secret',
+                'isAdmin' => true,
+            ]
+        )->create();
+
+        $card =  Card::factory()->state(
+            [
+                'name'     => 'new',
+                'description' => 'd',
+                'price' => 100,
+                'discount_amount' => 0.2,
+            ]
+        )->create();
+
+        $response = $this->actingAs($admin)->call('GET', '/admin/cards', [
+            'q' => $card->name
+        ]);
+        $response->assertViewIs('admin.cards.index');
+        $response->assertStatus(200);
+        
+    }
+
     public function test_create_card()
     {
         $admin = User::factory()->state(

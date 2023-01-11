@@ -31,6 +31,7 @@ class AdminUsersTest extends TestCase
         )->create();
 
         $response = $this->actingAs($admin)->get('/admin/users');
+        $response->assertViewIs('admin.users.index');
         $response->assertStatus(200);
     
     }
@@ -52,6 +53,23 @@ class AdminUsersTest extends TestCase
         $response = $this->actingAs($basic)->get('/admin/users');
         $response->assertRedirectContains('home');
     
+    }
+
+    public function test_search_user()
+    {
+        $admin = User::factory()->state(
+            [
+                'name'     => 'hugo',
+                'email'    => 'admin@email.com',
+                'password' => 'secret',
+                'isAdmin' => true,
+            ]
+        )->create();
+
+        $response = $this->actingAs($admin)->call('GET', '/admin/users', [
+            'q' => $admin->name
+        ]);
+        $response->assertStatus(200);
     }
 
     public function test_show_user()

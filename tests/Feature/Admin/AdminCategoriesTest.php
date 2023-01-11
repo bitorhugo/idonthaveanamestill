@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class AdminCategories extends TestCase
+class AdminCategoriesTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
     
@@ -50,6 +50,32 @@ class AdminCategories extends TestCase
         $response = $this->actingAs($basic)->get('/admin/categories');
         $response->assertRedirectContains('home');
     
+    }
+
+    public function test_search_categories()
+    {
+        $admin = User::factory()->state(
+            [
+                'name'     => 'hugo',
+                'email'    => 'admin@email.com',
+                'password' => 'secret',
+                'isAdmin' => true,
+            ]
+        )->create();
+
+        $cat =  Category::factory()->state(
+            [
+                'name'     => 'new',
+                'description' => 'd',
+            ]
+        )->create();
+
+        $response = $this->actingAs($admin)->call('GET', '/admin/categories', [
+            'q' => $cat->name
+        ]);
+        $response->assertViewIs('admin.categories.index');
+        $response->assertStatus(200);
+        
     }
 
     public function test_show_category()
