@@ -130,7 +130,7 @@ class SearchService
                         ->where('card__categories.category_id', '=', $category->id)
                         ->where('cards.name', 'ilike', '%' . $input . '%')
                         ->select('cards.*')
-                        ->orderBy('age', 'asc')
+                        ->orderBy('created_at', 'asc')
                         ->get()
                         ->paginate();
                     break;
@@ -166,7 +166,7 @@ class SearchService
                         ->where('card__categories.category_id', '=', $category->id)
                         ->where('cards.name', 'ilike', '%' . $input . '%')
                         ->select('cards.*')
-                        ->orderBy('age', 'desc')
+                        ->orderBy('created_at', 'desc')
                         ->get()
                         ->paginate();
                     break;
