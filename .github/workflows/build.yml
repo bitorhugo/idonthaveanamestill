@@ -16,12 +16,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          
-    tests:
-      name: PHPUnit
-      runs-on: ubuntu-latest
-      needs: sonarcloud
-      steps:
+  tests:
+    name: PHPUnit
+    runs-on: ubuntu-latest
+    needs: sonarcloud
+    steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
