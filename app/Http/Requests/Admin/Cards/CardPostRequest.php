@@ -34,7 +34,7 @@ class CardPostRequest extends FormRequest
             'categories'      => 'bail|required|array',
             'categories.*'    => 'bail|required|numeric',
             'image'           => 'bail|array|nullable',
-            'image.*'         => 'image|nullable',
+            'image.*'         => 'bail|image|nullable',
         ];
     }
 }

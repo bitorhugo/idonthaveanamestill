@@ -6,10 +6,7 @@ use App\Models\Inventory;
 
 class InventoryService {
 
-    private function __construct()
-    {
-        
-    }
+    private function __construct(){}
     
     public static function update(Inventory $inventory, $quantity): void
     {

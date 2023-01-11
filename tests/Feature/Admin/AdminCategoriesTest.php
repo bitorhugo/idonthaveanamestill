@@ -2,13 +2,13 @@
 
 namespace Tests\Feature\Admin;
 
+use App\Models\Category;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class AdminUsers extends TestCase
+class AdminCategories extends TestCase
 {
     use RefreshDatabase, WithFaker;
     
@@ -17,7 +17,7 @@ class AdminUsers extends TestCase
      *
      * @return void
      */
-    public function test_adminUsers_as_admin()
+    public function test_adminCategories_as_admin()
     {
         $admin = User::factory()->state(
             [
@@ -28,7 +28,7 @@ class AdminUsers extends TestCase
             ]
         )->create();
 
-        $response = $this->actingAs($admin)->get('/admin/users');
+        $response = $this->actingAs($admin)->get('/admin/categories');
         $response->assertStatus(200);
     
     }
@@ -36,7 +36,7 @@ class AdminUsers extends TestCase
     /**
      * test_adminHomePage_as_not_admin
      */
-    public function test_adminUsers_as_not_admin()
+    public function test_adminCategories_as_not_admin()
     {
         $basic = User::factory()->state(
             [
@@ -47,12 +47,36 @@ class AdminUsers extends TestCase
             ]
         )->create();
 
-        $response = $this->actingAs($basic)->get('/admin/users');
+        $response = $this->actingAs($basic)->get('/admin/categories');
         $response->assertRedirectContains('home');
     
     }
 
-    public function test_create_user()
+    public function test_show_category()
+    {
+        $admin = User::factory()->state(
+            [
+                'name'     => 'hugo',
+                'email'    => 'admin@email.com',
+                'password' => 'secret',
+                'isAdmin' => true,
+            ]
+        )->create();
+
+        $cat =  Category::factory()->state(
+            [
+                'name'     => 'new',
+                'description' => 'd',
+            ]
+        )->create();
+
+        $response = $this->actingAs($admin)
+             ->get('admin/categories/' . $cat->id);
+        
+        $response->assertStatus(500);
+    }
+
+    public function test_create_category()
     {
         $admin = User::factory()->state(
             [
@@ -64,38 +88,45 @@ class AdminUsers extends TestCase
         )->create();
 
         $response = $this->actingAs($admin)
-                         ->get('/admin/users/create');
+                         ->get('/admin/cards/create');
+        $response->assertSee('ADD CARD');
         $response->assertStatus(200);
+        
+    }
 
-        $new =  User::factory()->state(
+    public function test_store_category()
+    {
+        $admin = User::factory()->state(
+            [
+                'name'     => 'hugo',
+                'email'    => 'admin@email.com',
+                'password' => 'secret',
+                'isAdmin' => true,
+            ]
+        )->create();
+
+        $new =  Category::factory()->state(
             [
                 'name'     => 'new',
-                'email'    => 'added@email.com',
-                'password' => 'password',
-                'isAdmin' => false,
+                'description' => 'd',
             ]
         )->make();
 
         $response = $this->actingAs($admin)
-            ->post('admin/users', [
+            ->post('admin/categories', [
                 'name'     => $new->name,
-                'email'    => $new->email,
-                'password' => $new->password,
-                'password_confirmation' => 'password',
-                'isAdmin' => $new->isAdmin,
-                'image' => null
+                'description' => $new->description
             ]);
-        $response->assertRedirectContains('/admin/users');
 
-        $this->assertDatabaseHas('users', [
-            'name'     => 'new',
-            'email'    => 'added@email.com',
-            'isAdmin' => false,
+        $response->assertRedirect();
+
+        $this->assertDatabaseHas('categories', [
+            'name'     => $new->name,
+            'description' => $new->description
         ]);
-        
     }
 
-    public function test_store_user()
+    public function test_edit_category()
     {
         $admin = User::factory()->state(
             [
@@ -106,54 +137,23 @@ class AdminUsers extends TestCase
             ]
         )->create();
 
-        $new =  User::factory()->state(
+        $cat =  Category::factory()->state(
             [
                 'name'     => 'new',
-                'email'    => 'added@email.com',
-                'password' => 'password',
-                'isAdmin' => false,
+                'description' => 'd',
             ]
-        )->make();
-
-        $response = $this->actingAs($admin)
-            ->post('admin/users', [
-                'name'     => $new->name,
-                'email'    => $new->email,
-                'password' => $new->password,
-                'password_confirmation' => 'password',
-                'isAdmin' => $new->isAdmin,
-                'image' => null
-            ]);
+        )->create();        
         
-        $response->assertRedirectContains('/admin/users');
-
-        $this->assertDatabaseHas('users', [
-            'name'     => 'new',
-            'email'    => 'added@email.com',
-            'isAdmin' => false,
-        ]);        
-    }
-
-    public function test_edit_user()
-    {
-        $admin = User::factory()->state(
-            [
-                'name'     => 'hugo',
-                'email'    => 'admin@email.com',
-                'password' => 'secret',
-                'isAdmin' => true,
-            ]
-        )->create();
-
         $response = $this->actingAs($admin)
-                         ->get('/admin/users/' . $admin->id . '/edit');
+                         ->get('/admin/categories/' . $cat->id . '/edit');
+        
         $response->assertStatus(200);
     }
 
     public function test_update_user()
     {
         $admin = User::factory()->state(
-            [
+           [
                 'name'     => 'foo',
                 'email'    => 'foo@email.com',
                 'password' => 'password',
@@ -161,21 +161,26 @@ class AdminUsers extends TestCase
             ]
         )->create();
 
+        $cat = Category::factory()->state(
+            [
+                'name'     => 'foo',
+                'description' => 'd',
+            ]
+        )->create();        
+
         $name = 'bar';
 
         $this->actingAs($admin)
-            ->patch('admin/users/' . $admin->id,  [
+            ->patch('admin/categories/' . $cat->id,  [
                 'name' =>  $name,
             ]);
 
-        $this->assertDatabaseHas('users', [
+        $this->assertDatabaseHas('categories', [
             'name' => 'bar',
-            'email' => 'foo@email.com'
         ]);
 
-        $this->assertDatabaseMissing('users', [
+        $this->assertDatabaseMissing('categories', [
             'name' => 'foo',
-            'email' => 'foo@email.com'
         ]);
     }
 
@@ -190,12 +195,21 @@ class AdminUsers extends TestCase
             ]
         )->create();
 
+        $cat = Category::factory()->state(
+            [
+                'name'     => 'foo',
+                'description' => 'd',
+            ]
+        )->create();        
+
         $response = $this->actingAs($admin)
-                         ->delete('admin/users/' . $admin->id);
-        
-        $response->assertRedirect('admin/users');
+            ->delete('admin/categories/' . $cat->id);
+
+        $this->assertDatabaseMissing('categories', [
+            'name'     => 'foo',
+        ]);
+
+        $response->assertRedirect('admin/categories');
     }    
-
-
 
 }

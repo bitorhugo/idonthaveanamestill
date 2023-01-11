@@ -38,20 +38,6 @@ class Card extends Model implements HasMedia
               ->width(225)
               ->height(225);
     }
-    
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array
-     */
-    public function toSearchableArray()
-    {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'description' => $this->description,
-        ];
-    }
 
     public function categories()
     {

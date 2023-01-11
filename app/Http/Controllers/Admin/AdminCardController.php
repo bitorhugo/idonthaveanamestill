@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Cards\CardPostRequest;
 use App\Models\Card;
 use App\Models\Category;
 use App\Models\Inventory;
+use App\Services\InventoryService;
 use Illuminate\Http\Request;
 
 use App\Services\MediaService;
@@ -77,8 +78,8 @@ class AdminCardController extends Controller
         // add inventory
         $card->inventory()->save(new Inventory(['quantity' => $safe->quantity]));
 
-        // add media
-        if(!is_null($safe->image)) {
+        // add media if present
+        if($safe->__isset('image')) {
             MediaService::addCardMedia($card, collect($safe->image));            
         }
 
@@ -140,7 +141,7 @@ class AdminCardController extends Controller
 
         // update inventory
         if($safe->__isset('quantity')){
-            $card->inventory->quantity = $safe->quantity;
+            InventoryService::update($card->inventory, $safe->quantity);
         }
         
         // save both card and relation
