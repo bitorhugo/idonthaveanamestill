@@ -35,14 +35,15 @@ jobs:
                 
     steps:
 
-      - name: Start postgresql service
-        run: |
-          sudo systemctl start postgresql.service
-          sudo -u postgres createdb seeknfindtest --owner=bitor 
-          PGPASSWORD=secret
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, dom, fileinfo, pgsql
+          coverage: xdebug
 
-      - name: Create database
-        run: sudo systemctl status postgresql
+      - name: Start Postgres Database
+        run: sudo systemctl start postgresql
         
       - uses: actions/checkout@v2
         with:
