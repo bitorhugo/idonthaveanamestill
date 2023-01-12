@@ -25,7 +25,6 @@ jobs:
         image: postgres:latest
         env:
           POSTGRES_USER: bitor
-          POSTGRES_PASSWORD: secret
           POSTGRES_DB: seeknfindtest
         ports:
           - 5432/tcp
@@ -53,7 +52,6 @@ jobs:
           DB_HOST: 127.0.0.1
           DB_DATABASE: seeknfindtest
           DB_USERNAME: bitor
-          DB_PASSWORD: secret
           DB_PORT: 5432
       - name: Run tests
         run: php artisan test
