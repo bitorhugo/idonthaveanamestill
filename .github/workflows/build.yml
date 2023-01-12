@@ -49,7 +49,7 @@ jobs:
       - name: Run Migrations
         run: php artisan migrate --force
         env:
-          DB_PORT: ${{ job.services.postgres.ports[5432] }}
+          DB_PORT: 5432
       - name: Run tests
         run: php artisan test
   
