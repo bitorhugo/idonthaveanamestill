@@ -23,6 +23,7 @@ class HomeCardController extends Controller
         } else {
             $cards = SearchService::handleOrderedSearchCards($request->q, $request->category, $request->sort);
         }
+
         return view('home.cards.index')->with([
             'q'          => $request->q,
             'sort'       => $request->sort,

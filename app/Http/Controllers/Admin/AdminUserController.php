@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Services\MediaService;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class AdminUserController extends Controller
@@ -26,7 +27,6 @@ class AdminUserController extends Controller
 
     public function index(Request $request)
     {
-
         if($request->has('q')){
             $users = User::search($request->input('q'))
                    ->paginate(15);
@@ -34,9 +34,16 @@ class AdminUserController extends Controller
                 'users' => $users,
             ]);
         }
+
+        // cache paginated results
+        $users = Cache::remember('users-page-' . request('page', 1), now()->addDay(), function() {
+            return User::paginate();
+        });
+        
         return view('admin.users.index')->with([
-            'users' => User::paginate(),
+            'users' => $users,
         ]);
+        
     }
 
     /**
