@@ -78,7 +78,7 @@ jobs:
         run: php artisan config:clear
 
       - name: Dir Permission
-        run: chmod -R 777 storage bootstrap/cache public/storage
+        run: chmod -R 777 storage/ bootstrap/cache public/
 
       - name: Run Migration
         run: php artisan migrate -v
