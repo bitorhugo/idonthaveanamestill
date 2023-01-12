@@ -36,8 +36,8 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 3
         
     steps:
-      # - name: Start postgresql service
-      #   run: sudo systemctl start postgresql.service
+      - name: Start postgresql service
+        run: systemctl start postgresql.service
         
       - uses: actions/checkout@v2
         with:
