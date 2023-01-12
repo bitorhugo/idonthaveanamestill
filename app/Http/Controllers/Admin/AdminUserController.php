@@ -14,17 +14,20 @@ use Illuminate\Support\Str;
 
 class AdminUserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
+    /**
+     * __construct
+     */
     public function __construct()
     {
         $this->middleware('isAdmin');
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
         if($request->has('q')){
@@ -36,9 +39,11 @@ class AdminUserController extends Controller
         }
 
         // cache paginated results
-        $users = Cache::remember('users-page-' . $request->page ?? 1, now()->addDay(), function() {
-            return User::paginate();
-        });
+        $users = Cache::remember('users-page-' . ($request->page ?? 1),
+                                 now()->addDay(),
+                                 function() {
+                                     return User::paginate();
+                                 });
         
         return view('admin.users.index')->with([
             'users' => $users,
@@ -59,10 +64,12 @@ class AdminUserController extends Controller
         return view('admin.users.create')->with(['user' => $user]);
     }
 
+    
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param UserPostRequest $request
+     * @param User $user
      * @return \Illuminate\Http\Response
      */
     public function store(UserPostRequest $request, User $user)
@@ -115,8 +122,8 @@ class AdminUserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param UserPatchRequest $request
+     * @param User $user
      * @return \Illuminate\Http\Response
      */
     public function update(UserPatchRequest $request, User $user)

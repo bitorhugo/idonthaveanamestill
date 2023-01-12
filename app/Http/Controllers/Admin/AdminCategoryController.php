@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\Categories\CategoryPatchRequest;
 use App\Http\Requests\Admin\Categories\CategoryPostRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class AdminCategoryController extends Controller
 {
@@ -33,8 +34,15 @@ class AdminCategoryController extends Controller
                 'categories' => $categories,
             ]);
         }
+
+        $categories = Cache::remember('category-page-' . ($request->page ?? 1),
+                                      now()->addDay(),
+                                      function () {
+                                          return Category::paginate();
+                                      });
+        
         return view('admin.categories.index')->with([
-            'categories' => Category::paginate(),
+            'categories' => $categories,
         ]);
     }
 
@@ -85,7 +93,7 @@ class AdminCategoryController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the sppecified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

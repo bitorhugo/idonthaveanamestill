@@ -12,6 +12,7 @@ use App\Services\InventoryService;
 use Illuminate\Http\Request;
 
 use App\Services\MediaService;
+use Illuminate\Support\Facades\Cache;
 
 class AdminCardController extends Controller
 {
@@ -35,8 +36,15 @@ class AdminCardController extends Controller
                 'cards' => $cards,
             ]);
         }
+        
+        $cards = Cache::remember('cards-page-' . ($request->page ?? 1),
+                                 now()->addDay(),
+                                 function() {
+                                     return Card::paginate();
+                                 });
+        
         return view('admin.cards.index')->with([
-            'cards' => Card::paginate(),
+            'cards' => $cards,
         ]);
     }
 

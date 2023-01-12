@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Card;
+use App\Models\Category;
 use App\Models\User;
+use App\Observers\CardObserver;
 use App\Observers\UserObserver;
+use App\Observers\CategoryObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -30,5 +34,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         User::observe(UserObserver::class);
+        Card::observe(CardObserver::class);
+        Category::observe(CategoryObserver::class);
     }
 }

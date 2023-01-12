@@ -2,73 +2,74 @@
 
 namespace App\Observers;
 
-use App\Models\User;
+use App\Models\Card;
 use Illuminate\Support\Facades\Cache;
 
-class UserObserver
+class CardObserver
 {
     /**
-     * Handle the User "created" event.
+     * Handle the Card "created" event.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Card  $card
      * @return void
      */
-    public function created(User $user)
+    public function created(Card $card)
     {
         $this->clearCache();
     }
 
     /**
-     * Handle the User "updated" event.
+     * Handle the Card "updated" event.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Card  $card
      * @return void
      */
-    public function updated(User $user)
+    public function updated(Card $card)
     {
         $this->clearCache();
     }
 
     /**
-     * Handle the User "deleted" event.
+     * Handle the Card "deleted" event.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Card  $card
      * @return void
      */
-    public function deleted(User $user)
+    public function deleted(Card $card)
     {
         $this->clearCache();
     }
 
     /**
-     * Handle the User "restored" event.
+     * Handle the Card "restored" event.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Card  $card
      * @return void
      */
-    public function restored(User $user)
+    public function restored(Card $card)
     {
         $this->clearCache();
     }
 
     /**
-     * Handle the User "force deleted" event.
+     * Handle the Card "force deleted" event.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Card  $card
      * @return void
      */
-    public function forceDeleted(User $user)
+    public function forceDeleted(Card $card)
     {
         $this->clearCache();
     }
 
     private function clearCache(){
         collect(range(1, 100))->each(function ($i) {
-            $key = 'users-page-' . $i;
+            $key = 'cards-page-' . $i;
             if(Cache::has($key)) {
                 Cache::forget($key);
             }
             else return false;
         });
-    }
+    }    
+
 }
