@@ -35,7 +35,7 @@ jobs:
         
     steps:
       - name: Start postgresql service
-        run: systemctl start postgresql.service
+        run: sudo systemctl start postgresql.service
         
       - uses: actions/checkout@v2
         with:
