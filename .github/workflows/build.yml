@@ -47,7 +47,7 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
       - name: Run Migrations
-        run: php artisan migrate -v
+        run: php artisan migrate --force
         env:
           DB_PORT: ${{ job.services.postgres.ports[5432] }}
       - name: Run tests
