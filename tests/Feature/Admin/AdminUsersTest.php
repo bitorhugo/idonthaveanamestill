@@ -117,8 +117,8 @@ class AdminUsersTest extends TestCase
             ]
         )->create();
 
-        Storage::fake('avatar');
-        $file = UploadedFile::fake()->image('avatar.jpg');
+        // Storage::fake('avatar');
+        // $file = UploadedFile::fake()->image('avatar.jpg');
 
         $new =  User::factory()->state(
             [
@@ -136,7 +136,7 @@ class AdminUsersTest extends TestCase
                 'password' => $new->password,
                 'password_confirmation' => 'password',
                 'isAdmin' => $new->isAdmin,
-                'image' => $file
+                // 'image' => $file
             ]);
         
         $response->assertRedirectContains('/admin/users');

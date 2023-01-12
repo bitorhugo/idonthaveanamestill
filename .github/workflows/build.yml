@@ -1,8 +1,25 @@
-# GitHub Action for Laravel with PostgreSQL and Redis
-name: Testing Laravel with PostgreSQL
-on: [push, pull_request]
+# GitHub Action for Laravel with PostgreSQL
+name: seekNfind Workflow
+on:
+  push:
+    branches-ignore:
+      - main
 jobs:
-  laravel:
+
+  # sonarcloud:
+  #   name: SonarCloud
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+  #     - name: SonarCloud Scan
+  #       uses: SonarSource/sonarcloud-github-action@master
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  
+  tests:
     name: Laravel (PHP ${{ matrix.php-versions }})
     runs-on: ubuntu-latest
     env:
@@ -12,7 +29,6 @@ jobs:
       DB_USERNAME: bitor
       DB_DATABASE: seeknfindtest
 
-    # Docs: https://docs.github.com/en/actions/using-containerized-services
     services:
       postgres:
         image: postgres:latest
@@ -28,7 +44,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # Docs: https://github.com/shivammathur/setup-php
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -71,6 +86,6 @@ jobs:
           DB_PORT: ${{ job.services.postgres.ports[5432] }}
 
       - name: Test with phpunit
-        run: vendor/bin/phpunit --coverage-text
+        run: vendor/bin/phpunit
         env:
           DB_PORT: ${{ job.services.postgres.ports[5432] }}

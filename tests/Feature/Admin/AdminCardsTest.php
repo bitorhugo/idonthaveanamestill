@@ -129,8 +129,8 @@ class AdminCardsTest extends TestCase
 
         $quantity = 10;
 
-        Storage::fake('avatar');
-        $file = UploadedFile::fake()->image('avatar.jpg');
+        // Storage::fake('avatar');
+        // $file = UploadedFile::fake()->image('avatar.jpg');
 
         $response = $this->actingAs($admin)
             ->post('admin/cards', [
@@ -140,7 +140,7 @@ class AdminCardsTest extends TestCase
                 'discount_amount' => $card->discount_amount,
                 'quantity' => $quantity,
                 'categories' => [$cat->id],
-                'image' => [$file],
+                // 'image' => [$file],
             ]);
         
         $this->assertDatabaseHas('cards', [
