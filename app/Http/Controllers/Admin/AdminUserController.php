@@ -36,7 +36,7 @@ class AdminUserController extends Controller
         }
 
         // cache paginated results
-        $users = Cache::remember('users-page-' . request('page', 1), now()->addDay(), function() {
+        $users = Cache::remember('users-page-' . $request->page ?? 1, now()->addDay(), function() {
             return User::paginate();
         });
         
@@ -82,7 +82,7 @@ class AdminUserController extends Controller
         $user->save();
         
         // get images
-        if(!is_null($safe->image)) {
+        if($safe->__isset('image')) {
             MediaService::addUserMedia($user, $safe->image);
         }
                             
@@ -133,7 +133,7 @@ class AdminUserController extends Controller
         
         $user->save();
 
-        if(!is_null($safe->image)) {
+        if($safe->__isset('image')) {
             $user->clearMediaCollection();
             MediaService::addUserMedia($user, $safe->image);            
         }
