@@ -23,3 +23,14 @@
     </div>
 </div>
 
+<!-- <script type="text/javascript">
+
+     $('input.search').typeahead({
+     source:  function (str, process) 
+     {
+     return $.get(path, { str: str }, function (data) {
+     return process(data);
+     });
+     }
+     });
+     </script>  -->

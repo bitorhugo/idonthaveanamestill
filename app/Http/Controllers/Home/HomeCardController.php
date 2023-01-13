@@ -91,18 +91,5 @@ class HomeCardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id){}
-
-    /**
-     * autoComplete
-     * Autocompletion for search bar
-     * @param Request $request
-     */
-    public function autoComplete(Request $request)
-    {
-        $data = Card::select("name")
-        ->where("name", "LIKE", "%{$request->str}%")
-        ->get('query');
-        return response()->json($data);
-    }
     
 }

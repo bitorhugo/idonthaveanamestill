@@ -30,15 +30,15 @@
     </div>
 </div>
 
-<script type="text/javascript">
- var path = "{{ route('searchAutoComplete') }}";
- $('input.search').typeahead({
+<!-- <script type="text/javascript">
+
+     $('input.search').typeahead({
      source:  function (str, process) 
      {
-         return $.get(path, { str: str }, function (data) {
-             return process(data);
-         });
+     return $.get(path, { str: str }, function (data) {
+     return process(data);
+     });
      }
- });
-</script> 
+     });
+     </script>  -->
 
