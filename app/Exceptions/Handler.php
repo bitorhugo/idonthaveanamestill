@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use ErrorException;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -40,8 +41,12 @@ class Handler extends ExceptionHandler
         $this->emptyCartException();
         $this->sessionExpiredException();
         $this->methodNotAllowedException();
+        $this->errorException();
     }
 
+    /**
+     * sessionExpiredException
+     */
     private function sessionExpiredException()
     {
         $this->renderable(function (\Exception $e) {
@@ -51,6 +56,9 @@ class Handler extends ExceptionHandler
         });        
     }
 
+    /**
+     * methodNotAllowedException
+     */
     private function methodNotAllowedException()
     {
         $this->renderable(function (MethodNotAllowedHttpException $e) {
@@ -59,11 +67,25 @@ class Handler extends ExceptionHandler
         });
     }
 
+    /**
+     * emptyCartException
+     */
     private function emptyCartException()
     {
         $this->renderable(function (EmptyCartException $e) {
             error_log($e);
             return redirect()->route('cart.index')->with('error', 'Empty Cart.');
+        });
+    }
+
+    /**
+     * errorException
+     */
+    private function errorException()
+    {
+        $this->renderable(function (ErrorException $e) {
+            error_log($e);
+            return redirect()->route('home');
         });
     }
 

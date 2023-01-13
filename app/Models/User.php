@@ -43,11 +43,18 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         ];
     }
 
+    /**
+     * registerMediaConversions
+     * Registers media conversions for user avatar
+     * @param Media $media
+     *
+     * @return void
+     */
     public function registerMediaConversions(Media $media = null): void
     {
-        $this->addMediaConversion('thumb')
-             ->width(200)
-            ->height(200);
+        $this ->addMediaConversion('thumb')
+              ->width(200)
+              ->height(200);
     }
 
     /**
@@ -57,10 +64,10 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
      */
     protected $hidden = [
         'password',
-       'remember_token',
-       'created_at',
-       'updated_at',
-       'email_verified_at'
+        'remember_token',
+        'created_at',
+        'updated_at',
+        'email_verified_at'
     ];
 
     /**

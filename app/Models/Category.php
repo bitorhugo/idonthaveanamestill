@@ -43,6 +43,10 @@ class Category extends Model
         'updated_at',
     ];
 
+    /**
+     * cards
+     * relation category -> cards
+     */
     public function cards()
     {
         return $this->belongsToMany(Card::class, 'card__categories')

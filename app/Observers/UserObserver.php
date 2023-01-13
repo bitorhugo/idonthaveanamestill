@@ -62,8 +62,13 @@ class UserObserver
         $this->clearCache();
     }
 
+    /**
+     * clearCache
+     * clears cache for users
+     */
     private function clearCache(){
-        collect(range(1, 100))->each(function ($i) {
+        $pages = 100;
+        collect(range(1, $pages))->each(function ($i) {
             $key = 'users-page-' . $i;
             if(Cache::has($key)) {
                 Cache::forget($key);

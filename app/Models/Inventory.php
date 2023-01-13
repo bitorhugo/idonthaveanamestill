@@ -9,8 +9,7 @@ class Inventory extends Model
 {
     use HasFactory;
 
-
-        /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -20,6 +19,10 @@ class Inventory extends Model
         'card_id',
     ];
     
+    /**
+     * cards
+     * relation inventory -> card
+     */
     public function cards()
     {
         return $this->belongsTo(Card::class);

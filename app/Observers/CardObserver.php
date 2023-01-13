@@ -62,10 +62,16 @@ class CardObserver
         $this->clearCache();
     }
 
-    private function clearCache(){
-        collect(range(1, 100))->each(function ($i) {
+    /**
+     * clearCache
+     * Clears cache for card pagination
+     */
+    private function clearCache()
+    {
+        $pages = 100;
+        collect(range(1, $pages))->each(function ($i) {
             $key = 'cards-page-' . $i;
-            if(Cache::has($key)) {
+            if (Cache::has($key)) {
                 Cache::forget($key);
             }
         });

@@ -32,7 +32,7 @@ class ServeApp extends Command
 
     /**
      * Execute the console command.
-     *
+     * Serve app and stripe services
      * @return int
      */
     public function handle()

@@ -18,6 +18,10 @@ class StripeController extends Controller
         $this->middleware(['verified']);            
     }
     
+    /**
+     * checkout
+     * Prepares checkout form with cart items for stripe API
+     */
     public function checkout()
     {
         Stripe\Stripe::setApiKey(config('stripe.sk'));
@@ -76,6 +80,11 @@ class StripeController extends Controller
         return redirect()->away($session->url);
     }
 
+    /**
+     * payNow
+     * Prepares checkout form for one item for stripe API 
+     * @param Request $request
+     */
     public function payNow(Request $request)
     {
         \Stripe\Stripe::setApiKey(config('stripe.sk'));
@@ -119,6 +128,11 @@ class StripeController extends Controller
         return redirect()->away($session->url);
     }
 
+    /**
+     * success
+     * Handler for success response via stripe
+     * @param Request $request
+     */
     public function success(Request $request)
     {
         if ($request->has('item_id')) {
@@ -128,12 +142,21 @@ class StripeController extends Controller
         return $this->successCheckout();
      }
 
+    /**
+     * successCheckout
+     * Handler for success response via stripe if checkout was made via Cart
+     */
     private function successCheckout()
     {
         \Cart::session(Auth::id())->clear();
         return redirect()->route('home')->with('success', 'Payment was fullfilled.');
     }
     
+    /**
+     * canceled
+     * Handler for canceled response via stripe
+     * @param Request $request
+     */
     public function canceled(Request $request)
     {
         if ($request->has('search')) {
@@ -143,7 +166,5 @@ class StripeController extends Controller
         return redirect()->route('cart.index')
             ->with('error', 'Payment Canceled.');
     }
-
-    
     
 }

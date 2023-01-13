@@ -32,6 +32,13 @@ class Card extends Model implements HasMedia
      */
     protected $hidden = ['created_at', 'updated_at'];
 
+    /**
+     * registerMediaConversions
+     * registers media conversions for cards
+     * @param Media $media
+     *
+     * @return void
+     */
     public function registerMediaConversions(Media $media = null): void
     {
         $this ->addMediaConversion('thumb')
@@ -39,14 +46,22 @@ class Card extends Model implements HasMedia
               ->height(225);
     }
 
+    /**
+     * categories
+     * relation card -> categories
+     * intermidiate table used
+     */
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'card__categories')
                     ->withTimestamps()
                     ->as('categories');
-
     }
 
+    /**
+     * inventory
+     * relation card -> inventory
+     */
     public function inventory()
     {
         return $this->hasOne(Inventory::class)->withDefault();
