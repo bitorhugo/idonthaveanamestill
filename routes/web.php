@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Home\HomeCardController;
 use App\Http\Controllers\Cart\CartController;
+use App\Http\Controllers\Helper\AutoCompleteController;
 use App\Http\Controllers\Payment\StripeController;
 use App\Services\StripeCheckoutService;
 
@@ -56,5 +57,8 @@ Route::resource('/cart', CartController::class)->except(['create', 'show', 'edit
 // Listens for stripe checkout session completed events
 Route::post('/stripe/webhook', [StripeCheckoutService::class, 'handleCheckoutSessionCompleted']);
 
-// AutoComplete search bar
-Route::get('/searchAutoComplete', [HomeCardController::class, 'autoComplete'])->name('searchAutoComplete');
+// Route::controller(AutoCompleteController::class)->group(function () {
+//     Route::get('/autoCompleteCards', [HomeCardController::class, 'autoCompleteCards'])->name('autoCompleteCards');
+//     Route::get('/autoCompleteUsers', [HomeCardController::class, 'autoCompleteUsers'])->name('autoCompleteUsers');
+//     Route::get('/autoCompleteCategories', [HomeCardController::class, 'autoCompleteCategories'])->name('autoCompleteCategories');
+// });
