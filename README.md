@@ -1,4 +1,4 @@
-(https://github.com/github/docs/actions/workflows/main.yml/badge.svg?branch=feature-1)
+https://github.com/github/bitor/idonthaveanamestill/actions/workflows/main.yml/badge.svg
 
 .<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
