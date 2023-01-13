@@ -83,7 +83,6 @@
               action="{{ route('payNow') }}"
               method="POST" class="d-none">
             @csrf
-            <input type="hidden" value="{{ Auth::user()->email ?? null }}" name="email">
             <input type="hidden" value="{{ $card->id }}" name="id">
             <input type="hidden" value="{{ $card->name }}" name="name">
             <input type="hidden" value="{{ $card->price }}" name="price">

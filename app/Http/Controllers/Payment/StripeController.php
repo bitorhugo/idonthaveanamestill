@@ -51,7 +51,7 @@ class StripeController extends Controller
 
         $shipping_cost = 7.50;
         $session = Stripe\Checkout\Session::create([
-
+            'customer_email'              => Auth::user()->email,
             'shipping_address_collection' => ['allowed_countries' => ['PT', 'ES']],
             'shipping_options' => [
                 [
@@ -82,7 +82,7 @@ class StripeController extends Controller
         $shipping_cost = 7.50;
 
         $session = \Stripe\Checkout\Session::create([
-            'customer_email'              => $request->email,
+            'customer_email'              => Auth::user()->email,
             'shipping_address_collection' => ['allowed_countries' => ['PT', 'ES']],
             'shipping_options'            => [
                 [
