@@ -37,10 +37,11 @@ class ServeApp extends Command
      */
     public function handle()
     {
-        $this->info("Starting Sevices..");
-        shell_exec("php artisan serve &
-                   ./startStripe.sh");
-
+        $this->line("Starting services..");
+        exec("php artisan serve >> /dev/null &");
+        $this->info("WebApp Started!");
+        $this->info("Stripe Cli started!");
+        exec("./startStripe.sh");
         return 0;
     }
 }

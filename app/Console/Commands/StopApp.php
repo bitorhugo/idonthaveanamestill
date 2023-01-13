@@ -37,7 +37,7 @@ class StopApp extends Command
      */
     public function handle()
     {
-        shell_exec("pkill stripe");
+        shell_exec("pkill stripe >> /dev/null");
         shell_exec("pkill php");
         $this->info("Services killed");
     }
