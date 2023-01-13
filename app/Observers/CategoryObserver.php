@@ -68,7 +68,7 @@ class CategoryObserver
             $key = 'category-page-' . $i;
             if (Cache::has($key)) {
                 Cache::forget($key);
-            } else return false;
+            }
         });
     }
 }
