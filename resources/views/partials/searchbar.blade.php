@@ -25,8 +25,20 @@
                     </div>
                 </div>
             </form>
-           
+            
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+ var path = "{{ route('searchAutoComplete') }}";
+ $('input.search').typeahead({
+     source:  function (str, process) 
+     {
+         return $.get(path, { str: str }, function (data) {
+             return process(data);
+         });
+     }
+ });
+</script> 
 

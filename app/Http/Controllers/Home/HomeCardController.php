@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 class HomeCardController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -91,4 +92,17 @@ class HomeCardController extends Controller
      */
     public function destroy($id){}
 
+    /**
+     * autoComplete
+     * Autocompletion for search bar
+     * @param Request $request
+     */
+    public function autoComplete(Request $request)
+    {
+        $data = Card::select("name")
+        ->where("name", "LIKE", "%{$request->str}%")
+        ->get('query');
+        return response()->json($data);
+    }
+    
 }

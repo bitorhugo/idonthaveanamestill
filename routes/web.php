@@ -55,3 +55,6 @@ Route::resource('/cart', CartController::class)->except(['create', 'show', 'edit
 
 // Listens for stripe checkout session completed events
 Route::post('/stripe/webhook', [StripeCheckoutService::class, 'handleCheckoutSessionCompleted']);
+
+// AutoComplete search bar
+Route::get('/searchAutoComplete', [HomeCardController::class, 'autoComplete'])->name('searchAutoComplete');

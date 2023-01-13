@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Payment;
 
+use App\Exceptions\EmptyCartException;
 use Stripe;
 
 use App\Http\Controllers\Controller;
@@ -22,6 +23,8 @@ class StripeController extends Controller
         Stripe\Stripe::setApiKey(config('stripe.sk'));
 
         $cart = \Cart::session(Auth::id())->getContent();
+
+        if ($cart->isEmpty()) throw new EmptyCartException;
 
         $line_items = array();
         foreach ($cart as $item) {

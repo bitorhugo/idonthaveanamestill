@@ -13,8 +13,13 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('verified');
+        /**
+         * The order matters for logic reason
+         * first check if is admin
+         * then verify email
+         */
         $this->middleware('isAdmin');
+        $this->middleware('verified');
     }
 
     
