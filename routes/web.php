@@ -56,7 +56,6 @@ Route::resource('/cart', CartController::class)->except(['create', 'show', 'edit
 
 // Listens for stripe checkout session completed events
 Route::post('/stripe/webhook', [StripeCheckoutService::class, 'handleCheckoutSessionCompleted']);
-
 // Route::controller(AutoCompleteController::class)->group(function () {
 //     Route::get('/autoCompleteCards', [HomeCardController::class, 'autoCompleteCards'])->name('autoCompleteCards');
 //     Route::get('/autoCompleteUsers', [HomeCardController::class, 'autoCompleteUsers'])->name('autoCompleteUsers');

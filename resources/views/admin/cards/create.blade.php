@@ -63,7 +63,7 @@
                         <div class="form-check-inline form-check">
                             @foreach($categories as $cat)
                                 <label for="inline-checkbox1" class="form-check-label ">
-                                    <input type="checkbox" id="category{{$cat->id}}" name="categories[]" value="{{$cat->id}}" class="form-check-input">{{$cat->id}}
+                                    <input type="checkbox" id="category{{$cat->id}}" name="categories[]" value="{{$cat->id}}" class="form-check-input">{{$cat->name}}
                                 </label>
                             @endforeach
                         </div>
