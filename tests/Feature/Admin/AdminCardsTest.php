@@ -130,7 +130,7 @@ class AdminCardsTest extends TestCase
         $quantity = 10;
 
         Storage::fake('avatar');
-        $file = UploadedFile::fake()->image('avatar.jpg');
+        $file = UploadedFile::fake()->image('avatar.jpg')->size(100);
 
         $response = $this->actingAs($admin)
             ->post('admin/cards', [

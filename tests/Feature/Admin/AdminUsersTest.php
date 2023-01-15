@@ -118,7 +118,7 @@ class AdminUsersTest extends TestCase
         )->create();
 
         Storage::fake('avatar');
-        $file = UploadedFile::fake()->image('avatar.jpg');
+        $file = UploadedFile::fake()->image('avatar.jpg')->size(100);
 
         $new =  User::factory()->state(
             [
