@@ -55,7 +55,7 @@ class CartController extends Controller
             'value' => '-' . ($request->discount * 100) . '%',
         ));
         
-        \Cart::session(Auth::id())->add(
+        \Cart::session(Auth::user()->id)->add(
             $request->id,
             $request->name,
             $request->price,
